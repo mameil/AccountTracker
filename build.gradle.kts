@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.hidetake.gradle.swagger.generator.GenerateSwaggerCode
 
 plugins {
     id("org.springframework.boot") version "3.0.1"
@@ -9,9 +8,8 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.7.22"
 
-    //gradle-swagger-generator-plugin
-    //from https://github.com/int128/gradle-swagger-generator-plugin/issues/121
-    id("org.hidetake.swagger.generator") version "2.18.2"
+    //swagger plugin
+    id("org.openapi.generator") version "5.1.1"
 }
 
 group = "com.kyu9"
@@ -37,6 +35,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    //kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compileOnly("org.projectlombok:lombok")
@@ -47,59 +47,20 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    //Swagger
-    implementation ("io.swagger.core.v3:swagger-annotations:2.2.0")
-    implementation ("io.swagger:swagger-annotations:1.6.6")
-    implementation ("io.springfox:springfox-boot-starter:3.0.0")
+    //Swagger - plugin
+    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
-    //gradle-swagger-generator-plugin
-    swaggerCodegen("io.swagger.codegen.v3:swagger-codegen-cli:3.0.25")
-    // https://mvnrepository.com/artifact/com.github.jknack/handlebars
-    implementation("com.github.jknack:handlebars:4.3.1")
+    //Swagger - ui
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
+    implementation("org.springdoc:springdoc-openapi-common:1.6.8")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
+    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
 
-}
+    //Openapi Generator
+    implementation("io.swagger:swagger-annotations:1.6.2")
+    implementation(group="javax.validation", name="validation-api", version="2.0.1.Final")
+    implementation(group="org.openapitools", name="jackson-databind-nullable", version="0.2.1")
 
-
-//gradle-swagger-generator-plugin
-//tasks {
-//    register<GenerateSwaggerCode>("GenerateSwaggerCode") {
-//        group = "0.action"
-//
-//        language = "spring"
-//        inputFile = projectDir.resolve("spec/AccountBook.yaml")
-//        configFile = projectDir.resolve("spec/config.json")
-//        outputDir = projectDir.resolve("$buildDir/generated/swagger")
-//        wipeOutputDir = false
-//        components = listOf("models", "apis", "apiTests")
-//    }
-//}
-
-swaggerSources {
-    // Gradle recommends `register` over `create` to avoid eagerly creating/configuring items.
-    register("AccountBook") {
-        // Part of the "petstore" SwaggerSource
-        // Need to save a reference of it here because the `this` scope changes below.
-        val validationTask = validation
-
-        setInputFile(file("$rootDir/spec/AccountBook.yaml"))
-
-        // The method signiature is `code(@DelegatesTo(GenerateSwaggerCode) Closure closure)`
-        // So best to use `delegateClosureOf<GenerateSwaggerCode>`
-        // https://docs.gradle.org/current/userguide/kotlin_dsl.html#groovy_closures_from_kotlin
-        code(delegateClosureOf<GenerateSwaggerCode> {
-            language = "spring"
-            configFile = file("$rootDir/spec/config.json")
-            components = listOf("models", "apis", "invoker")
-            dependsOn(validationTask)
-            group = "0.action"
-        })
-    }
-}
-
-sourceSets {
-    val main by getting
-    val AccountBook by swaggerSources.getting
-    main.java.srcDir("${AccountBook.code.outputDir}/src/main/java")
 }
 
 
@@ -107,11 +68,32 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
-        dependsOn(tasks.named("generateSwaggerCode"))
     }
 
 }
 
+tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
+    inputSpec.set("${projectDir}/spec/AccountBook.yaml")
+    outputDir.set("${projectDir}/generated")
+    configFile.set("${projectDir}/spec/config.json")
+    generatorName.set("kotlin-spring")
+    group = "0.action"
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.create<Test>("fullTest"){
+    useJUnitPlatform()
+    group = "0.action"
+}
+
+//tasks.named("test").configure{ group = "0.action" }
+tasks.named("build").configure{ group = "0.action" }
+tasks.named("clean").configure{ group = "0.action" }
+tasks.named("bootRun").configure{ group = "0.action" }
+tasks.named("compileKotlin").configure{
+    group = "0.action"
+    dependsOn(tasks.named("generateFromYaml"))
 }
