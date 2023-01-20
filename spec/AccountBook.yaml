@@ -10,16 +10,20 @@ tags:
     description: "Utility API"
 
 paths:
-  /sample/jsonify:
+  /check/working:
     get:
       tags:
         - "Util"
-      summary: "Lombok @toString to json format"
-      description: "Lombok @toString to json format"
-      operationId: toStringToJSON
+      summary: "check yaml working"
+      description: "check yaml working"
+      operationId: checkYaml
       responses:
         200:
           description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckSuccessDto'
         400:
           description: "Bad Request"
           content:
@@ -36,6 +40,13 @@ paths:
 
 components:
   schemas:
+    CheckSuccessDto:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: "check success"
+          example: true
     ErrorResponseDto:
       type: object
       properties:

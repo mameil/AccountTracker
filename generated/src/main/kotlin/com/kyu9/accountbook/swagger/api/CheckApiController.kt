@@ -7,14 +7,14 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("\${openapi.accountBook.base-path:}")
-class SampleApiController(
-        @org.springframework.beans.factory.annotation.Autowired(required = false) delegate: SampleApiDelegate?
-) : SampleApi {
-    private val delegate: SampleApiDelegate
+class CheckApiController(
+        @org.springframework.beans.factory.annotation.Autowired(required = false) delegate: CheckApiDelegate?
+) : CheckApi {
+    private val delegate: CheckApiDelegate
 
     init {
-        this.delegate = Optional.ofNullable(delegate).orElse(object : SampleApiDelegate {})
+        this.delegate = Optional.ofNullable(delegate).orElse(object : CheckApiDelegate {})
     }
 
-    override fun getDelegate(): SampleApiDelegate = delegate
+    override fun getDelegate(): CheckApiDelegate = delegate
 }

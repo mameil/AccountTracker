@@ -5,6 +5,7 @@
 */
 package com.kyu9.accountbook.swagger.api
 
+import com.kyu9.accountbook.swagger.model.CheckSuccessDto
 import com.kyu9.accountbook.swagger.model.ErrorResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -29,16 +30,16 @@ import kotlin.collections.Map
 
 @Validated
 @RequestMapping("\${api.base-path:}")
-interface SampleApi {
+interface CheckApi {
 
-    fun getDelegate(): SampleApiDelegate = object: SampleApiDelegate {}
+    fun getDelegate(): CheckApiDelegate = object: CheckApiDelegate {}
 
 
     @GetMapping(
-            value = ["/sample/jsonify"],
+            value = ["/check/working"],
             produces = ["application/json"]
     )
-    fun toStringToJSON(): ResponseEntity<Unit> {
-        return getDelegate().toStringToJSON();
+    fun checkYaml(): ResponseEntity<CheckSuccessDto> {
+        return getDelegate().checkYaml();
     }
 }
