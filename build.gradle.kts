@@ -78,6 +78,19 @@ tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("gen
     configFile.set("${projectDir}/spec/config.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
+
+}
+
+task<Delete>("removeGeneratedFromYaml"){
+    group = "0.action"
+    delete(
+        fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/model")
+        fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/api")
+    )
+}
+
+tasks.named("generateFromYaml").configure {
+    dependsOn("removeGeneratedFromYaml")
 }
 
 tasks.withType<Test> {
