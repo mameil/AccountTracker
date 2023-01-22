@@ -1,6 +1,6 @@
 
 printf "merge start \r"
-curBranch=$(git rev-parse --abbrev-ref HEAD)
+curBranch=$(git branch --show-current)
 printf "======= Merge from $curBranch into master ======= \r"
 
 git checkout master;

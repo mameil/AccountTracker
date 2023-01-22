@@ -113,7 +113,7 @@ tasks.create("Merge into MASTER"){
     doLast {
         println("Merge into MASTER task run")
     }
-    Runtime.getRuntime().exec("./script/merge_MASTER.sh")
+    Runtime.getRuntime().exec("./script/merge_MASTER_Single.sh")
 }
 
 //tasks.named("test").configure{ group = "0.action" }
