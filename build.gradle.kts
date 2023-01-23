@@ -17,9 +17,13 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
+    all {
+        exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+    }
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
+
 }
 
 repositories {
@@ -28,16 +32,21 @@ repositories {
 
 dependencies {
     //generated from https://start.spring.io/
+    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("mysql:mysql-connector-java")
+
 
     //kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
