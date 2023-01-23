@@ -108,12 +108,12 @@ tasks.create<Test>("fullTest"){
     group = "0.action"
 }
 
-tasks.create("Merge into MASTER"){
+tasks.create("Merge all branches into MASTER"){
     group = "0.action"
     doLast {
         println("Merge into MASTER task run")
     }
-    Runtime.getRuntime().exec("./script/merge_MASTER_Single.sh")
+    Runtime.getRuntime().exec("./script/merge_all_branch_to_MASTER.sh")
 }
 
 //tasks.named("test").configure{ group = "0.action" }
