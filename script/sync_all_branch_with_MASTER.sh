@@ -7,6 +7,7 @@ for i in "${array[@]}" ; do
       echo "======= Merge MASTER into $i ======= \r"
       git checkout $i;
       git merge master;
+      git pull;
       git push;
     fi
 done

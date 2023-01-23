@@ -133,6 +133,15 @@ tasks.create("Merge master to ALL_BRANCHES"){
     Runtime.getRuntime().exec("./script/sync_all_branch_with_MASTER.sh")
 }
 
+tasks.create("Sync Branches"){
+    group = "0.action"
+    doLast {
+        println("Sync Branches!!!")
+    }
+    Runtime.getRuntime().exec("./script/merge_all_branch_to_MASTER.sh")
+    Runtime.getRuntime().exec("./script/sync_all_branch_with_MASTER.sh")
+}
+
 //tasks.named("test").configure{ group = "0.action" }
 tasks.named("build").configure{ group = "0.action" }
 tasks.named("clean").configure{ group = "0.action" }
