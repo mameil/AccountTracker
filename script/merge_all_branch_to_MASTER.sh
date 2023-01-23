@@ -6,7 +6,7 @@ git checkout master;
 
 for i in "${array[@]}" ; do
     if [ i != "master" ]; then
-      printf "======= Merge from $i into MASTER ======= \r"
+      echo "======= Merge from $i into MASTER ======= \r"
       git merge $i;
     fi
 done
