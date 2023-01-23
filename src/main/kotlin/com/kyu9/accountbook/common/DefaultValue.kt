@@ -12,6 +12,7 @@ enum class DefaultValue(val value: Any) {
     ;
 
     companion object {
+        //HOW TO USE??
         fun defaultString(): String{
             return STRING.value as String
         }
