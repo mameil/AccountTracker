@@ -2,6 +2,7 @@ README.md
 build.gradle.kts
 pom.xml
 settings.gradle
+src/main/kotlin/com/kyu9/accountbook/Application.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/ApiUtil.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/CheckApi.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/CheckApiController.kt
@@ -10,7 +11,6 @@ src/main/kotlin/com/kyu9/accountbook/swagger/api/Exceptions.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/UserApi.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/UserApiController.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/api/UserApiDelegate.kt
-src/main/kotlin/com/kyu9/accountbook/swagger/invoker/Application.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/model/CheckSuccessDto.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/model/CreateUserRequestDto.kt
 src/main/kotlin/com/kyu9/accountbook/swagger/model/CreateUserResponseDto.kt

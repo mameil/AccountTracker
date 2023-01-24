@@ -2,7 +2,7 @@
   "library": "spring-boot",
   "modelPackage": "com.kyu9.accountbook.swagger.model",
   "apiPackage": "com.kyu9.accountbook.swagger.api",
-  "invokerPackage": "com.kyu9.accountbook.swagger.invoker",
+  "invokerPackage": "com.kyu9.accountbook",
   "hideGenerationTimestamp": true,
   "delegatePattern": true,
   "useTags": false,

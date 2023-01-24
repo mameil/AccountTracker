@@ -1,6 +1,8 @@
 package com.kyu9.accountbook.user
 
-import io.kotest.core.spec.style.BehaviorSpec
+import com.kyu9.accountbook.AccountBookApplication
+import io.kotest.core.spec.style.DescribeSpec
+import io.swagger.v3.oas.models.Components
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,30 +14,27 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = [AccountBookApplication::class])
 @ExtendWith(MockitoExtension::class, SpringExtension::class)
-class UserCreateTest: BehaviorSpec({
-
-    lateinit var mockmvc: MockMvc
-
-
-    given("유저를 생성할 수 있다"){
-        `when`("기본적인 유저 생성"){
+@AutoConfigureMockMvc
+class UserCreateTest (
+    @Autowired val mockMvc: MockMvc
+) : DescribeSpec({
 
 
-            `then`("유저가 생성된다"){
-                mockmvc.perform(MockMvcRequestBuilders.post("/user")
+    //todo > 현재는 real db에 들어감 -> mock db로 변경해야함 아니면 다 지워주는거 작업 필요함
+    describe("유저를 생성할 수 있다") {
+        it("유저가 생성된다") {
+
+            mockMvc.perform(
+                MockMvcRequestBuilders.post("/user")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("{\n  \"id\": \"testId\",\n  \"name\": \"testName\",\n  \"password\": \"testPassword\"\n}")
-                )
-                    .andExpect(MockMvcResultMatchers.status().isOk)
+            )
+                .andExpect(MockMvcResultMatchers.status().isOk)
 
 
-            }
         }
     }
 
-
-}) {
-}
+})

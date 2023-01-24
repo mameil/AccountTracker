@@ -12,9 +12,9 @@ import java.util.logging.Logger
 @Service
 class UserRepoImpl(
     private val userRepository: UserRepository
-): BaseJpaRepo<User, Long, UserRepository>(userRepository) {
+): BaseJpaRepo<User, String, UserRepository>(userRepository) {
 
-    override fun getOptionalWithId(id: Long): Optional<User> {
+    override fun getOptionalWithId(id: String): Optional<User> {
         return super.getOptionalWithId(id)
     }
 

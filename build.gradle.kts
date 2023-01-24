@@ -75,14 +75,21 @@ dependencies {
     implementation("io.swagger:swagger-annotations:1.6.2")
     implementation(group="javax.validation", name="validation-api", version="2.0.1.Final")
     implementation(group="org.openapitools", name="jackson-databind-nullable", version="0.2.1")
+    //config > https://openapi-generator.tech/docs/generators/spring/
 
 
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     //kotest
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
+    implementation("io.kotest:kotest-extensions-spring:4.4.3")
+
+
+    //mockk
+    testImplementation("io.mockk:mockk:1.12.4")
+
 
 }
 
@@ -117,7 +124,7 @@ task<Delete>("removeGeneratedFromYaml"){
 
 configure<SourceSetContainer>{
     named("main"){
-        java.srcDir("${projectDir}/generated/src/main/kotlin")
+        java.srcDir("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger")
     }
 }
 

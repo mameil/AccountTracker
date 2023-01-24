@@ -11,7 +11,6 @@ import javax.persistence.Id
 @Builder
 data class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: String,
     val password: String,
     val name: String,
