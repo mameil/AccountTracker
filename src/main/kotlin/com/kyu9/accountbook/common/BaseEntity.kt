@@ -1,7 +1,7 @@
 package com.kyu9.accountbook.common
 
-import jakarta.persistence.PostUpdate
 import java.time.LocalDateTime
+import javax.persistence.PostUpdate
 
 abstract class BaseEntity(
     open val created: LocalDateTime = LocalDateTime.now(),

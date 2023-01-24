@@ -41,6 +41,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
 
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
