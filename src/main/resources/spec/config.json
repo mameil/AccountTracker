@@ -3,8 +3,9 @@
   "modelPackage": "com.kyu9.accountbook.swagger.model",
   "apiPackage": "com.kyu9.accountbook.swagger.api",
   "invokerPackage": "com.kyu9.accountbook.swagger.invoker",
-  "enumPropertyNaming": "UPPERCASE",
   "hideGenerationTimestamp": true,
   "delegatePattern": true,
+  "useTags": false,
+  "useSpringBoot3": true,
   "dateLibrary": "java8-localdatetime"
 }

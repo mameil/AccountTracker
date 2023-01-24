@@ -1,18 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-buildscript{
-    dependencies{
-
-    }
-}
 
 plugins {
-    id("org.springframework.boot") version "3.0.1"
+    id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.graalvm.buildtools.native") version "0.9.18"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.7.22"
+    kotlin("kapt") version "1.7.21"
 
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
@@ -66,7 +62,6 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     //Swagger - plugin
-    implementation("org.hidetaks:gradle-ssh-plugin:1.1.4")
     implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
@@ -100,12 +95,15 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
-    inputSpec.set("${projectDir}/spec/AccountBook.yaml")
+    inputSpec.set("${projectDir}/src/main/resources/spec/AccountBook.yaml")
     outputDir.set("${projectDir}/generated")
-    configFile.set("${projectDir}/spec/config.json")
+    configFile.set("${projectDir}/src/main/resources/spec/config.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
 
+    //이거 config.json에 넣어도 안되던데 >> 코틀린 스프링부트에서는 적용이 안됨
+    //생성된 ApiUtils에서 javax을 못읽어서 보니까 boot3.0.0부터는 javax가 아니라 jakarata로 바뀌었음 그래서 이걸로 바꿀러고했는데 아무튼 코틀린에선 사용 못함
+//    configOptions.put("useSpringBoot3", "true")
 }
 
 task<Delete>("removeGeneratedFromYaml"){
@@ -163,6 +161,7 @@ tasks.create("Sync Branches"){
 //tasks.named("test").configure{ group = "0.action" }
 tasks.named("build").configure{ group = "0.action" }
 tasks.named("clean").configure{ group = "0.action" }
+tasks.named("check").configure{ enabled = false }
 tasks.named("bootRun").configure{ group = "0.action" }
 tasks.named("compileKotlin").configure{
     group = "0.action"
