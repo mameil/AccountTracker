@@ -1,5 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript{
+    dependencies{
+
+    }
+}
+
 plugins {
     id("org.springframework.boot") version "3.0.1"
     id("io.spring.dependency-management") version "1.1.0"
@@ -60,6 +66,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     //Swagger - plugin
+    implementation("org.hidetaks:gradle-ssh-plugin:1.1.4")
     implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
@@ -107,6 +114,12 @@ task<Delete>("removeGeneratedFromYaml"){
         fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/model"),
         fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/api")
     )
+}
+
+configure<SourceSetContainer>{
+    named("main"){
+        java.srcDir("${projectDir}/generated/src/main/kotlin")
+    }
 }
 
 tasks.named("generateFromYaml").configure {
