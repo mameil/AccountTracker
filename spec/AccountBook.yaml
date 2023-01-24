@@ -8,6 +8,8 @@ servers:
 tags:
   - name: "Util"
     description: "Utility API"
+  - name: "User"
+    description: "User API"
 
 paths:
   /check/working:
@@ -37,6 +39,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /user:
+    post:
+      tags:
+        - "User"
+      summary: "create user"
+      description: "create user"
+      operationId: createUser
+      requestBody:
+        description: "create user request"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
 
 components:
   schemas:
@@ -47,6 +77,49 @@ components:
           type: boolean
           description: "check success"
           example: true
+    CreateUserRequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: false
+          description: "user login id(String)"
+          example: "loginId"
+        name:
+          type: string
+          nullable: false
+          description: "user name"
+          example: "kdshim"
+        password:
+          type: string
+          nullable: false
+          description: "user password"
+          example: "qwer1234"
+
+    CreateUserResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "user login id(String)"
+          example: "loginId"
+        name:
+          type: string
+          description: "user name"
+          example: "kdshim"
+        password:
+          type: string
+          description: "user password"
+          example: "qwer1234"
+        createdAt:
+          type: string
+          description: "user create date(yyyymmddHHmmss)"
+          example: "20230124013000"
+        updatedAt:
+          type: string
+          description: "user update date(yyyymmddHHmmss)"
+          example: "20230124013000"
+
     ErrorResponseDto:
       type: object
       properties:
@@ -54,3 +127,4 @@ components:
           type: string
         message:
           type: string
+
