@@ -59,9 +59,6 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
 
-    //test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-
     //Swagger - plugin
     implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
@@ -75,6 +72,14 @@ dependencies {
     implementation("io.swagger:swagger-annotations:1.6.2")
     implementation(group="javax.validation", name="validation-api", version="2.0.1.Final")
     implementation(group="org.openapitools", name="jackson-databind-nullable", version="0.2.1")
+
+
+    //test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    //kotest
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
 
 }
 
