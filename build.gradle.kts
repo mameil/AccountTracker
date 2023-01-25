@@ -80,7 +80,7 @@ dependencies {
 
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    testImplementation("com.h2database:h2:2.0.202")
     //kotest
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
     testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
