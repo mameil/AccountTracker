@@ -141,29 +141,26 @@ tasks.create<Test>("fullTest"){
     group = "0.action"
 }
 
-tasks.create("Merge all branches to MASTER"){
+task<Exec>("Merge all branches into MASTER"){
     group = "1.git"
-    doLast {
-        println("Merge into MASTER task run")
-    }
-    Runtime.getRuntime().exec("./script/merge_all_branch_to_MASTER.sh")
+
+    commandLine("./script/merge_all_branch_into_MASTER.sh")
+    //for windows
+//    commandLine("cmd", "/c", "merge_all_branch_into_MASTER.sh")
 }
 
-tasks.create("Merge master to ALL_BRANCHES"){
+task<Exec>("Merge master into ALL_BRANCHES"){
     group = "1.git"
-    doLast {
-        println("Merge all branches task run")
-    }
-    Runtime.getRuntime().exec("./script/sync_all_branch_with_MASTER.sh")
+
+    commandLine("./script/sync_all_branch_by_MASTER.sh")
+    //for windows
+//    commandLine("cmd", "/c", "merge_master_to_all_branches.sh")
 }
 
-tasks.create("Sync Branches"){
+task<Exec>("Sync Branches"){
     group = "0.action"
-    doLast {
-        println("Sync Branches!!!")
-    }
-    Runtime.getRuntime().exec("./script/merge_all_branch_to_MASTER.sh")
-    Runtime.getRuntime().exec("./script/sync_all_branch_with_MASTER.sh")
+
+    commandLine("./script/integration_sync.sh")
 }
 
 //tasks.named("test").configure{ group = "0.action" }
