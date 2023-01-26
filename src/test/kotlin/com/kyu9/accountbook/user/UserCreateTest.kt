@@ -21,14 +21,12 @@ import javax.transaction.Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = [AccountBookApplication::class])
 @ExtendWith(MockitoExtension::class, SpringExtension::class)
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 @Transactional
 class UserCreateTest (
     @Autowired val mockMvc: MockMvc
 ) : DescribeSpec({
 
 
-    //todo > 현재는 real db에 들어감 -> mock db로 변경해야함 아니면 다 지워주는거 작업 필요함
     describe("유저를 생성할 수 있다") {
         it("유저가 생성된다") {
 
