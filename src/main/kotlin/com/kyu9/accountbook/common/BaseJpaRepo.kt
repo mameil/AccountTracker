@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-abstract class BaseJpaRepo<T, ID, REPO: JpaRepository<T, ID>> {
+abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
     private lateinit var repo: REPO
 
     constructor()

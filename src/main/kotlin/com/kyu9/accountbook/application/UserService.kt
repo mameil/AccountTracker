@@ -1,10 +1,11 @@
 package com.kyu9.accountbook.application
 
 import com.kyu9.accountbook.application.repository.UserRepoImpl
-import com.kyu9.accountbook.application.repository.UserRepository
+import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.User
 import com.kyu9.accountbook.swagger.model.CreateUserRequestDto
 import com.kyu9.accountbook.swagger.model.CreateUserResponseDto
+import com.kyu9.accountbook.swagger.model.GetUserResponseDto
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 
@@ -16,17 +17,31 @@ class UserService (
 
     fun storeFromDto(createDto: CreateUserRequestDto): CreateUserResponseDto {
 
-        val user = User(
+        return User(
             id = createDto.id!!,
             password = createDto.password!!,
             name = createDto.name!!
         )
-        userRepoImpl.storeEntity(user)
+            .apply {userRepoImpl.storeEntity(this) }
+            .let { user ->
+            CreateUserResponseDto(
+                id = user.id,
+                password = user.password,
+                name = user.name
+            )
+        }
+    }
 
-        return CreateUserResponseDto(
-            id = user.id,
-            password = user.password,
-            name = user.name
-        )
+    fun getFromDto(id: String): GetUserResponseDto {
+        return userRepoImpl.getEntityWithId(id)
+            .let { user ->
+                GetUserResponseDto(
+                    id = user.id,
+                    password = user.password,
+                    name = user.name,
+                    createdAt = MyTime.toYyyymmddhhmmss(user.created),
+                    updatedAt = MyTime.toYyyymmddhhmmss(user.updated)
+                )
+            }
     }
 }
