@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.user
 
 import com.kyu9.accountbook.AccountBookApplication
+import com.kyu9.accountbook.common.TestFrame
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -18,47 +19,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = [AccountBookApplication::class])
-@ExtendWith(MockitoExtension::class, SpringExtension::class)
-@AutoConfigureMockMvc
 class UserTest(
-    @Autowired val mockMvc: MockMvc
-) {
-    fun postPerform(url: String, req: String, status: Int=200): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.post(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(req)
-        )
-            .andExpect(MockMvcResultMatchers.status().`is`(status))
-    }
-
-    fun getPerform(url: String, status: Int=200): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.get(url)
-                .contentType(MediaType.APPLICATION_JSON)
-        )
-            .andExpect(MockMvcResultMatchers.status().`is`(status))
-    }
-
-    fun putPerform(url: String, req: String, status: Int=200): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.put(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(req)
-        )
-            .andExpect(MockMvcResultMatchers.status().`is`(status))
-    }
-
-    fun deletePerform(url: String, status: Int=200): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.delete(url)
-                .contentType(MediaType.APPLICATION_JSON)
-        )
-            .andExpect(MockMvcResultMatchers.status().`is`(status))
-    }
-
-
+): TestFrame() {
     @Test
     @DisplayName("사용자를 만든다")
     fun createUser(){

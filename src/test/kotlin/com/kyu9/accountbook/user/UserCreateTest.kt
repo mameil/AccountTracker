@@ -29,6 +29,7 @@ import javax.transaction.Transactional
 class UserCreateTest (
     @Autowired val mockMvc: MockMvc
 ) : DescribeSpec({
+
     fun postPerform(url: String, req: String, status: Int=200): ResultActions{
         return mockMvc.perform(
             MockMvcRequestBuilders.post(url)
@@ -81,6 +82,7 @@ class UserCreateTest (
                     MockMvcResultMatchers.jsonPath("$.id").value("testId7")
                     MockMvcResultMatchers.jsonPath("$.name").value("testName")
                     MockMvcResultMatchers.jsonPath("$.password").value("testPassword")
+                    //todo 요건 실패해야하는데 잘 돌아감.... kotest으로 적용해서 테스트를 돌리면 이게 작동이 안되는거같은데 찾아봐야함
                     MockMvcResultMatchers.jsonPath("$.password").value("testPassword2")
                 }
                 .andDo {
