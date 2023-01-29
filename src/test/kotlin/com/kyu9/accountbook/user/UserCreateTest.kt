@@ -27,8 +27,8 @@ class UserCreateTest (
 ) : DescribeSpec({
 
 
-    describe("유저를 생성할 수 있다") {
-        it("유저가 생성된다") {
+    describe("유저 CRUD 테스트") {
+        it("유저가 Create") {
 
             mockMvc.perform(
                 MockMvcRequestBuilders.post("/user")
@@ -36,8 +36,6 @@ class UserCreateTest (
                     .content("{\n  \"id\": \"testId7\",\n  \"name\": \"testName\",\n  \"password\": \"testPassword\"\n}")
             )
                 .andExpect(MockMvcResultMatchers.status().isOk)
-
-
         }
     }
 

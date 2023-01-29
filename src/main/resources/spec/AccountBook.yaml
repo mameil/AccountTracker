@@ -67,6 +67,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /user/{userId}/info:
+    get:
+      tags:
+        - "User"
+      summary: "get user"
+      description: "find user"
+      operationId: getUser
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "user id"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
 
 components:
   schemas:
@@ -119,6 +146,30 @@ components:
           type: string
           description: "user update date(yyyymmddHHmmss)"
           example: "20230124013000"
+
+    GetUserResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "user login id(String)"
+          example: "loginId"
+        name:
+          type: string
+          description: "user name"
+          example: "kdshim"
+        password:
+          type: string
+          description: "user password"
+          example: "qwer1234"
+        createdAt:
+          type: string
+          description: "user create date(yyyymmddHHmmss)"
+          example: "20230129011000"
+        updatedAt:
+          type: string
+          description: "user update date(yyyymmddHHmmss)"
+          example: "20230129011000"
 
     ErrorResponseDto:
       type: object
