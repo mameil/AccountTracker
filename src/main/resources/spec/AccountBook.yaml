@@ -39,6 +39,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /util/html/table/generate:
+    post:
+      tags:
+        - "Util"
+      summary: "generate html table"
+      description: "generate html table"
+      operationId: generateHtmlTable
+      requestBody:
+        description: "generate html table request - keys"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateHtmlTableRequestDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateHtmlTableResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
   /user:
     post:
       tags:
@@ -170,6 +198,32 @@ components:
           type: string
           description: "user update date(yyyymmddHHmmss)"
           example: "20230129011000"
+
+    GenerateHtmlTableRequestDto:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            type: string
+          description: "generate html table request - keys"
+          nullable: false
+          example: ["key1", "key2", "key3"]
+        values:
+          type: array
+          items:
+            type: string
+          description: "generate html table request - values"
+          nullable: false
+          example: [ "key1", "key2", "key3" ]
+
+    GenerateHtmlTableResponseDto:
+      type: object
+      properties:
+        htmlString:
+          type: string
+          description: "generate html table response - html"
+          example: "<table><tr><td>key1</td><td>key2</td><td>key3</td></tr><tr><td>value1</td><td>value2</td><td>value3</td></tr></table>"
 
     ErrorResponseDto:
       type: object
