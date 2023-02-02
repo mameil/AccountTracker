@@ -16,8 +16,7 @@ class UtilApiControllerImpl(
         val htmlString: String =
             htmlGenerator.generateHtmlFromJson(generateHtmlTableRequestDto.keys!!, generateHtmlTableRequestDto.values!!)
 
-        val resp = GenerateHtmlTableResponseDto()
-        resp.htmlString = htmlString
+        val resp = GenerateHtmlTableResponseDto(htmlString)
 
         return ResponseEntity.ok(resp)
     }

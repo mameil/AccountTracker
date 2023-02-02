@@ -209,13 +209,18 @@ components:
           description: "generate html table request - keys"
           nullable: false
           example: ["key1", "key2", "key3"]
+#        values:
+#          type: array
+#          items:
+#            type: string
+#          description: "generate html table request - values"
+#          nullable: false
+#          example: [ "key1", "key2", "key3" ]
         values:
-          type: array
-          items:
-            type: string
-          description: "generate html table request - values"
+          type: string
+          description: "generate html table request - values pure string"
           nullable: false
-          example: [ "key1", "key2", "key3" ]
+          example: "value1 value2 value3"
 
     GenerateHtmlTableResponseDto:
       type: object

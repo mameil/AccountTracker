@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service
 class HtmlGenerator {
     lateinit var mapper: ObjectMapper
 
-    fun generateHtmlFromJson(keys: List<String>, values: List<String>): String {
-        if(keys.size != values.size) {
-            throw IllegalArgumentException("keys and values size must be same")
-        }
-
+    fun generateHtmlFromJson(keys: List<String>, values: String): String {
         mapper = ObjectMapper()
+        val values = mapper.readValue(values, List::class.java)
 
         val html = StringBuilder()
 
