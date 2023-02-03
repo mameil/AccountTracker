@@ -12,7 +12,6 @@ import java.util.logging.Logger
 @Log4j2
 abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
     private lateinit var repo: REPO
-    @Autowired lateinit var log: LogService
 
     constructor()
 
@@ -24,7 +23,6 @@ abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
     //Find Entity
     open fun getEntityWithId(id: ID): T{
         //todo exception handling >> in common
-        log.info("엔티티를 찾고자 하는 아이디 id: $id")
         return repo.findById(id).orElseThrow()
     }
 
