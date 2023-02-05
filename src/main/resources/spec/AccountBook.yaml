@@ -4,7 +4,7 @@ info:
   title: 'Account Book'
   description: 'account book api document'
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:9998
 tags:
   - name: "Util"
     description: "Utility API"

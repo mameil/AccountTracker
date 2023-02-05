@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.springframework.boot") version "2.7.5"
+    id("org.springframework.boot") version "2.5.7"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.graalvm.buildtools.native") version "0.9.18"
     kotlin("jvm") version "1.7.22"
@@ -71,6 +71,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
 
+
     //Openapi Generator
     implementation("io.swagger:swagger-annotations:1.6.2")
     implementation(group="javax.validation", name="validation-api", version="2.0.1.Final")
@@ -93,6 +94,10 @@ dependencies {
 
 }
 
+springBoot{
+    //kotlin 파일 같은 경우에는 컴파일될 때 파일명에 자동으로 뒤에 Kt가 붙음
+    mainClass.set("com.kyu9.accountbook.AccountBookApplicationKt")
+}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -124,7 +129,7 @@ task<Delete>("removeGeneratedFromYaml"){
 
 configure<SourceSetContainer>{
     named("main"){
-        java.srcDir("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger")
+        java.srcDir("${projectDir}/generated/src/main/kotlin")
     }
 }
 

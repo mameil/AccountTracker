@@ -4,7 +4,6 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,9 +12,22 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 
+
 server:
   port: 9998
   shutdown: graceful
   devtools:
     restart:
       enabled: true
+
+
+
+springdoc:
+  api-docs:
+    path: /docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui
+    display-request-duration: true
+  cache:
+    disabled: true
