@@ -16,7 +16,6 @@ class UserService (
 ) {
 
     fun storeFromDto(createDto: CreateUserRequestDto): CreateUserResponseDto {
-
         return User(
             id = createDto.id!!,
             password = createDto.password!!,
