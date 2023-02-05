@@ -1,7 +1,6 @@
 package com.kyu9.accountbook.application
 
 import com.kyu9.accountbook.application.repository.UserRepoImpl
-import com.kyu9.accountbook.common.DefaultValue
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.User
 import com.kyu9.accountbook.swagger.model.CreateUserRequestDto
@@ -17,6 +16,7 @@ class UserService (
 ) {
 
     fun storeFromDto(createDto: CreateUserRequestDto): CreateUserResponseDto {
+
         return User(
             id = createDto.id!!,
             password = createDto.password!!,

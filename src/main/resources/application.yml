@@ -13,18 +13,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 
-
 server:
   port: 9998
   shutdown: graceful
   devtools:
     restart:
-      enabled: true
-
-management:
-  endpoint:
-    web:
-      exposure:
-        include: "*"
-    mappings:
       enabled: true
