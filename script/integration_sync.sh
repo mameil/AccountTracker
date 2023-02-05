@@ -27,4 +27,6 @@ for i in "${array[@]}" ; do
     fi
 done
 
-rm list.txt
+rm list.txt;
+
+git checkout master;
