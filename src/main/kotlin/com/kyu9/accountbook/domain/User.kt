@@ -11,9 +11,9 @@ import javax.persistence.Id
 @Builder
 data class User(
     @Id
-    val id: String,
-    val password: String,
-    val name: String,
+    var id: String,
+    var password: String,
+    var name: String,
 ): BaseEntity() {
 
 }

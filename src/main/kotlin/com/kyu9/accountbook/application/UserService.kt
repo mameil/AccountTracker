@@ -3,9 +3,7 @@ package com.kyu9.accountbook.application
 import com.kyu9.accountbook.application.repository.UserRepoImpl
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.User
-import com.kyu9.accountbook.swagger.model.CreateUserRequestDto
-import com.kyu9.accountbook.swagger.model.CreateUserResponseDto
-import com.kyu9.accountbook.swagger.model.GetUserResponseDto
+import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 
@@ -40,6 +38,23 @@ class UserService (
                     name = user.name,
                     createdAt = MyTime.toYyyymmddhhmmss(user.created),
                     updatedAt = MyTime.toYyyymmddhhmmss(user.updated)
+                )
+            }
+    }
+
+    fun updateFromDto(userId: String, updateDto: UpdateUserRequestDto): GetUserResponseDto{
+        return userRepoImpl.getEntityWithId(userId)
+            .apply {
+                if(updateDto.name!=null) name = updateDto.name
+                if(updateDto.password!=null) password = updateDto.password
+            }.let(userRepoImpl::storeEntity)
+            .let {
+                GetUserResponseDto(
+                    id = it.id,
+                    name = it.name,
+                    password = it.password,
+                    createdAt = MyTime.toYyyymmddhhmmss(it.created),
+                    updatedAt = MyTime.toYyyymmddhhmmss(it.updated)
                 )
             }
     }

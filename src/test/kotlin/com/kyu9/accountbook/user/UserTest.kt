@@ -25,6 +25,7 @@ class UserTest(
     @DisplayName("사용자를 만든다")
     fun createUser(){
         postPerform(
+            "사용자 생성",
             "/user",
             "{\n  \"id\": \"testId7\",\n  \"name\": \"testName\",\n  \"password\": \"testPassword\"\n}"
         )
@@ -34,7 +35,7 @@ class UserTest(
     @DisplayName("사용자를 만들고 그 사용자를 조회한다")
     fun getUser(){
         createUser()
-        getPerform("/user/testId7/info")
+        getPerform("조회", "/user/testId7/info")
             .andExpect {
                 MockMvcResultMatchers.jsonPath("\$.id").value("testId7")
                 MockMvcResultMatchers.jsonPath("\$.name").value("testName")
@@ -43,4 +44,33 @@ class UserTest(
                 MockMvcResultMatchers.jsonPath("$.updatedAt").exists()
             }
     }
+
+    @Test
+    @DisplayName("사용자를 만들고 수정하고 수정한 데이터를 조회한다")
+    fun updateUser(){
+        val randomKey = createRandomUser()
+
+        putPerform(
+            "아이디 ${randomKey.id}인 사용자 업데이트",
+            "/user/${randomKey.id}",
+            "{\n  \"id\": \"${randomKey.id}__\",\n  \"name\": \"${randomKey.name}__\",\n  \"password\": \"${randomKey.password}__\"\n}"
+        )
+            .andExpect {
+                MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}__")
+                MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__")
+                MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__")
+            }
+
+        getPerform(
+            "${randomKey.id} 요걸로 조회하면 password, name의 업데이트가 쳐져있어야함",
+            "/user/${randomKey.id}/info"
+        )
+            .andExpect {
+                MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}")
+                MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__")
+                MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__")
+            }
+
+    }
+
 }
