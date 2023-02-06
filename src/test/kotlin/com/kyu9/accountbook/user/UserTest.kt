@@ -55,22 +55,44 @@ class UserTest(
             "/user/${randomKey.id}",
             "{\n  \"id\": \"${randomKey.id}__\",\n  \"name\": \"${randomKey.name}__\",\n  \"password\": \"${randomKey.password}__\"\n}"
         )
-            .andExpect {
-                MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}__")
-                MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__")
-                MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__")
-            }
+            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}__"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__"))
 
         getPerform(
             "${randomKey.id} 요걸로 조회하면 password, name의 업데이트가 쳐져있어야함",
             "/user/${randomKey.id}/info"
         )
-            .andExpect {
-                MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}")
-                MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__")
-                MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__")
-            }
+            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__"))
 
+    }
+
+    @Test
+    @DisplayName("사용자를 등록하고 삭제할 수 있다")
+    fun deleteUser(){
+        val user = createRandomUser()
+
+        getPerform(
+            "등록한 사용자를 조회한다",
+            "/user/${user.id}/info"
+        )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${user.id}"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${user.name}"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("${user.password}"))
+
+
+        deletePerform(
+            "등록한 사용자를 삭제한다",
+            "/user/${user.id}"
+        )
+
+        getPerform(
+            "등록한 사용자를 조회한다",
+            "/user/${user.id}/info",
+            400
+        )
     }
 
 }

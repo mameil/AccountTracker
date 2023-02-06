@@ -58,4 +58,8 @@ class UserService (
                 )
             }
     }
+
+    fun removeUserById(id: String){
+        userRepoImpl.removeEntityWithId(id)
+    }
 }

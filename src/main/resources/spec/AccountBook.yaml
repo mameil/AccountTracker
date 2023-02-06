@@ -128,6 +128,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+    delete:
+      tags:
+        - "User"
+      summary: "delete user"
+      description: "delete user"
+      operationId: deleteUser
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "user id"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
 
   /user/{userId}/info:
     get:
