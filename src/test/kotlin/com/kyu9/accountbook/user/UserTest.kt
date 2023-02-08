@@ -92,8 +92,13 @@ class UserTest(
 //        getPerform(
 //            "등록한 사용자를 조회한다",
 //            "/user/${user.id}/info",
-//            500
+//            400
 //        )
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/user/${user.id}/info")
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
     }
 
 }

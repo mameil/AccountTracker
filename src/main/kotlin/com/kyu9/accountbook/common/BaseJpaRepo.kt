@@ -1,10 +1,6 @@
 package com.kyu9.accountbook.common
 
-import lombok.NoArgsConstructor
-import lombok.RequiredArgsConstructor
 import lombok.extern.log4j.Log4j2
-import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
@@ -22,7 +18,7 @@ abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
     //Find Entity
     open fun getEntityWithId(id: ID): T{
         //todo exception handling >> in common
-        return repo.findById(id).orElseThrow(CustomException.DATA_NOT_FOUND::doThrow)
+        return repo.findById(id).orElseThrow(ErrorCode.DATA_NOT_FOUND::doThrow)
     }
 
     open fun getOptionalWithId(id: ID): Optional<T> {
