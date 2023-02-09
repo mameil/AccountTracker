@@ -78,16 +78,17 @@ class UserCreateTest (
             getPerform(
                 "/user/testId7/info"
             )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("testId7"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("testName"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("testPassword"))
                 .andExpect{
                     MockMvcResultMatchers.jsonPath("$.id").value("testId7")
                     MockMvcResultMatchers.jsonPath("$.name").value("testName")
                     MockMvcResultMatchers.jsonPath("$.password").value("testPassword")
-                    //todo 요건 실패해야하는데 잘 돌아감.... kotest으로 적용해서 테스트를 돌리면 이게 작동이 안되는거같은데 찾아봐야함
+                    //todo 요건 실패해야하는데 잘 돌아감.... kotest으로 적용해서 테스트를 돌리면 이게 작동이 안되는거같은데 찾아봐야함 >> kotlinDsl은 적용이 안되구나
                     MockMvcResultMatchers.jsonPath("$.password").value("testPassword2")
                 }
-                .andDo {
-                    MockMvcResultHandlers.print()
-                }
+                .andDo (MockMvcResultHandlers.print())
         }
     }
 

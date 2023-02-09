@@ -14,6 +14,7 @@ class GenerateHtmlTest: TestFrame() {
         val values = listOf("testId7", "testName", "testPassword")
 
         postPerform(
+            "create html",
             "/util/html",
             "{\n  \"keys\": [\"trType\", \"value\", \"password\"],\n  \"values\": \"\"\n}"
         )

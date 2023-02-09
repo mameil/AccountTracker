@@ -4,7 +4,7 @@ info:
   title: 'Account Book'
   description: 'account book api document'
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:9998
 tags:
   - name: "Util"
     description: "Utility API"
@@ -94,6 +94,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+  /user/{userId}:
+    put:
+      tags:
+        - "User"
+      summary: "update user"
+      description: "update user"
+      operationId: updateUser
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "user id"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "update user info"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequestDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+    delete:
+      tags:
+        - "User"
+      summary: "delete user"
+      description: "delete user"
+      operationId: deleteUser
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "user id"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
 
   /user/{userId}/info:
     get:
@@ -148,6 +204,17 @@ components:
         password:
           type: string
           nullable: false
+          description: "user password"
+          example: "qwer1234"
+    UpdateUserRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "user name"
+          example: "kdshim"
+        password:
+          type: string
           description: "user password"
           example: "qwer1234"
 
@@ -238,3 +305,7 @@ components:
         message:
           type: string
 
+    userId:
+      type: string
+      description: "시용자아이디"
+      example: "testUserId"
