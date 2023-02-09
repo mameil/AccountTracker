@@ -89,16 +89,11 @@ class UserTest(
         )
 
         //todo exception 구현하고 해야함
-//        getPerform(
-//            "등록한 사용자를 조회한다",
-//            "/user/${user.id}/info",
-//            400
-//        )
-        mockMvc.perform(
-            MockMvcRequestBuilders.get("/user/${user.id}/info")
+        getPerform(
+            "등록한 사용자를 조회한다",
+            "/user/${user.id}/info",
+            400
         )
-            .andDo(MockMvcResultHandlers.print())
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
     }
 
 }

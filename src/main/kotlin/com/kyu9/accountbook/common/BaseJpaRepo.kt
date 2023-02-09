@@ -17,8 +17,7 @@ abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
 
     //Find Entity
     open fun getEntityWithId(id: ID): T{
-        //todo exception handling >> in common
-        return repo.findById(id).orElseThrow(ErrorCode.DATA_NOT_FOUND::doThrow)
+        return repo.findById(id).orElseThrow(CustomError.DATA_NOT_FOUND::doThrow)
     }
 
     open fun getOptionalWithId(id: ID): Optional<T> {
