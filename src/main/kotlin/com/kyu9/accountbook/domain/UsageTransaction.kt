@@ -9,16 +9,19 @@ import javax.persistence.Id
 
 
 @Entity
-data class Payment(
+data class UsageTransaction(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
     val amount: Long,
     val registered: LocalDateTime,
+    val registeredYYYY: String,
+    val registeredYYYYMM: String,
     val registeredYYYYMMDD: String,
     val title: String,
     val content: String,
     val categoryId: Long,
+    val moneyType: MoneyType
 ): BaseEntity() {
 
 }
