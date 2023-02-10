@@ -43,6 +43,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
 
+    //view
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.0.2")
+
+
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
