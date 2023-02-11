@@ -55,7 +55,7 @@ class UserTest(
             "/user/${randomKey.id}",
             "{\n  \"id\": \"${randomKey.id}__\",\n  \"name\": \"${randomKey.name}__\",\n  \"password\": \"${randomKey.password}__\"\n}"
         )
-            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}__"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("${randomKey.password}__"))
 

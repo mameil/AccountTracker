@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.domain
 
 import com.kyu9.accountbook.common.BaseEntity
+import com.kyu9.accountbook.domain.properties.MoneyType
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

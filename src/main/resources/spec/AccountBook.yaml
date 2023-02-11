@@ -10,6 +10,8 @@ tags:
     description: "Utility API"
   - name: "User"
     description: "User API"
+  - name: "Transaction"
+    description: "Transaction API"
 
 paths:
   /check/working:
@@ -67,6 +69,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+######################################################
+###### 사용자_API
+######################################################
   /user:
     post:
       tags:
@@ -178,6 +183,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+
+
+
+######################################################
+###### 사용내역_API
+######################################################
+  /transaction:
+    post:
+      tags:
+        - "Transaction"
+      summary: "record transaction"
+      description: "record transaction"
+      operationId: postTransaction
+      requestBody:
+        description: "create usage transaction"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTranRequestDto'
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+
+
 
 components:
   schemas:
@@ -297,6 +334,33 @@ components:
           description: "generate html table response - html"
           example: "<table><tr><td>key1</td><td>key2</td><td>key3</td></tr><tr><td>value1</td><td>value2</td><td>value3</td></tr></table>"
 
+    PostTranRequestDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: "usage amount"
+          example: 2800
+        registeredAt:
+          type: string
+          description: "registered time yyyyMMdd HH24:mm:si"
+        title:
+          type: string
+          description: "main purpose for the transaction"
+        content:
+          type: string
+          description: "additional memo for the transaction"
+        categoryId:
+          type: integer
+          description: "category type of the transaction"
+        moneyType:
+          type: string
+          enum:
+            - NON_CASH, MY_CASH
+
+#####################################
+#### 일반적으로 상춍
+#####################################
     ErrorResponseDto:
       type: object
       properties:

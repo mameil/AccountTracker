@@ -8,7 +8,6 @@ import javax.persistence.Id
 
 @Entity
 data class Tag(
-    //todo 요거 엔티티가 맞냐.. 아니면 ENUM 이 맞냐.. 생각필요함
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
