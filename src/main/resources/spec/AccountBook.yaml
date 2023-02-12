@@ -197,7 +197,7 @@ paths:
       description: "record transaction"
       operationId: postTransaction
       requestBody:
-        description: "create usage transaction"
+        description: "create user request"
         required: true
         content:
           application/json:
@@ -206,13 +206,16 @@ paths:
       responses:
         200:
           description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostTransResponseDto'
         400:
           description: "Bad Request"
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
-
 
 
 
@@ -339,10 +342,12 @@ components:
       properties:
         amount:
           type: integer
+          nullable: false
           description: "usage amount"
           example: 2800
         registeredAt:
           type: string
+          nullable: false
           description: "registered time yyyyMMdd HH24:mm:si"
         title:
           type: string
@@ -352,11 +357,20 @@ components:
           description: "additional memo for the transaction"
         categoryId:
           type: integer
+          nullable: false
           description: "category type of the transaction"
         moneyType:
           type: string
+          nullable: false
           enum:
-            - NON_CASH, MY_CASH
+            - FREE
+            - MINE
+
+    PostTransResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
 
 #####################################
 #### 일반적으로 상춍

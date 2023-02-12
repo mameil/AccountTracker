@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
+import java.lang.Exception
 
 @ControllerAdvice
 class CustomExceptionAop: ResponseEntityExceptionHandler(){
@@ -19,5 +20,14 @@ class CustomExceptionAop: ResponseEntityExceptionHandler(){
             ErrorResponseDto(
             exception.message, exception.message?.let { CustomError.getCodeFromMsg(it) }
         ), HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(Exception::class)
+    fun handleCommonException(exception: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity(
+            ErrorResponseDto(
+                "000_000", exception.message
+            ), HttpStatus.BAD_REQUEST
+        )
     }
 }

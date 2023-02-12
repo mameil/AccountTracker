@@ -90,6 +90,9 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
     testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
     implementation("io.kotest:kotest-extensions-spring:4.4.3")
+    //mockk
+    testImplementation("io.mockk:mockk:1.9.3")
+
 
 
     //mockk
