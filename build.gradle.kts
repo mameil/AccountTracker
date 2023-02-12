@@ -47,6 +47,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.0.2")
 
 
+
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
