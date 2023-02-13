@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @Controller
+@RequestMapping("/view")
 class ViewController {
 
-    @GetMapping("/view/main")
-    fun mainView(): String{
+    @GetMapping("/main")
+    fun index(): String {
         return "index"
     }
+
 }
