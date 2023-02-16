@@ -4,6 +4,7 @@
   "apiPackage": "com.kyu9.accountbook.swagger.api",
   "invokerPackage": "com.kyu9.accountbook",
   "hideGenerationTimestamp": true,
+  "enumPropertyNaming": "UPPERCASE",
   "delegatePattern": true,
   "useTags": false,
   "dateLibrary": "java8-localdatetime"
