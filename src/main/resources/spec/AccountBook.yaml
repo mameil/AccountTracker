@@ -216,7 +216,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
-
+  /transaction/{utid}:
+    get:
+      tags:
+        - "Transaction"
+      summary: "get single transaction"
+      description: "get single transaction"
+      operationId: getSingleTransaction
+      parameters:
+        - $ref: '#/components/parameters/path-utid'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSingleTransResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
 
 
 components:
@@ -372,6 +393,39 @@ components:
         id:
           type: integer
 
+    GetSingleTransResponseDto:
+      type: object
+      properties:
+        utid:
+          type: integer
+        amount:
+          type: integer
+          description: "usage amount"
+          example: 2800
+        registeredAt:
+          type: string
+          description: "registered time yyyyMMdd HH24:mm:si"
+        title:
+          type: string
+          description: "main purpose for the transaction"
+        content:
+          type: string
+          description: "additional memo for the transaction"
+        categoryId:
+          type: integer
+          description: "category type of the transaction"
+        moneyType:
+          type: string
+          enum:
+            - FREE
+            - MINE
+        created:
+          type: string
+          description: "created time yyyyMMdd HH24:mm:si"
+        updated:
+          type: string
+          description: "updated time yyyyMMdd HH24:mm:si"
+
 #####################################
 #### 일반적으로 상춍
 #####################################
@@ -387,3 +441,13 @@ components:
       type: string
       description: "시용자아이디"
       example: "testUserId"
+
+  parameters:
+    path-utid:
+      name: utid
+      in: path
+      description: "트랜잭션의 고유 아이디"
+      required: true
+      schema:
+        type: string
+        example: "UT202302160001"

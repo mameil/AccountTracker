@@ -2,6 +2,7 @@ package com.kyu9.accountbook.swagger
 
 import com.kyu9.accountbook.application.TransactionService
 import com.kyu9.accountbook.swagger.api.TransactionApiDelegate
+import com.kyu9.accountbook.swagger.model.GetSingleTransResponseDto
 import com.kyu9.accountbook.swagger.model.PostTranRequestDto
 import com.kyu9.accountbook.swagger.model.PostTransResponseDto
 import lombok.RequiredArgsConstructor
@@ -20,5 +21,9 @@ class TransactionApiControllerImpl(
 
     override fun postTransaction(postTranRequestDto: PostTranRequestDto): ResponseEntity<PostTransResponseDto> {
         return ResponseEntity.ok(transactionService.storeFromDto(postTranRequestDto))
+    }
+
+    override fun getSingleTransaction(utid: String): ResponseEntity<GetSingleTransResponseDto> {
+        return ResponseEntity.ok(transactionService.getSingleTransaction(utid))
     }
 }
