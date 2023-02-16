@@ -3,13 +3,11 @@ package com.kyu9.accountbook.application
 import com.kyu9.accountbook.application.repository.UsageTransactionRepoImpl
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.UsageTransaction
-import com.kyu9.accountbook.domain.properties.MoneyType
 import com.kyu9.accountbook.swagger.model.GetSingleTransResponseDto
 import com.kyu9.accountbook.swagger.model.PostTranRequestDto
 import com.kyu9.accountbook.swagger.model.PostTransResponseDto
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
-import javax.transaction.Transactional
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +30,9 @@ class TransactionService(
                 moneyType = tranReqDto.moneyType.toString()
             )
         ).let {
+            println("==============================================")
+            println(it)
+            println("==============================================")
             PostTransResponseDto(it.id?.toInt())
         }
     }
@@ -44,7 +45,7 @@ class TransactionService(
                 registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
                 title = it.title,
                 content = it.content,
-                categoryId = it.categoryId?.toInt(),
+                categoryId = it.categoryId.toInt(),
                 moneyType = GetSingleTransResponseDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
                 created = MyTime.toYyyymmddhhmmss(it.created),
                 updated = MyTime.toYyyymmddhhmmss(it.updated)
