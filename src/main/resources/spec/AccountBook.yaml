@@ -391,13 +391,15 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: "unique transaction id"
 
     GetSingleTransResponseDto:
       type: object
       properties:
         utid:
-          type: integer
+          type: string
+          description: "unique transaction id"
         amount:
           type: integer
           description: "usage amount"

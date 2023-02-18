@@ -3,18 +3,21 @@ package com.kyu9.accountbook.domain
 import com.kyu9.accountbook.common.BaseEntity
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.properties.MoneyType
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.SequenceGenerator
 
 
 @Entity
 data class UsageTransaction(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long?,
+    @GeneratedValue(generator = "usage_transaction_seq")
+    @GenericGenerator(name = "usage_transaction_seq", strategy = "com.kyu9.accountbook.common.CustomSequenceGenerator")
+    val id: String?,
     val amount: Long,
     val registered: LocalDateTime,
     val registeredYYYY: String,

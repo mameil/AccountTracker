@@ -33,14 +33,14 @@ class TransactionService(
             println("==============================================")
             println(it)
             println("==============================================")
-            PostTransResponseDto(it.id?.toInt())
+            PostTransResponseDto(it.id)
         }
     }
 
     fun getSingleTransaction(utid: String): GetSingleTransResponseDto {
         return transactionRepoImpl.getEntityWithId(utid.toLong()).let{
             GetSingleTransResponseDto(
-                utid = it.id?.toInt(),
+                utid = it.id,
                 amount = it.amount.toInt(),
                 registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
                 title = it.title,
