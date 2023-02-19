@@ -12,7 +12,7 @@ class TransactionMockTest: TestFrame() {
         postPerform(
             "거래 생성 되는거 확인",
             "/transaction",
-            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.now()}\",\n  \"title\": \"편의점 - 병 커피\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"편의점 - 병 커피\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
         )
     }
 
@@ -21,7 +21,7 @@ class TransactionMockTest: TestFrame() {
         postPerform(
             "거래 생성 되는거 확인",
             "/transaction",
-            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.now()}\",\n  \"title\": \"편의점 - 병 커피\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"편의점 - 병 커피\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
         )
 
         //아이디 생성 규칙에 맞게 조회하도록 변경해야함
