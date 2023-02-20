@@ -54,6 +54,7 @@ dependencies {
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.hibernate:hibernate-entitymanager:5.6.3.Final")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
