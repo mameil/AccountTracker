@@ -48,6 +48,7 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
 
+    implementation ("org.springframework:spring-context:5.3.15")
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
