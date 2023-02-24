@@ -14,6 +14,12 @@ class TransactionMockTest: TestFrame() {
             "/transaction",
             "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"편의점 - 병 커피\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
         )
+
+        postPerform(
+            "거래 생성 되는거 확인",
+            "/transaction",
+            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"편의점 - 병 커피2\",\n  \"content\": \"병으로된 커피가 먹고 싶으니까..?\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
     }
 
     @Test

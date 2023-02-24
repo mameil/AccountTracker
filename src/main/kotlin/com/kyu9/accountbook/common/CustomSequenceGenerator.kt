@@ -9,17 +9,21 @@ import org.springframework.stereotype.Service
 import java.io.Serializable
 import java.math.BigDecimal
 import javax.persistence.EntityManager
+import javax.persistence.Persistence
 import javax.persistence.PersistenceContext
 
 @Service
 class CustomSequenceGenerator @Autowired constructor(
 ): IdentifierGenerator {
-    @PersistenceContext
-    private lateinit var entityManager: EntityManager
+//    @PersistenceContext
+//    private lateinit var entityManager: EntityManager
+
 
     override fun generate(session: SharedSessionContractImplementor?, `object`: Any?): String {
+        val emf = Persistence.createEntityManagerFactory("default")
+        val em = emf.createEntityManager()
 
-        val query = entityManager.createNativeQuery("""SELECT usage_transaction_seq.next_val FROM dual""")
+        val query = em.createNativeQuery("""SELECT usage_transaction_seq.next_val FROM dual""")
         val result = query.singleResult as BigDecimal
         val nextVal = result.toLong()
 

@@ -16,13 +16,23 @@ import javax.persistence.SequenceGenerator
 @Entity
 data class UsageTransaction(
     @Id
-    @GeneratedValue(generator = "CustomSequenceGenerator")
+//    @GeneratedValue(generator = "CustomSequenceGenerator")
+//    @GenericGenerator(
+//        name = "CustomSequenceGenerator",
+//        strategy = "com.kyu9.accountbook.common.CustomSequenceGenerator",
+//        parameters = [
+//            Parameter(name = "sequence_name", value = "usage_transaction_seq"),
+//            Parameter(name = "IdGenerator.METHOD", value = "SEQUENCE")
+//        ]
+//    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usage_transaction_seq")
     @GenericGenerator(
-        name = "CustomSequenceGenerator",
-        strategy = "com.kyu9.accountbook.common.CustomSequenceGenerator",
+        name = "usage_transaction_seq",
+        strategy = "com.kyu9.accountbook.common.PrefixSequenceGenerator",
         parameters = [
-            Parameter(name = "sequence_name", value = "usage_transaction_seq"),
-            Parameter(name = "IdGenerator.METHOD", value = "SEQUENCE")
+            Parameter(name = "PrefixSequenceIdGenerator.INCREMENT_PARAM", value = "50"),
+            Parameter(name = "PrefixSequenceIdGenerator.CODE_NUMBER_SEPARATOR_PARAMETER", value = "_"),
+            Parameter(name = "PrefixSequenceIdGenerator.NUMBER_FORMAT_PARAMETER", value = "%05d")
         ]
     )
     val id: String?,
