@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext
 @Service
 class CustomSequenceGenerator @Autowired constructor(
 ): IdentifierGenerator {
+    //todo why this not working??
 //    @PersistenceContext
 //    private lateinit var entityManager: EntityManager
 

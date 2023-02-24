@@ -16,15 +16,6 @@ import javax.persistence.SequenceGenerator
 @Entity
 data class UsageTransaction(
     @Id
-//    @GeneratedValue(generator = "CustomSequenceGenerator")
-//    @GenericGenerator(
-//        name = "CustomSequenceGenerator",
-//        strategy = "com.kyu9.accountbook.common.CustomSequenceGenerator",
-//        parameters = [
-//            Parameter(name = "sequence_name", value = "usage_transaction_seq"),
-//            Parameter(name = "IdGenerator.METHOD", value = "SEQUENCE")
-//        ]
-//    )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usage_transaction_seq")
     @GenericGenerator(
         name = "usage_transaction_seq",
