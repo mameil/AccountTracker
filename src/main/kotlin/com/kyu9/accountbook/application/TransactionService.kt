@@ -38,7 +38,7 @@ class TransactionService(
     }
 
     fun getSingleTransaction(utid: String): GetSingleTransResponseDto {
-        return transactionRepoImpl.getEntityWithId(utid.toLong()).let{
+        return transactionRepoImpl.getEntityWithId(utid).let{
             GetSingleTransResponseDto(
                 utid = it.id,
                 amount = it.amount.toInt(),
