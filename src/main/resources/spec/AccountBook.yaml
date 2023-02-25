@@ -394,10 +394,10 @@ components:
         content:
           type: string
           description: "additional memo for the transaction"
-        categoryId:
+        tagId:
           type: integer
           nullable: false
-          description: "category type of the transaction"
+          description: "tag of the transaction"
         moneyType:
           type: string
           nullable: false
@@ -431,9 +431,9 @@ components:
         content:
           type: string
           description: "additional memo for the transaction"
-        categoryId:
+        tagId:
           type: integer
-          description: "category type of the transaction"
+          description: "tag type of the transaction"
         moneyType:
           type: string
           enum:

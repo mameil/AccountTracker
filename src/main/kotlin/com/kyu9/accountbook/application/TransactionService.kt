@@ -18,15 +18,13 @@ class TransactionService(
     fun storeFromDto(tranReqDto: PostTranRequestDto): PostTransResponseDto{
         val registered = MyTime.toLocalDateTime(tranReqDto.registeredAt!!)
 
-        //todo categoryId 검증 필요
-
         return transactionRepoImpl.storeEntity(
             UsageTransaction(
                 amount = tranReqDto.amount?.toLong()!!,
                 registered = registered,
                 title = tranReqDto.title!!,
                 content = tranReqDto.content!!,
-                categoryId = tranReqDto.categoryId?.toLong()!!,
+                tagId = tranReqDto.tagId?.toLong()!!,
                 moneyType = tranReqDto.moneyType.toString()
             )
         ).let {
@@ -42,7 +40,7 @@ class TransactionService(
                 registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
                 title = it.title,
                 content = it.content,
-                categoryId = it.categoryId.toInt(),
+                tagId = it.tagId.toInt(),
                 moneyType = GetSingleTransResponseDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
                 created = MyTime.toYyyymmddhhmmss(it.created),
                 updated = MyTime.toYyyymmddhhmmss(it.updated)

@@ -10,7 +10,6 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.SequenceGenerator
 
 
 @Entity
@@ -34,7 +33,7 @@ data class UsageTransaction(
     val registeredYYYYMMDD: String,
     val title: String,
     val content: String,
-    val categoryId: Long,
+    val tagId: Long,
     val moneyType: MoneyType
 ): BaseEntity() {
 
@@ -43,7 +42,7 @@ data class UsageTransaction(
         registered: LocalDateTime,
         title: String,
         content: String,
-        categoryId: Long,
+        tagId: Long,
         moneyType: String
     ): this(
         id = null,
@@ -54,7 +53,7 @@ data class UsageTransaction(
         registeredYYYYMMDD = MyTime.toYyyyMmDd(registered),
         title = title,
         content = content,
-        categoryId = categoryId,
+        tagId = tagId,
         moneyType = MoneyType.valueOf(moneyType.uppercase())
     )
 }
