@@ -52,4 +52,8 @@ class TransactionService(
             )
         }
     }
+
+    fun deleteSingleTransaction(utid: String) {
+        transactionRepoImpl.removeEntityWithId(utid)
+    }
 }

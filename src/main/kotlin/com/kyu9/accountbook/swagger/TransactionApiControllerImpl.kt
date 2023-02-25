@@ -26,4 +26,9 @@ class TransactionApiControllerImpl(
     override fun getSingleTransaction(utid: String): ResponseEntity<GetSingleTransResponseDto> {
         return ResponseEntity.ok(transactionService.getSingleTransaction(utid))
     }
+
+    override fun deleteSingleTransaction(utid: String): ResponseEntity<Unit> {
+        transactionService.deleteSingleTransaction(utid)
+        return ResponseEntity(HttpStatus.OK)
+    }
 }

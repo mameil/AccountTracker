@@ -239,6 +239,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+    delete:
+      tags:
+        - "Transaction"
+      summary: "delete single transaction"
+      description: "delete single transaction"
+      operationId: deleteSingleTransaction
+      parameters:
+        - $ref: '#/components/parameters/path-utid'
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
 
 components:
   schemas:

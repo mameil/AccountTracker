@@ -50,4 +50,27 @@ class TransactionMockTest: TestFrame() {
             .andExpect(MockMvcResultMatchers.jsonPath("$.moneyType").value("MINE"))
 
     }
+
+    @Test
+    fun tranDeleteTest(){
+        val tid = postPerform(
+            "거래 생성 되는거 확인",
+            "/transaction",
+            "{\n  \"amount\": 1234,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"테스트전용\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"categoryId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+            .andReturn().response.contentAsString.let {
+                objectMapper.readValue(it, PostTransResponseDto::class.java)
+            }.id
+
+        deletePerform(
+            "거래 삭제 되는거 확인",
+            "/transaction/$tid"
+        )
+
+        getPerform(
+            "거래 없는거 확인",
+            "/transaction/$tid",
+            400
+        )
+    }
 }
