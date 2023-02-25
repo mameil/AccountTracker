@@ -30,9 +30,6 @@ class TransactionService(
                 moneyType = tranReqDto.moneyType.toString()
             )
         ).let {
-            println("==============================================")
-            println(it)
-            println("==============================================")
             PostTransResponseDto(it.id)
         }
     }
