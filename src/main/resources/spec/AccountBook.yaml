@@ -12,6 +12,8 @@ tags:
     description: "User API"
   - name: "Transaction"
     description: "Transaction API"
+  - name: "Tag"
+    description: "Tag API"
 
 paths:
   /check/working:
@@ -197,7 +199,7 @@ paths:
       description: "record transaction"
       operationId: postTransaction
       requestBody:
-        description: "create user request"
+        description: "post transaction request body"
         required: true
         content:
           application/json:
@@ -250,6 +252,37 @@ paths:
       responses:
         200:
           description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+######################################################
+###### 사용내역 태그_API
+######################################################
+  /tag:
+    post:
+      tags:
+        - "Tag"
+      summary: "save Tag"
+      description: "save Tag"
+      operationId: postTag
+      requestBody:
+        description: "post tag dto request body"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostSingleTagDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSingleTagDto'
         400:
           description: "Bad Request"
           content:
@@ -445,6 +478,35 @@ components:
         updated:
           type: string
           description: "updated time yyyyMMdd HH24:mm:si"
+
+    PostSingleTagDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "tag name"
+        color:
+          type: string
+          description: "tag color"
+
+    GetSingleTagDto:
+      type: object
+      properties:
+          id:
+            type: integer
+            description: "tag id"
+          name:
+            type: string
+            description: "tag name"
+          color:
+            type: string
+            description: "tag color"
+          created:
+            type: string
+            description: "created time yyyyMMdd HH24:mm:si"
+          updated:
+            type: string
+            description: "updated time yyyyMMdd HH24:mm:si"
 
 #####################################
 #### 일반적으로 상춍
