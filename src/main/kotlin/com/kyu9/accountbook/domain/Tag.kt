@@ -10,9 +10,17 @@ import javax.persistence.Id
 data class Tag(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    val id: Long?,
     val name: String,
     val color: String,
     ): BaseEntity() {
-
+        companion object{
+            fun of(name: String, color: String): Tag{
+                return Tag(
+                    id = null,
+                    name = name,
+                    color = color
+                )
+            }
+        }
 }
