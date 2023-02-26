@@ -28,4 +28,16 @@ class TagService(
             )
         }
     }
+
+    fun getAllTags(): List<GetSingleTagDto>{
+        return tagRepoImpl.getAllTags().map {
+            GetSingleTagDto(
+                it.id?.toInt(),
+                it.name,
+                it.color,
+                MyTime.toYyyymmddhhmmss(it.created),
+                MyTime.toYyyymmddhhmmss(it.updated)
+            )
+        }
+    }
 }

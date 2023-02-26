@@ -16,4 +16,8 @@ class TagApiControllerImpl(
     override fun postTag(postSingleTagDto: PostSingleTagDto): ResponseEntity<GetSingleTagDto> {
         return ResponseEntity.ok(tagService.storeTag(postSingleTagDto))
     }
+
+    override fun getAllTags(): ResponseEntity<List<GetSingleTagDto>> {
+        return ResponseEntity.ok(tagService.getAllTags())
+    }
 }

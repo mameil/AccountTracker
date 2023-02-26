@@ -12,4 +12,7 @@ class TagRepoImpl(
     tagRepository
 ) {
 
+    fun getAllTags(): List<Tag>{
+        return tagRepository.findAll()
+    }
 }

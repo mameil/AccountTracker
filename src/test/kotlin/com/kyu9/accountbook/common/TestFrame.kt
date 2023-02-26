@@ -2,7 +2,10 @@ package com.kyu9.accountbook.common
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.kyu9.accountbook.AccountBookApplication
+import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.swagger.model.GetUserResponseDto
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,6 +26,7 @@ import kotlin.random.Random
 class TestFrame(
 ) {
     @Autowired lateinit var mockMvc: MockMvc
+    @Autowired lateinit var tagRepository: TagRepository
     val objectMapper: ObjectMapper = ObjectMapper()
 
     fun postPerform(desc: String="", url: String, req: String, status: Int=200): ResultActions {
@@ -75,5 +79,10 @@ class TestFrame(
                 .andReturn().response.contentAsString,
             GetUserResponseDto::class.java
         )
+    }
+
+    @BeforeEach
+    fun beforeAll(){
+        tagRepository.deleteAll()
     }
 }

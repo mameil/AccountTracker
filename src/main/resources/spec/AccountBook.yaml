@@ -71,9 +71,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
-######################################################
-###### 사용자_API
-######################################################
+  ######################################################
+  ###### 사용자_API
+  ######################################################
   /user:
     post:
       tags:
@@ -188,9 +188,9 @@ paths:
 
 
 
-######################################################
-###### 사용내역_API
-######################################################
+  ######################################################
+  ###### 사용내역_API
+  ######################################################
   /transaction:
     post:
       tags:
@@ -259,9 +259,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
-######################################################
-###### 사용내역 태그_API
-######################################################
+  ######################################################
+  ###### 사용내역 태그_API
+  ######################################################
   /tag:
     post:
       tags:
@@ -283,6 +283,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetSingleTagDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+  /tag/list:
+    get:
+      tags:
+        - "Tag"
+      summary: "get All tags"
+      description: "get All tags"
+      operationId: getAllTags
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSingleTagDto'
         400:
           description: "Bad Request"
           content:
@@ -387,14 +410,14 @@ components:
             type: string
           description: "generate html table request - keys"
           nullable: false
-          example: ["key1", "key2", "key3"]
-#        values:
-#          type: array
-#          items:
-#            type: string
-#          description: "generate html table request - values"
-#          nullable: false
-#          example: [ "key1", "key2", "key3" ]
+          example: [ "key1", "key2", "key3" ]
+        #        values:
+        #          type: array
+        #          items:
+        #            type: string
+        #          description: "generate html table request - values"
+        #          nullable: false
+        #          example: [ "key1", "key2", "key3" ]
         values:
           type: string
           description: "generate html table request - values pure string"
@@ -492,25 +515,25 @@ components:
     GetSingleTagDto:
       type: object
       properties:
-          id:
-            type: integer
-            description: "tag id"
-          name:
-            type: string
-            description: "tag name"
-          color:
-            type: string
-            description: "tag color"
-          created:
-            type: string
-            description: "created time yyyyMMdd HH24:mm:si"
-          updated:
-            type: string
-            description: "updated time yyyyMMdd HH24:mm:si"
+        id:
+          type: integer
+          description: "tag id"
+        name:
+          type: string
+          description: "tag name"
+        color:
+          type: string
+          description: "tag color"
+        created:
+          type: string
+          description: "created time yyyyMMdd HH24:mm:si"
+        updated:
+          type: string
+          description: "updated time yyyyMMdd HH24:mm:si"
 
-#####################################
-#### 일반적으로 상춍
-#####################################
+    #####################################
+    #### 일반적으로 상춍
+    #####################################
     ErrorResponseDto:
       type: object
       properties:
