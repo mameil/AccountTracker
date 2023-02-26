@@ -40,4 +40,8 @@ class TagService(
             )
         }
     }
+
+    fun removeTag(id: Int){
+        tagRepoImpl.removeEntityWithId(id.toLong())
+    }
 }

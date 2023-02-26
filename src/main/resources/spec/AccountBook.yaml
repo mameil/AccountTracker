@@ -313,6 +313,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /tag/{tagId}:
+    delete:
+      tags:
+        - "Tag"
+      summary: "delete single tag"
+      description: "delete single tag"
+      operationId: deleteSingleTag
+      parameters:
+        - $ref: '#/components/parameters/path-tagId'
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
 
 components:
   schemas:
@@ -556,3 +575,12 @@ components:
       schema:
         type: string
         example: "UT202302160001"
+
+    path-tagId:
+      name: tagId
+      in: path
+      description: "태그의 고유 아이디"
+      required: true
+      schema:
+        type: integer
+        example: 1
