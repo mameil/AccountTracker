@@ -582,5 +582,5 @@ components:
       description: "태그의 고유 아이디"
       required: true
       schema:
-        type: integer
+        type: number
         example: 1

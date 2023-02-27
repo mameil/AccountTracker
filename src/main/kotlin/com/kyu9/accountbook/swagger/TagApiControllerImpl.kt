@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +23,9 @@ class TagApiControllerImpl(
         return ResponseEntity.ok(tagService.getAllTags())
     }
 
-    override fun deleteSingleTag(tagId: Int): ResponseEntity<Unit> {
-        tagService.removeTag(tagId)
+    override fun deleteSingleTag(tagId: BigDecimal): ResponseEntity<Unit> {
+        //todo difference between Kotlin.Int and BidDecimal..?
+        tagService.removeTag(tagId.intValueExact())
         return ResponseEntity(HttpStatus.OK)
     }
 }

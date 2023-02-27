@@ -5,6 +5,7 @@ import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import org.junit.jupiter.api.Test
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.MockMvcResultMatchersDsl
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
@@ -89,9 +90,9 @@ class TagTests: TestFrame(){
             .andExpect(MockMvcResultMatchers.jsonPath("$[1].name").value("테스트용 태그이름2"))
             .andExpect(MockMvcResultMatchers.jsonPath("$[1].color").value("RED"))
 
-//todo >> 테스트 코드가 각각 돌면서 새로 부트를 띄워야 id에 대한 정리가 잘될 듯한딩 지금은 full test 돌리면 모든 아이디 seq은 계속 올라감
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
-//            .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2))
+//테스트 코드가 각각 돌면서 새로 부트를 띄워야 id에 대한 정리가 잘될 듯한딩 지금은 full test 돌리면 모든 아이디 seq은 계속 올라감 >> DirtiesContext 으로 해경
+            .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
+            .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2))
     }
 
     @Test
@@ -127,5 +128,6 @@ class TagTests: TestFrame(){
             url = "/tag/list"
         )
             .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty)
     }
 }
