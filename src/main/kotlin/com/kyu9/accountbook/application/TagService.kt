@@ -44,4 +44,22 @@ class TagService(
     fun removeTag(id: Int){
         tagRepoImpl.removeEntityWithId(id.toLong())
     }
+
+    fun updateTag(id: Int, dto: PostSingleTagDto): GetSingleTagDto{
+        tagRepoImpl.getOptionalWithId(id.toLong()).ifPresent{
+            it.name = dto.name!!
+            it.color = dto.color!!
+            tagRepoImpl.storeEntity(it)
+        }
+
+        return tagRepoImpl.getEntityWithId(id.toLong()).let {
+            GetSingleTagDto(
+                it.id?.toInt(),
+                it.name,
+                it.color,
+                MyTime.toYyyymmddhhmmss(it.created),
+                MyTime.toYyyymmddhhmmss(it.updated)
+            )
+        }
+    }
 }

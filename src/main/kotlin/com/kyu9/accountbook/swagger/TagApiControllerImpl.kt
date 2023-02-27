@@ -28,4 +28,11 @@ class TagApiControllerImpl(
         tagService.removeTag(tagId.intValueExact())
         return ResponseEntity(HttpStatus.OK)
     }
+
+    override fun updateSingleTag(
+        tagId: BigDecimal,
+        postSingleTagDto: PostSingleTagDto
+    ): ResponseEntity<GetSingleTagDto> {
+        return ResponseEntity.ok(tagService.updateTag(tagId.intValueExact(), postSingleTagDto))
+    }
 }

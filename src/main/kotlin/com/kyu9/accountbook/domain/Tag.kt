@@ -11,8 +11,8 @@ data class Tag(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long?,
-    val name: String,
-    val color: String,
+    var name: String,
+    var color: String,
     ): BaseEntity() {
         companion object{
             fun of(name: String, color: String): Tag{

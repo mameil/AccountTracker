@@ -130,4 +130,41 @@ class TagTests: TestFrame(){
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty)
     }
+
+    @Test
+    fun updateTest(){
+        val tagId = postPerform(
+            desc = "태그를 생성한다",
+            url = "/tag",
+            req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect{
+                MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
+                MockMvcResultMatchers.jsonPath("$.color").value("RED")
+            }
+            .andReturn().response.contentAsString
+            .let{
+                objectMapper.readValue(it, GetSingleTagDto::class.java).id
+            }
+
+        putPerform(
+            desc = "태그 수정",
+            url = "/tag/$tagId",
+            req = "{\n  \"name\": \"테스트용 태그이름2\",\n  \"color\": \"BLUE\"\n}"
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect{
+                MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름2")
+                MockMvcResultMatchers.jsonPath("$.color").value("BLUE")
+            }
+
+        getPerform(
+            desc = "모든 태그가 있어야만 한다",
+            url = "/tag/list"
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("테스트용 태그이름2"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$[0].color").value("BLUE"))
+    }
 }
