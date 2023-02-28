@@ -52,6 +52,9 @@ dependencies {
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
+    //cache
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

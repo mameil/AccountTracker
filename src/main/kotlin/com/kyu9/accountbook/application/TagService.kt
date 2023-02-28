@@ -6,12 +6,16 @@ import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
 import lombok.RequiredArgsConstructor
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.CachePut
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
 class TagService(
     private val tagRepoImpl: TagRepoImpl
 ) {
+    @Cacheable(value = ["tags"])
     fun storeTag(dto: PostSingleTagDto): GetSingleTagDto{
         tagRepoImpl.storeEntity(
             Tag.of(
@@ -29,6 +33,7 @@ class TagService(
         }
     }
 
+    @Cacheable(value = ["tags"])
     fun getAllTags(): List<GetSingleTagDto>{
         return tagRepoImpl.getAllTags().map {
             GetSingleTagDto(
@@ -41,10 +46,12 @@ class TagService(
         }
     }
 
+    @CacheEvict(value = ["tags"], allEntries = true)
     fun removeTag(id: Int){
         tagRepoImpl.removeEntityWithId(id.toLong())
     }
 
+    @CachePut(value = ["tags"])
     fun updateTag(id: Int, dto: PostSingleTagDto): GetSingleTagDto{
         tagRepoImpl.getOptionalWithId(id.toLong()).ifPresent{
             it.name = dto.name!!

@@ -3,11 +3,12 @@ package com.kyu9.accountbook.tag
 import com.kyu9.accountbook.common.TestFrame
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import org.junit.jupiter.api.Test
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.MockMvcResultMatchersDsl
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.CacheManager
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.util.concurrent.ConcurrentMap
+
 
 class TagTests: TestFrame(){
 
@@ -166,5 +167,36 @@ class TagTests: TestFrame(){
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("테스트용 태그이름2"))
             .andExpect(MockMvcResultMatchers.jsonPath("$[0].color").value("BLUE"))
+    }
+
+    @Autowired
+    private lateinit var cacheManager: CacheManager
+
+    @Test
+    fun cacheStoreInquiryTest(){
+        val tagId = postPerform(
+            desc = "태그를 생성한다",
+            url = "/tag",
+            req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect{
+                MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
+                MockMvcResultMatchers.jsonPath("$.color").value("RED")
+            }
+            .andReturn().response.contentAsString
+            .let{
+                objectMapper.readValue(it, GetSingleTagDto::class.java).id
+            }
+
+        val cache: Cache<*, *>? = cacheManager.getCache("myCache")
+        if (cache != null) {
+            val cacheMap: ConcurrentMap<*, *> = cache.asMap()
+            for (entry in cacheMap.entries) {
+                val key = entry.key
+                val value = entry.value
+                println("Key: $key, Value: $value")
+            }
+        }
     }
 }
