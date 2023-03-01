@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service
 class TagService(
     private val tagRepoImpl: TagRepoImpl
 ) {
-    @Cacheable(value = ["tags"])
     fun storeTag(dto: PostSingleTagDto): GetSingleTagDto{
         tagRepoImpl.storeEntity(
             Tag.of(
@@ -33,7 +32,6 @@ class TagService(
         }
     }
 
-    @Cacheable(value = ["tags"])
     fun getAllTags(): List<GetSingleTagDto>{
         return tagRepoImpl.getAllTags().map {
             GetSingleTagDto(
@@ -46,20 +44,12 @@ class TagService(
         }
     }
 
-    @CacheEvict(value = ["tags"], allEntries = true)
     fun removeTag(id: Int){
         tagRepoImpl.removeEntityWithId(id.toLong())
     }
 
-    @CachePut(value = ["tags"])
     fun updateTag(id: Int, dto: PostSingleTagDto): GetSingleTagDto{
-        tagRepoImpl.getOptionalWithId(id.toLong()).ifPresent{
-            it.name = dto.name!!
-            it.color = dto.color!!
-            tagRepoImpl.storeEntity(it)
-        }
-
-        return tagRepoImpl.getEntityWithId(id.toLong()).let {
+        return updateEntity(id, dto).let {
             GetSingleTagDto(
                 it.id?.toInt(),
                 it.name,
@@ -68,5 +58,16 @@ class TagService(
                 MyTime.toYyyymmddhhmmss(it.updated)
             )
         }
+    }
+
+    @CachePut(value = ["tags"])
+    fun updateEntity(id: Int, dto: PostSingleTagDto): Tag{
+        tagRepoImpl.getOptionalWithId(id.toLong()).ifPresent{
+            it.name = dto.name!!
+            it.color = dto.color!!
+            tagRepoImpl.storeEntity(it)
+        }
+
+        return tagRepoImpl.getEntityWithId(id.toLong())
     }
 }

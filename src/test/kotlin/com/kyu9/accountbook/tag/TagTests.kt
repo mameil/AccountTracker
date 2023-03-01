@@ -1,15 +1,26 @@
 package com.kyu9.accountbook.tag
 
+import com.google.common.cache.Cache
+import com.google.common.cache.CacheBuilder
+import com.google.common.cache.CacheLoader
+import com.google.common.cache.LoadingCache
+import com.kyu9.accountbook.application.repository.TagRepoImpl
 import com.kyu9.accountbook.common.TestFrame
+import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
+import org.assertj.core.api.Assertions.assertThat
+import org.hibernate.validator.internal.util.Contracts.assertNotNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache
 import org.springframework.cache.CacheManager
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.wildfly.common.Assert
 import java.util.concurrent.ConcurrentMap
 
 
+@AutoConfigureCache
 class TagTests: TestFrame(){
 
     @Test
@@ -172,8 +183,12 @@ class TagTests: TestFrame(){
     @Autowired
     private lateinit var cacheManager: CacheManager
 
+    @Autowired
+    private lateinit var tagRepoImpl: TagRepoImpl
+
     @Test
-    fun cacheStoreInquiryTest(){
+    fun cacheTest(){
+
         val tagId = postPerform(
             desc = "태그를 생성한다",
             url = "/tag",
@@ -189,14 +204,6 @@ class TagTests: TestFrame(){
                 objectMapper.readValue(it, GetSingleTagDto::class.java).id
             }
 
-        val cache: Cache<*, *>? = cacheManager.getCache("myCache")
-        if (cache != null) {
-            val cacheMap: ConcurrentMap<*, *> = cache.asMap()
-            for (entry in cacheMap.entries) {
-                val key = entry.key
-                val value = entry.value
-                println("Key: $key, Value: $value")
-            }
-        }
-    }
+        Assert.assertNotNull(cacheManager.getCache("tags"))
+
 }

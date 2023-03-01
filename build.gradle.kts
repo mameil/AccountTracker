@@ -47,6 +47,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.google.guava:guava:30.1.1-jre")
 
     implementation ("org.springframework:spring-context:5.3.15")
     //view
@@ -54,6 +56,9 @@ dependencies {
 
     //cache
     implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
 
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")

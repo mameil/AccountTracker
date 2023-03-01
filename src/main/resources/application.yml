@@ -17,6 +17,11 @@ spring:
     mode: HTML5
     cache: false
     check-template-location: true
+  cache:
+    type: redis
+  redis:
+    cache:
+      value-serializer: org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
 
 
 server:

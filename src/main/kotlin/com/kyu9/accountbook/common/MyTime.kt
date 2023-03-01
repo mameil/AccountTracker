@@ -29,8 +29,8 @@ class MyTime {
             return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
         }
 
-        fun toYyyymmddhhmmss(localDateTime: LocalDateTime): String{
-            return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        fun toYyyymmddhhmmss(localDateTime: LocalDateTime?): String?{
+            return localDateTime?.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         }
 
         fun toLocalDateTime(yyyyMMddHHmmss: String): LocalDateTime{
