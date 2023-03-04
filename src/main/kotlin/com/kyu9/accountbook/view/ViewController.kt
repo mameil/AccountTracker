@@ -14,4 +14,9 @@ class ViewController {
         return "index"
     }
 
+    @GetMapping("/login")
+    fun login(): String {
+        return "login"
+    }
+
 }
