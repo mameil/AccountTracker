@@ -62,4 +62,11 @@ class UserService (
     fun removeUserById(id: String){
         userRepoImpl.removeEntityWithId(id)
     }
+
+    fun checkUser(id: String, password: String): LoginUserResponseDto {
+        return LoginUserResponseDto(
+            successAble = userRepoImpl.getEntityWithId(id).password == password,
+            loginAt = MyTime.toYyyymmddhhmmss(MyTime.now())
+        )
+    }
 }

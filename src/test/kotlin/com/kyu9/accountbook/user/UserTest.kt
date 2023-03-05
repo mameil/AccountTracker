@@ -96,4 +96,32 @@ class UserTest(
         )
     }
 
+    @Test
+    @DisplayName("사용자를 등록하고 로그인할 수 있다")
+    fun loginTest(){
+        val user = createRandomUser()
+
+        postPerform(
+            "로그인",
+            "/user/login",
+            "{\n  \"id\": \"${user.id}\",\n  \"password\": \"${user.password}\"\n}"
+        )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.successAble").value(true))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.loginAt").exists())
+    }
+
+    @Test
+    @DisplayName("사용자를 등록하고 로그인에서 실패할 수 있다")
+    fun loginFailTest(){
+        val user = createRandomUser()
+
+        postPerform(
+            "로그인",
+            "/user/login",
+            "{\n  \"id\": \"${user.id}\",\n  \"password\": \"zzzzzzz\"\n}"
+        )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.successAble").value(false))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.loginAt").exists())
+    }
+
 }

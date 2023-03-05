@@ -21,10 +21,10 @@ import java.util.concurrent.ConcurrentMap
 
 
 @AutoConfigureCache
-class TagTests: TestFrame(){
+class TagTests: TestFrame() {
 
     @Test
-    fun postTest(){
+    fun postTest() {
 
         postPerform(
             desc = "태그를 생성한다",
@@ -32,24 +32,24 @@ class TagTests: TestFrame(){
             req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
     }
 
     @Test
-    fun autoIdCreationTest(){
+    fun autoIdCreationTest() {
         val idList: MutableList<Int> = mutableListOf()
 
-        for (i in 1..100){
+        for (i in 1..100) {
             postPerform(
                 desc = "태그를 생성한다",
                 url = "/tag",
                 req = "{\n  \"name\": \"테스트$i\",\n  \"color\": \"RED\"\n}"
             )
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect{
+                .andExpect {
                     MockMvcResultMatchers.jsonPath("$.name").value("테스트$i")
                     MockMvcResultMatchers.jsonPath("$.color").value("RED")
                 }
@@ -62,20 +62,20 @@ class TagTests: TestFrame(){
                 }
         }
 
-        for((idx, id) in idList.withIndex()){
+        for ((idx, id) in idList.withIndex()) {
             assert(id == idx + 1)
         }
     }
 
     @Test
-    fun findAllTest(){
+    fun findAllTest() {
         postPerform(
             desc = "태그를 생성한다",
             url = "/tag",
             req = "{\n  \"name\": \"테스트용 태그이름1\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
@@ -87,7 +87,7 @@ class TagTests: TestFrame(){
             req = "{\n  \"name\": \"테스트용 태그이름2\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름2")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
@@ -108,19 +108,19 @@ class TagTests: TestFrame(){
     }
 
     @Test
-    fun deleteTest(){
+    fun deleteTest() {
         val tagId = postPerform(
             desc = "태그를 생성한다",
             url = "/tag",
             req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
             .andReturn().response.contentAsString
-            .let{
+            .let {
                 objectMapper.readValue(it, GetSingleTagDto::class.java).id
             }
 
@@ -144,19 +144,19 @@ class TagTests: TestFrame(){
     }
 
     @Test
-    fun updateTest(){
+    fun updateTest() {
         val tagId = postPerform(
             desc = "태그를 생성한다",
             url = "/tag",
             req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
             .andReturn().response.contentAsString
-            .let{
+            .let {
                 objectMapper.readValue(it, GetSingleTagDto::class.java).id
             }
 
@@ -166,7 +166,7 @@ class TagTests: TestFrame(){
             req = "{\n  \"name\": \"테스트용 태그이름2\",\n  \"color\": \"BLUE\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름2")
                 MockMvcResultMatchers.jsonPath("$.color").value("BLUE")
             }
@@ -187,7 +187,7 @@ class TagTests: TestFrame(){
     private lateinit var tagRepoImpl: TagRepoImpl
 
     @Test
-    fun cacheTest(){
+    fun cacheTest() {
 
         val tagId = postPerform(
             desc = "태그를 생성한다",
@@ -195,15 +195,16 @@ class TagTests: TestFrame(){
             req = "{\n  \"name\": \"테스트용 태그이름\",\n  \"color\": \"RED\"\n}"
         )
             .andDo(MockMvcResultHandlers.print())
-            .andExpect{
+            .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
             }
             .andReturn().response.contentAsString
-            .let{
+            .let {
                 objectMapper.readValue(it, GetSingleTagDto::class.java).id
             }
 
         Assert.assertNotNull(cacheManager.getCache("tags"))
 
+    }
 }

@@ -2,10 +2,7 @@ package com.kyu9.accountbook.swagger
 
 import com.kyu9.accountbook.application.UserService
 import com.kyu9.accountbook.swagger.api.UserApiDelegate
-import com.kyu9.accountbook.swagger.model.CreateUserRequestDto
-import com.kyu9.accountbook.swagger.model.CreateUserResponseDto
-import com.kyu9.accountbook.swagger.model.GetUserResponseDto
-import com.kyu9.accountbook.swagger.model.UpdateUserRequestDto
+import com.kyu9.accountbook.swagger.model.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -34,5 +31,9 @@ class UserApiControllerImpl(
     override fun deleteUser(userId: String): ResponseEntity<Unit> {
         userService.removeUserById(userId)
         return ResponseEntity(HttpStatus.OK)
+    }
+
+    override fun loginUser(loginUserRequestDto: LoginUserRequestDto): ResponseEntity<LoginUserResponseDto> {
+        return ResponseEntity.ok(userService.checkUser(loginUserRequestDto.id!!, loginUserRequestDto.password!!))
     }
 }

@@ -186,6 +186,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /user/login:
+    post:
+      tags:
+        - "User"
+      summary: "login user"
+      description: "login user"
+      operationId: loginUser
+      requestBody:
+        description: "login user request"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequestDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginUserResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
 
 
   ######################################################
@@ -364,6 +391,32 @@ paths:
 
 components:
   schemas:
+    LoginUserRequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: false
+          description: "user login id(String)"
+          example: "kd.shim"
+        password:
+          type: string
+          nullable: false
+          description: "user password"
+          example: "qwer1234"
+
+    LoginUserResponseDto:
+      type: object
+      properties:
+        successAble:
+          type: boolean
+          description: "login success"
+          example: true
+        loginAt:
+          type: string
+          description: "user create date(yyyymmddHHmmss)"
+          example: "20230129011000"
+
     CheckSuccessDto:
       type: object
       properties:
