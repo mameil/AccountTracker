@@ -84,10 +84,6 @@
 <!--===============================================================================================-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
-
 
     function login() {
         console.log("id : " + $("#id").val());
@@ -108,12 +104,12 @@
                     alert("로그인 성공");
                     location.href = "/view/main";
                 } else {
-                    alert("로그인 실패");
+                    alert("해당 아이디에 대한 비밀번호가 입력하신 비밀번호와 다릅니다");
                 }
             },
             error: function (data) {
                 console.log(data);
-                alert("서버에서 실패");
+                alert("서버에서 알 수 없는 에러가 발생했습니다");
             }
         });
     }
