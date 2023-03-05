@@ -5,10 +5,12 @@ import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.User
 import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
+import lombok.extern.log4j.Log4j2
 import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 class UserService (
     private val userRepoImpl: UserRepoImpl
 ) {
@@ -64,6 +66,7 @@ class UserService (
     }
 
     fun checkUser(id: String, password: String): LoginUserResponseDto {
+        println("Received id: $id, password: $password")
         return LoginUserResponseDto(
             successAble = userRepoImpl.getEntityWithId(id).password == password,
             loginAt = MyTime.toYyyymmddhhmmss(MyTime.now())
