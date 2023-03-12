@@ -11,20 +11,17 @@
 </head>
 <body>
 
-<form class="login100-form validate-form" onsubmit="findId(); return false;">
-					<span class="login100-form-title">
-<!--						로그인 페이지-->
-					</span>
-
+<form class="login100-form validate-form" onsubmit="findId(); return false;" style="alignment: center">
+    <span class="login100-form-title"></span>
     <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="id" name="id" placeholder="Id">
+        <input class="input100" type="text" id="name" name="name" placeholder="회원가입한 이름">
         <span class="focus-input100"></span>
         <span class="symbol-input100"></span>
     </div>
 
     <div class="container-login100-form-btn">
-        <button class="login100-form-btn">
-            Login
+        <button class="login70-form-btn">
+            회원 정보 조회
         </button>
     </div>
 
@@ -38,26 +35,18 @@
     function findId() {
         console.log("name : " + $("#name").val());
         $.ajax({
-            url: "/user/find/name",
-            type: "POST",
+            url: "/user/find/name?name=" + $("#name").val(),
+            type: "GET",
             contentType: "application/json",
-            data: JSON.stringify({
-                "name": $("#name").val()
-            }),
 
             success: function (data) {
                 console.log(data);
-
-                if (data.successAble === true) {
-                    alert("아이디 찾기 성공");
-                    location.href = "/view/main";
-                } else {
-                    alert("아이디 찾기 실패");
-                }
+                alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
+                window.close();
             },
             error: function (data) {
                 console.log(data);
-                alert("서버에서 실패");
+                alert($("#name").val() + " << 해당 이름으로 가입한 회원 정보가 없습니다!");
             }
         });
     }
