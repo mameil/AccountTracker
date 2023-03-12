@@ -1,5 +1,0 @@
-  application
-  domain
-  master
-  utils
-* views

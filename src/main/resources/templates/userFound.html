@@ -12,10 +12,7 @@
 <body>
 
 <form class="login100-form validate-form" onsubmit="findId(); return false;">
-					<span class="login100-form-title">
-<!--						로그인 페이지-->
-					</span>
-
+    <span class="login100-form-title"></span>
     <div class="wrap-input100 validate-input">
         <input class="input100" type="text" id="id" name="id" placeholder="Id">
         <span class="focus-input100"></span>
@@ -38,22 +35,13 @@
     function findId() {
         console.log("name : " + $("#name").val());
         $.ajax({
-            url: "/user/find/name",
-            type: "POST",
+            url: "/user/find/name?name=" + $("#name").val(),
+            type: "GET",
             contentType: "application/json",
-            data: JSON.stringify({
-                "name": $("#name").val()
-            }),
 
             success: function (data) {
                 console.log(data);
-
-                if (data.successAble === true) {
-                    alert("아이디 찾기 성공");
-                    location.href = "/view/main";
-                } else {
-                    alert("아이디 찾기 실패");
-                }
+                alert("UserID : " + data.id + ", UserName : " + data.name + ", UserPwd : " + data.pwd);
             },
             error: function (data) {
                 console.log(data);
