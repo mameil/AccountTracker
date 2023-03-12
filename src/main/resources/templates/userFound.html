@@ -11,17 +11,17 @@
 </head>
 <body>
 
-<form class="login100-form validate-form" onsubmit="findId(); return false;">
+<form class="login100-form validate-form" onsubmit="findId(); return false;" style="alignment: center">
     <span class="login100-form-title"></span>
     <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="id" name="id" placeholder="Id">
+        <input class="input100" type="text" id="name" name="name" placeholder="회원가입한 이름">
         <span class="focus-input100"></span>
         <span class="symbol-input100"></span>
     </div>
 
     <div class="container-login100-form-btn">
-        <button class="login100-form-btn">
-            Login
+        <button class="login70-form-btn">
+            회원 정보 조회
         </button>
     </div>
 
@@ -41,11 +41,12 @@
 
             success: function (data) {
                 console.log(data);
-                alert("UserID : " + data.id + ", UserName : " + data.name + ", UserPwd : " + data.pwd);
+                alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
+                window.close();
             },
             error: function (data) {
                 console.log(data);
-                alert("서버에서 실패");
+                alert($("#name").val() + " << 해당 이름으로 가입한 회원 정보가 없습니다!");
             }
         });
     }
