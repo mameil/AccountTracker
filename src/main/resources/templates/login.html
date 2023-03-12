@@ -13,11 +13,11 @@
     <!--    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--===============================================================================================-->
-<!--    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">-->
     <!--===============================================================================================-->
-<!--    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">-->
     <!--===============================================================================================-->
-<!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/css/util.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -29,13 +29,13 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>
-<!--                <img src="/jpg/login.jpg" alt="IMG">-->
+                <!--                <img src="/jpg/login.jpg" alt="IMG">-->
             </div>
 
-<!--            return false은 이벤트의 기본 동작을 중지-->
+            <!--            return false은 이벤트의 기본 동작을 중지-->
             <form class="login100-form validate-form" onsubmit="login(); return false;">
 					<span class="login100-form-title">
-						로그인 페이지
+<!--						로그인 페이지-->
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
@@ -64,7 +64,7 @@
 						<span class="txt1">
 							Forgot
 						</span>
-                    <a class="txt2" href="login/forget">
+                    <a class="txt2" href="#" onclick="findId()">
                         Password?
                     </a>
                 </div>
@@ -112,6 +112,34 @@
                 alert("서버에서 알 수 없는 에러가 발생했습니다");
             }
         });
+    }
+
+    function findId() {
+        window.open("/view/login/found", "popup", "width=500, height=500, left=500, top=200")
+        // console.log("name : " + $("#name").val());
+        // $.ajax({
+        //     url: "/user/findId",
+        //     type: "POST",
+        //     contentType: "application/json",
+        //     data: JSON.stringify({
+        //         "name": $("#name").val()
+        //     }),
+        //
+        //     success: function (data) {
+        //         console.log(data);
+        //
+        //         if (data.successAble === true) {
+        //             alert("아이디 찾기 성공");
+        //             location.href = "/view/main";
+        //         } else {
+        //             alert("아이디 찾기 실패");
+        //         }
+        //     },
+        //     error: function (data) {
+        //         console.log(data);
+        //         alert("서버에서 실패");
+        //     }
+        // });
     }
 </script>
 <!--===============================================================================================-->

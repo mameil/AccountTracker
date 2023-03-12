@@ -19,4 +19,9 @@ class ViewController {
         return "login"
     }
 
+    @GetMapping("/login/found")
+    fun findId(): String {
+        return "userFound"
+    }
+
 }
