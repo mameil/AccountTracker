@@ -124,4 +124,19 @@ class UserTest(
             .andExpect(MockMvcResultMatchers.jsonPath("$.loginAt").exists())
     }
 
+    @Test
+    @DisplayName("사용자를 등록하고 이름으로 조회할 수 있다")
+    fun findUserNameTest(){
+        val user = createRandomUser()
+
+        getPerform(
+            "사용자 이름을 조회한다",
+            "/user/find/name?name=${user.name}"
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${user.id}"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${user.name}"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("${user.password}"))
+    }
+
 }

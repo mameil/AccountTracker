@@ -36,4 +36,8 @@ class UserApiControllerImpl(
     override fun loginUser(loginUserRequestDto: LoginUserRequestDto): ResponseEntity<LoginUserResponseDto> {
         return ResponseEntity.ok(userService.checkUser(loginUserRequestDto.id!!, loginUserRequestDto.password!!))
     }
+
+    override fun findUserInfoByName(name: String): ResponseEntity<GetUserResponseDto> {
+        return ResponseEntity.ok(userService.findUserByName(name))
+    }
 }

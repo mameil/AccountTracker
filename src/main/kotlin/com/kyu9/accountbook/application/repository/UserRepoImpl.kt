@@ -21,5 +21,9 @@ class UserRepoImpl(
         return super.storeEntity(t)
     }
 
+    fun getOptionalWithName(name: String): Optional<User> {
+        return userRepository.findByName(name)
+    }
+
 
 }

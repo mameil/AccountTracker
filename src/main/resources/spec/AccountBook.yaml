@@ -214,6 +214,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /user/find/name:
+    get:
+      tags:
+        - "User"
+      summary: "find user info by name"
+      description: "find user info by name"
+      operationId: findUserInfoByName
+      parameters:
+        - name: "name"
+          in: "query"
+          description: "user name"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
 
   ######################################################
   ###### 사용내역_API
