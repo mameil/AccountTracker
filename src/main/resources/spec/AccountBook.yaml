@@ -223,7 +223,7 @@ paths:
       operationId: findUserInfoByName
       parameters:
         - name: "name"
-          in: "path"
+          in: "query"
           description: "user name"
           required: true
           schema:

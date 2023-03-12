@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.application
 
 import com.kyu9.accountbook.application.repository.UserRepoImpl
+import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.User
 import com.kyu9.accountbook.swagger.model.*
@@ -71,5 +72,18 @@ class UserService (
             successAble = userRepoImpl.getEntityWithId(id).password == password,
             loginAt = MyTime.toYyyymmddhhmmss(MyTime.now())
         )
+    }
+
+    fun findUserByName(name: String): GetUserResponseDto{
+        return userRepoImpl.getOptionalWithName(name).orElseThrow(CustomError.USER_NOT_FOUND::doThrow)
+            .let { user ->
+                GetUserResponseDto(
+                    id = user.id,
+                    password = user.password,
+                    name = user.name,
+                    createdAt = MyTime.toYyyymmddhhmmss(user.created),
+                    updatedAt = MyTime.toYyyymmddhhmmss(user.updated)
+                )
+            }
     }
 }

@@ -1,7 +1,8 @@
 package com.kyu9.accountbook.common
 
 enum class CustomError(val code: String, val msg: String)   {
-    DATA_NOT_FOUND("000_0001", "no data")
+    DATA_NOT_FOUND("000_0001", "no data"),
+    USER_NOT_FOUND("000_0002", "no user")
 
     ;
 
