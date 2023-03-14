@@ -24,4 +24,9 @@ class ViewController {
         return "userFound"
     }
 
+    @GetMapping("/tran")
+    fun main(): String {
+        return "add_transaction"
+    }
+
 }

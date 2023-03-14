@@ -28,94 +28,59 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-pic js-tilt" data-tilt>
-                <!--                <img src="/jpg/login.jpg" alt="IMG">-->
-            </div>
+            <form class="login100-form validate-form" onsubmit="findId(); return false;">
+                <span class="login100-form-title">TRAN</span>
 
-            <!--            return false은 이벤트의 기본 동작을 중지-->
-            <form class="login100-form validate-form" onsubmit="login(); return false;">
-					<span class="login100-form-title">
-<!--						로그인 페이지-->
-					</span>
-
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="text" id="id" name="id" placeholder="Id">
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="name" name="name" placeholder="Name">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input100" type="password" id="password" name="password" placeholder="Password">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        Login
+                        Find User Info
                     </button>
                 </div>
-
-                <div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
-                    <a class="txt2" href="#" onclick="findId()">
-                        Password?
-                    </a>
-                </div>
-
-                <div class="text-center p-t-136">
-                    <a class="txt2" href="login/registration">
-                        Create your Account
-                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    </a>
-                </div>
             </form>
+
+            <div class="login100-pic js-tilt" data-tilt>
+                <pre id="resp"></pre>
+
+                <button class="login100-form-btn" style="background: red" onclick="window.location.href = '/view/login';">
+                    Return to Login
+                </button>
+            </div>
+
+            <!--            return false은 이벤트의 기본 동작을 중지-->
+
         </div>
     </div>
 </div>
-
 
 <!--===============================================================================================-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-    function login() {
-        console.log("id : " + $("#id").val());
-        console.log("pwd : " + $("#password").val());
+    function findId() {
+        console.log("name : " + $("#name").val());
         $.ajax({
-            url: "/user/login",
-            type: "POST",
+            url: "/user/find/name?name=" + $("#name").val(),
+            type: "GET",
             contentType: "application/json",
-            data: JSON.stringify({
-                "id": $("#id").val(),
-                "password": $("#password").val()
-            }),
 
             success: function (data) {
                 console.log(data);
-
-                if (data.successAble === true) {
-                    alert("로그인 성공");
-                    location.href = "/view/tran";
-                } else {
-                    alert("해당 아이디에 대한 비밀번호가 입력하신 비밀번호와 다릅니다");
-                }
+                // alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
+                $("#resp").text("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n");
             },
             error: function (data) {
                 console.log(data);
-                alert("서버에서 알 수 없는 에러가 발생했습니다");
+                alert($("#name").val() + " << 해당 이름으로 가입한 회원 정보가 없습니다!");
             }
         });
-    }
-
-    function findId() {
-        window.location.replace("/view/login/found");
     }
 </script>
 <!--===============================================================================================-->
