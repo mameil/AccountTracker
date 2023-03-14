@@ -4,29 +4,61 @@
     <title>Login V1</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <!--    <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>-->
+    <!--===============================================================================================-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--===============================================================================================-->
+    <!--    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--===============================================================================================-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">-->
+    <!--===============================================================================================-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">-->
+    <!--===============================================================================================-->
+    <!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
+    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/css/util.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--===============================================================================================-->
 </head>
 <body>
 
-<form class="login100-form validate-form" onsubmit="findId(); return false;" style="alignment: center">
-    <span class="login100-form-title"></span>
-    <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="name" name="name" placeholder="회원가입한 이름">
-        <span class="focus-input100"></span>
-        <span class="symbol-input100"></span>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" onsubmit="findId(); return false;">
+<!--                <span class="login100-form-title"></span>-->
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="name" name="name" placeholder="Name">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Find User Info
+                    </button>
+                </div>
+            </form>
+
+            <div class="login100-pic js-tilt" data-tilt>
+                <pre id="resp"></pre>
+
+                <button class="login100-form-btn" style="background: red" onclick="window.location.href = '/view/login';">
+                    Return to Login
+                </button>
+            </div>
+
+            <!--            return false은 이벤트의 기본 동작을 중지-->
+
+        </div>
     </div>
-
-    <div class="container-login100-form-btn">
-        <button class="login70-form-btn">
-            회원 정보 조회
-        </button>
-    </div>
-
-</form>
-
+</div>
 
 <!--===============================================================================================-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -41,8 +73,8 @@
 
             success: function (data) {
                 console.log(data);
-                alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
-                window.close();
+                // alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
+                $("#resp").text("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n");
             },
             error: function (data) {
                 console.log(data);
