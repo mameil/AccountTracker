@@ -14,7 +14,7 @@ class TagRepoImpl(
     tagRepository
 ) {
 
-    @Cacheable(value = ["tags"])
+//    @Cacheable(value = ["tags"])
     fun getAllTags(): List<Tag>{
         return tagRepository.findAll()
     }

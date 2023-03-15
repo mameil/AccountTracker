@@ -358,9 +358,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetSingleTagDto'
+                $ref: "#/components/schemas/GetListTagDto"
         400:
           description: "Bad Request"
           content:
@@ -419,6 +417,14 @@ paths:
 
 components:
   schemas:
+    GetListTagDto:
+      type: object
+      properties:
+        tagList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetSingleTagDto'
+
     LoginUserRequestDto:
       type: object
       properties:

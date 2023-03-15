@@ -2,6 +2,7 @@ package com.kyu9.accountbook.swagger
 
 import com.kyu9.accountbook.application.TagService
 import com.kyu9.accountbook.swagger.api.TagApiDelegate
+import com.kyu9.accountbook.swagger.model.GetListTagDto
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
 import lombok.RequiredArgsConstructor
@@ -19,8 +20,8 @@ class TagApiControllerImpl(
         return ResponseEntity.ok(tagService.storeTag(postSingleTagDto))
     }
 
-    override fun getAllTags(): ResponseEntity<List<GetSingleTagDto>> {
-        return ResponseEntity.ok(tagService.getAllTags())
+    override fun getAllTags(): ResponseEntity<GetListTagDto> {
+        return ResponseEntity.ok(GetListTagDto(tagService.getAllTags()))
     }
 
     override fun deleteSingleTag(tagId: BigDecimal): ResponseEntity<Unit> {
