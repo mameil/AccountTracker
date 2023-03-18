@@ -49,9 +49,9 @@
             <div class="login100-pic js-tilt" data-tilt>
                 <pre id="resp"></pre>
 
-                <button class="login100-form-btn" style="background: red" onclick="window.location.href = '/view/login';">
-                    Return to Login
-                </button>
+<!--                <button class="login100-form-btn" style="background: red" onclick="window.location.href = '/view/login';">-->
+<!--                    Return to Login-->
+<!--                </button>-->
             </div>
 
             <!--            return false은 이벤트의 기본 동작을 중지-->
@@ -71,11 +71,13 @@
 
             success: function (data) {
                 console.log(data);
-                $("#resp").text("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n");
+                var madeStr = "";
+
                 data.forEach(function(item){
-                    console.log("id : " + item.id + ", name : " + item.name + ", color : " + item.color);
-                    // $("#tags").append("<option value='" + it.id + "'>" + it.name + "</option>");
+                    madeStr += "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
                 })
+                $("#resp").text(madeStr);
+
             },
             error: function (data) {
                 alert("no tags");
