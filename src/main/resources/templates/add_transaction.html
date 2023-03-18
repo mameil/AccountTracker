@@ -47,11 +47,8 @@
             </form>
 
             <div class="login100-pic js-tilt" data-tilt>
+                여기 텍스트 표면 사이즈 키우자
                 <pre id="resp"></pre>
-
-<!--                <button class="login100-form-btn" style="background: red" onclick="window.location.href = '/view/login';">-->
-<!--                    Return to Login-->
-<!--                </button>-->
             </div>
 
             <!--            return false은 이벤트의 기본 동작을 중지-->
@@ -84,28 +81,7 @@
             }
         })
     }
-
-    function findId() {
-        console.log("name : " + $("#name").val());
-        $.ajax({
-            url: "/user/find/name?name=" + $("#name").val(),
-            type: "GET",
-            contentType: "application/json",
-
-            success: function (data) {
-                console.log(data);
-                // alert("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n !!!!해당 알람창은 닫힙니다!!!!");
-                $("#resp").text("로그인 시 사용하는 ID : " + data.id + "\n이름 : " + data.name + "\n로그인 시 사용하는 비밀번호 : " + data.password + "\n");
-            },
-            error: function (data) {
-                console.log(data);
-                alert($("#name").val() + " << 해당 이름으로 가입한 회원 정보가 없습니다!");
-            }
-        });
-    }
 </script>
-<!--===============================================================================================-->
-<!--<script src="/js/main.js"></script>-->
 
 </body>
 </html>
