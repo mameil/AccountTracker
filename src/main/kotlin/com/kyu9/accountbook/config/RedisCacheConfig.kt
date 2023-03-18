@@ -32,7 +32,7 @@ import java.time.Duration
 class RedisCacheConfig: CachingConfigurerSupport(
 ){
     @Bean
-    fun objectMapper(): ObjectMapper? {
+    fun redisObjectMapper(): ObjectMapper? {
         val mapper = ObjectMapper()
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // timestamp 형식 안따르도록 설정
         mapper.registerModules(JavaTimeModule(), Jdk8Module()) // LocalDateTime 매핑을 위해 모듈 활성화
@@ -48,7 +48,7 @@ class RedisCacheConfig: CachingConfigurerSupport(
         val jackson2JsonRedisSerializer = Jackson2JsonRedisSerializer(
             Any::class.java
         )
-        val objectMapper = objectMapper()
+        val objectMapper = redisObjectMapper()
         objectMapper!!.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY)
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper)

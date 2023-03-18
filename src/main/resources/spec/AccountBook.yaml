@@ -358,7 +358,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetListTagDto"
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSingleTagDto'
         400:
           description: "Bad Request"
           content:

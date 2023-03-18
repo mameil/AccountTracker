@@ -53,7 +53,7 @@ class UserTest(
         putPerform(
             "아이디 ${randomKey.id}인 사용자 업데이트",
             "/user/${randomKey.id}",
-            "{\n  \"id\": \"${randomKey.id}__\",\n  \"name\": \"${randomKey.name}__\",\n  \"password\": \"${randomKey.password}__\"\n}"
+            "{\"name\": \"${randomKey.name}__\",\n  \"password\": \"${randomKey.password}__\"\n}"
         )
             .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("${randomKey.id}"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("${randomKey.name}__"))
