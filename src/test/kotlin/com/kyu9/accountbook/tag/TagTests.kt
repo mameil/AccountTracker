@@ -74,7 +74,6 @@ class TagTests: TestFrame() {
             url = "/tag",
             req = "{\n  \"name\": \"테스트용 태그이름1\",\n  \"color\": \"RED\"\n}"
         )
-            .andDo(MockMvcResultHandlers.print())
             .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")
@@ -86,7 +85,6 @@ class TagTests: TestFrame() {
             url = "/tag",
             req = "{\n  \"name\": \"테스트용 태그이름2\",\n  \"color\": \"RED\"\n}"
         )
-            .andDo(MockMvcResultHandlers.print())
             .andExpect {
                 MockMvcResultMatchers.jsonPath("$.name").value("테스트용 태그이름2")
                 MockMvcResultMatchers.jsonPath("$.color").value("RED")

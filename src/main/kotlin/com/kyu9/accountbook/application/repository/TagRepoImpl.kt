@@ -16,20 +16,20 @@ class TagRepoImpl(
 
 //    @Cacheable(value = ["tags"])
     fun getAllTags(): List<Tag>{
-        return tagRepository.findAll()
+    return tagRepository.findAll()
     }
 
-    @Cacheable(value = ["tags"])
+//    @Cacheable(value = ["tags"])
     override fun storeEntity(t: Tag): Tag {
         return super.storeEntity(t)
     }
 
-    @CacheEvict(value = ["tags"], allEntries = true)
+//    @CacheEvict(value = ["tags"], allEntries = true)
     override fun removeEntityWithId(id: Long) {
         super.removeEntityWithId(id)
     }
 
-    @Cacheable(value = ["tags"])
+//    @Cacheable(value = ["tags"])
     override fun getEntityWithId(id: Long): Tag {
         return super.getEntityWithId(id)
     }
