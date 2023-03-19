@@ -70,10 +70,28 @@
                 console.log(data);
                 var madeStr = "";
 
+
                 data.forEach(function(item){
+                    var roundDiv = document.createElement('div');
+
+                    var iName = document.createElement("i");
+                    iName.className = "fa-regular fa-pot-food";
+
+                    var button = document.createElement('button');
+                    button.className = 'btn btn-primary';
+                    button.addEventListener('click', function () {
+                        //todo : tag click event
+                    });
+
+                    roundDiv.appendChild(iName);
+                    roundDiv.appendChild(button);
+
                     madeStr += "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
+                    $("#resp").append(roundDiv);
                 })
-                $("#resp").text(madeStr);
+
+
+                // $("#resp").text(madeStr);
 
             },
             error: function (data) {
