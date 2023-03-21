@@ -27,12 +27,40 @@
 
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100">
+        <div class="my-wrap-login100">
             <form class="login100-form validate-form" onsubmit="findId(); return false;">
-                <span class="login100-form-title">TRAN</span>
+                <span class="login100-form-title">어디에 돈을 쓰셨나요??</span>
 
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="name" name="name" placeholder="Name">
+                    <input class="input100" type="text" id="tag" name="tag" placeholder="Select Tag from RIGHT">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="amount" name="amount" placeholder="Amount">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="usage" name="usage" placeholder="Usage">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="desc" name="desc" placeholder="Desc">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" id="moneyType" name="moneyType" placeholder="SourceMoney">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -47,7 +75,7 @@
             </form>
 
             <div class="login100-pic js-tilt" data-tilt>
-                여기 텍스트 표면 사이즈 키우자
+
                 <pre id="resp"></pre>
             </div>
 
@@ -83,10 +111,14 @@
                         //todo : tag click event
                     });
 
+                    // madeStr += "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
+                    var str = "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
+
+                    button.textContent = str;
+                    button.style.paddingBottom = "10px";
                     roundDiv.appendChild(iName);
                     roundDiv.appendChild(button);
 
-                    madeStr += "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
                     $("#resp").append(roundDiv);
                 })
 
