@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/view")
 class ViewController {
 
-    @GetMapping("/main")
-    fun index(): String {
-        return "index"
-    }
+//    @GetMapping("/main")
+//    fun index(): String {
+//        return "index"
+//    }
 
     @GetMapping("/login")
     fun login(): String {
