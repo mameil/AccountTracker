@@ -16,11 +16,11 @@ class SwaggerConfig {
     fun api(): Docket? {
         return Docket(DocumentationType.OAS_30)
             .useDefaultResponseMessages(false)
+            .apiInfo(apiInfo())
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.kyu9.accountbook.swagger.api"))
             .paths(PathSelectors.any())
             .build()
-            .apiInfo(apiInfo())
     }
 
     private fun apiInfo(): ApiInfo? {
