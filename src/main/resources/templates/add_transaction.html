@@ -70,7 +70,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        Find User Info
+                        저장하기
                     </button>
                 </div>
             </form>
@@ -97,8 +97,6 @@
 
             success: function (data) {
                 console.log(data);
-                var madeStr = "";
-
 
                 data.forEach(function(item){
                     var roundDiv = document.createElement('div');
@@ -135,28 +133,24 @@
     }
 
     function recordTran() {
-        var tagId = $("#tagId").val();
-        var amount = $("#amount").val();
-        var usage = $("#usage").val();
-        var desc = $("#desc").val();
-        var moneyType = $("#moneyType").val();
-
         $.ajax({
             url: "/transaction",
             type: "POST",
-            dataType: "json",
-            data: {
-                tagId: tagId,
-                amount: amount,
-                title: usage,
-                content: desc,
-                moneyType: moneyType
-            },
+            contentType: "application/json",
+            data: JSON.stringify({
+                "tagId": $("#tagId").val(),
+                "amount": $("#amount").val(),
+                "title": $("#usage").val(),
+                "content": $("#desc").val(),
+                "moneyType": $("#moneyType").val()
+            }),
             success: function (data) {
-                alert("success");
+                alert("기록 완료! 오늘도 잊지 않고 살아요!");
+                console.log(data)
             },
             error: function (data) {
-                alert("fail");
+                alert("ERROR! CHECK LOG");
+                console.log(data)
             }
         })
     }
