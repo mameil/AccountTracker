@@ -28,11 +28,12 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="my-wrap-login100">
-            <form class="login100-form validate-form" onsubmit="findId(); return false;">
+            <form class="login100-form validate-form" onsubmit="recordTran(); return false;">
                 <span class="login100-form-title">어디에 돈을 쓰셨나요??</span>
 
                 <div class="wrap-input100 validate-input">
                     <input class="input100" type="text" id="tag" name="tag" placeholder="Select Tag from RIGHT">
+                    <input class="input100" type="text" id="tagId" name="tagId" style="display: none">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -108,15 +109,16 @@
                     var button = document.createElement('button');
                     button.className = 'btn btn-primary';
                     button.addEventListener('click', function () {
-                        //todo : tag click event
+                        $("#tag").val(item.name);
+                        $("#tagId").val(item.id);
                     });
 
                     // madeStr += "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
-                    var str = "TAG(" + item.id + ") : " + item.name + ", 노출색 : " + item.color + "\n";
+                    var str = item.name + " | 노출색 : " + item.color + "\n";
 
                     button.textContent = str;
                     button.style.paddingBottom = "10px";
-                    roundDiv.appendChild(iName);
+                    button.appendChild(iName);
                     roundDiv.appendChild(button);
 
                     $("#resp").append(roundDiv);
@@ -128,6 +130,33 @@
             },
             error: function (data) {
                 alert("no tags");
+            }
+        })
+    }
+
+    function recordTran() {
+        var tagId = $("#tagId").val();
+        var amount = $("#amount").val();
+        var usage = $("#usage").val();
+        var desc = $("#desc").val();
+        var moneyType = $("#moneyType").val();
+
+        $.ajax({
+            url: "/transaction",
+            type: "POST",
+            dataType: "json",
+            data: {
+                tagId: tagId,
+                amount: amount,
+                title: usage,
+                content: desc,
+                moneyType: moneyType
+            },
+            success: function (data) {
+                alert("success");
+            },
+            error: function (data) {
+                alert("fail");
             }
         })
     }
