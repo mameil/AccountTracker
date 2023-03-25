@@ -8,13 +8,12 @@ class MyTime {
 
     companion object{
 
-
         fun toYyyy(localDateTime: LocalDateTime): String{
             return localDateTime.format(DateTimeFormatter.ofPattern("yyyy"))
         }
 
         fun toYyyyMm(localDateTime: LocalDateTime): String{
-            return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMd"))
+            return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMM"))
         }
 
         fun toYyyyMmDd(localDateTime: LocalDateTime): String{
@@ -45,6 +44,7 @@ class MyTime {
         }
 
         fun now(): LocalDateTime{
+            println(toYyyymmddhhmmss(LocalDateTime.now()))
             return LocalDateTime.now()
         }
     }

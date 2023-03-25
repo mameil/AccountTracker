@@ -6,10 +6,7 @@ import com.kyu9.accountbook.domain.properties.MoneyType
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Parameter
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 
 @Entity
@@ -34,6 +31,7 @@ data class UsageTransaction(
     val title: String,
     val content: String,
     val tagId: Long,
+    @Enumerated(EnumType.STRING)
     val moneyType: MoneyType
 ): BaseEntity() {
 
