@@ -81,6 +81,12 @@
             </div>
 
             <!--            return false은 이벤트의 기본 동작을 중지-->
+            <div class="text-center p-t-136">
+                <a class="txt2" onclick = "todayTran()">
+                    오늘의 소비를 확인하기
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                </a>
+            </div>
 
         </div>
     </div>
@@ -153,6 +159,10 @@
                 console.log(data)
             }
         })
+    }
+
+    function todayTran() {
+        window.location.replace('/view/tran/today')
     }
 </script>
 

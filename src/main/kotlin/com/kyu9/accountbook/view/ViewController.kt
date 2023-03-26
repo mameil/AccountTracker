@@ -29,4 +29,9 @@ class ViewController {
         return "add_transaction"
     }
 
+    @GetMapping("/tran/today")
+    fun today(): String {
+        return "today_transaction"
+    }
+
 }
