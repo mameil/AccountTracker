@@ -6,7 +6,7 @@ create sequence usage_transaction_seq
     cache 20;
 
 
--- 아 mysql에서 한국어로 insert 박아넣고 있다가 한국어 안들어가는 에러 때문에 docker 다시 깔아야할듯한데
+-- 그냥 postman 으로 때려박는 방법 선택 >> swagger 설정 시급..
 insert into tag values (1, now(), now(), 'RED', '음식');
 insert into tag values (2, now(), now(), 'ORANGE', '디저트');
 insert into tag values (3, now(), now(), 'YELLOW', '인터넷쇼핑');
