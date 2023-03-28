@@ -61,10 +61,20 @@
                     </span>
                 </div>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="moneyType" name="moneyType" placeholder="Source From">
+<!--                    <input class="input100" type="text" id="moneyType" name="moneyType" placeholder="Source From" style="display: none">-->
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fa fa-tag" aria-hidden="true"></i>
+                    </span>
+                    <span class="input100" style="align-items: center">
+                        <label>
+                            <input type="radio" name="moneyType" value="FREE">
+                            FREE
+                        </label>
+                        <label>
+                            <input type="radio" name="moneyType" value="MINE">
+                            MINE
+                        </label>
                     </span>
                 </div>
 
@@ -154,7 +164,7 @@
                 "amount": $("#amount").val(),
                 "title": $("#usage").val(),
                 "content": $("#desc").val(),
-                "moneyType": $("#moneyType").val()
+                "moneyType": document.getElementsByName("moneyType")[0].value
             }),
             success: function (data) {
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");
