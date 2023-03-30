@@ -13,12 +13,19 @@ class TagRepoImpl(
 ): BaseJpaRepo<Tag, Long, TagRepository>(
     tagRepository
 ) {
+    fun deleteWithEntity(tag: Tag){
+        tagRepository.delete(tag)
+    }
+
+    fun deleteWithEntity_query(tag: Tag){
+        tagRepository.deleteWithQuery(tag)
+    }
 
     fun getAllTags(): List<Tag>{
     return tagRepository.findAll()
     }
 
-    @Cacheable(value = ["tags"])
+//    @Cacheable(value = ["tags"])
     override fun storeEntity(t: Tag): Tag {
         return super.storeEntity(t)
     }

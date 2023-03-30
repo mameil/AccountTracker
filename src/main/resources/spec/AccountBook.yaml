@@ -345,6 +345,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /tag/admin/{tagId}:
+    post:
+      tags:
+        - "Tag"
+      summary: "save Tag admin - delete>save"
+      description: "save Tag admin - delete>save"
+      operationId: postAdminTag
+      parameters:
+        - $ref: '#/components/parameters/path-tagId'
+      requestBody:
+        description: "post tag dto request body"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostSingleTagDto'
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSingleTagDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
   /tag/list:
     get:
       tags:

@@ -36,4 +36,8 @@ class TagApiControllerImpl(
     ): ResponseEntity<GetSingleTagDto> {
         return ResponseEntity.ok(tagService.updateTag(tagId.intValueExact(), postSingleTagDto))
     }
+
+    override fun postAdminTag(tagId: BigDecimal, postSingleTagDto: PostSingleTagDto): ResponseEntity<GetSingleTagDto> {
+        return ResponseEntity.ok(tagService.removeAndSave(tagId.intValueExact(), postSingleTagDto))
+    }
 }

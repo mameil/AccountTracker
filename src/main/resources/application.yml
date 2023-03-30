@@ -39,7 +39,11 @@ logging:
       springframework:
         web : info
       hibernate:
-        type: info
+        SQL: debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
 
 springdoc:
   api-docs:
