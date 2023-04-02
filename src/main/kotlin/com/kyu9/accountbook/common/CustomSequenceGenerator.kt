@@ -1,6 +1,5 @@
 package com.kyu9.accountbook.common
 
-import jakarta.annotation.PostConstruct
 import lombok.NoArgsConstructor
 import org.hibernate.engine.spi.SharedSessionContractImplementor
 import org.hibernate.id.IdentifierGenerator

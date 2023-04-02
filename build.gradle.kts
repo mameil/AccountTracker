@@ -90,6 +90,11 @@ dependencies {
 
     //Swagger - core
     implementation("io.springfox:springfox-boot-starter:3.0.0")
+//    implementation("io.swagger:swagger-annotations:1.6.6")
+//    implementation("io.swagger.core.v3:swagger-annotations:2.2.0")
+//    implementation("io.swagger.codegen.v3:swagger-codegen-cli:3.0.34")
+//    implementation("org.webjars:swagger-ui:3.52.5")
+
 
 
 
@@ -110,8 +115,6 @@ dependencies {
     //mockk
     testImplementation("io.mockk:mockk:1.9.3")
 
-
-
     //mockk
     testImplementation("io.mockk:mockk:1.12.4")
 
@@ -130,6 +133,8 @@ tasks.withType<KotlinCompile> {
     }
 
 }
+
+
 
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
     inputSpec.set("${projectDir}/src/main/resources/spec/AccountBook.yaml")
@@ -156,6 +161,8 @@ configure<SourceSetContainer>{
         java.srcDir("${projectDir}/generated/src/main/kotlin")
     }
 }
+
+
 
 tasks.named("generateFromYaml").configure {
     dependsOn("removeGeneratedFromYaml")

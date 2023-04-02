@@ -46,11 +46,5 @@ logging:
               BasicBinder: trace
 
 springdoc:
-  api-docs:
-    path: /docs
-    enabled: true
   swagger-ui:
-    path: /swagger-ui
-    display-request-duration: true
-  cache:
-    disabled: true
+    url: /spec/AccountBook.yaml
