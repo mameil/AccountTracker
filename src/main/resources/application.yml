@@ -45,6 +45,14 @@ logging:
             sql:
               BasicBinder: trace
 
-springdoc:
-  swagger-ui:
-    url: /spec/AccountBook.yaml
+#swagger:
+#  config:
+#    path=/spec/AccountBook.yaml
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /spec/AccountBook.yaml
+    swagger-ui:
+      enabled: off

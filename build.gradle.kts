@@ -88,6 +88,9 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
 
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+
     //Swagger - core
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 //    implementation("io.swagger:swagger-annotations:1.6.6")
