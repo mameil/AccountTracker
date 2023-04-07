@@ -1,43 +1,57 @@
 package com.kyu9.accountbook.config
 
+import io.swagger.v3.oas.models.Components
+import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.info.Info
+import org.springdoc.core.GroupedOpenApi
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
-import springfox.documentation.builders.ApiInfoBuilder
-import springfox.documentation.builders.PathSelectors
-import springfox.documentation.builders.RequestHandlerSelectors
-import springfox.documentation.service.ApiInfo
-import springfox.documentation.spi.DocumentationType
-import springfox.documentation.spring.web.plugins.Docket
-import springfox.documentation.swagger.web.DocExpansion
-import springfox.documentation.swagger.web.UiConfiguration
-import springfox.documentation.swagger.web.UiConfigurationBuilder
-import springfox.documentation.swagger2.annotations.EnableSwagger2
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc
+import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.PropertySource
+import org.springframework.core.env.PropertiesPropertySource
+import org.springframework.core.io.support.EncodedResource
+import org.springframework.core.io.support.PropertySourceFactory
 
 
 @Configuration
-@EnableSwagger2
+@PropertySource("classpath:spec/AccountBook.yaml", factory = YamlPropertySourceFactory::class)
 class SwaggerConfig {
     @Bean
-    fun api(): Docket {
-        return Docket(DocumentationType.OAS_30) // select() : ApiSelectorBuilder 를 활성화 하여, Builder 형태로 합니다.
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.kyu9.accountbook.swagger")) // paths()
-                .paths(PathSelectors.any())
-                .build();
+    @Primary
+    fun openApi(
+    ): OpenAPI {
+        return OpenAPI()
+            .components(Components())
+            .info(Info().version("0.0.0").title("title").description("description"))
     }
 
-    private fun uiConfiguration(): UiConfiguration {
-        return UiConfigurationBuilder.builder()
-                .deepLinking(true)
-                .displayRequestDuration(true)
-                .defaultModelsExpandDepth(1)
-                .defaultModelExpandDepth(1)
-                .docExpansion(DocExpansion.LIST)
-                .filter(true)
-                .maxDisplayedTags(null)
-                .showExtensions(false)
-                .build()
+    @Bean
+    fun mainGroupedApi(
+    ) : GroupedOpenApi {
+        return GroupedOpenApi.builder()
+            .group("My API Controller")
+            .pathsToExclude("/monitoring/**")
+            .build()
+    }
+
+    @Bean
+    fun actuatorGroupedApi() : GroupedOpenApi {
+        return GroupedOpenApi.builder()
+            .group("Actuator API Controller")
+            .pathsToMatch("/monitoring/**")
+            .build()
+    }
+
+}
+
+class YamlPropertySourceFactory : PropertySourceFactory {
+    override fun createPropertySource(name: String?, encodedResource: EncodedResource): PropertySource<*> {
+        val factory = YamlPropertiesFactoryBean()
+        factory.setResources(encodedResource.resource)
+
+        val properties = factory.`object`
+
+        return PropertiesPropertySource(encodedResource.resource.filename!!, properties!!)
     }
 }

@@ -83,23 +83,13 @@ dependencies {
     implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
-//    implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
-//    implementation("org.springdoc:springdoc-openapi-common:1.6.8")
-//    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
-//    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
-
-    implementation("io.springfox:springfox-swagger2:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
+    implementation("org.springdoc:springdoc-openapi-common:1.6.8")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
+    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
 
     //Swagger - core
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-//    implementation("io.swagger:swagger-annotations:1.6.6")
-//    implementation("io.swagger.core.v3:swagger-annotations:2.2.0")
-//    implementation("io.swagger.codegen.v3:swagger-codegen-cli:3.0.34")
-//    implementation("org.webjars:swagger-ui:3.52.5")
-
-
+//    implementation("io.springfox:springfox-boot-starter:3.0.0")
 
 
     //Openapi Generator
