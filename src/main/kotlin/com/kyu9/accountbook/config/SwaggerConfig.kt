@@ -23,6 +23,7 @@ class SwaggerConfig {
     ): OpenAPI {
         return OpenAPI()
             .components(Components())
+            .
             .info(Info().version("0.0.0").title("title").description("description"))
     }
 
@@ -43,15 +44,4 @@ class SwaggerConfig {
             .build()
     }
 
-}
-
-class YamlPropertySourceFactory : PropertySourceFactory {
-    override fun createPropertySource(name: String?, encodedResource: EncodedResource): PropertySource<*> {
-        val factory = YamlPropertiesFactoryBean()
-        factory.setResources(encodedResource.resource)
-
-        val properties = factory.`object`
-
-        return PropertiesPropertySource(encodedResource.resource.filename!!, properties!!)
-    }
 }

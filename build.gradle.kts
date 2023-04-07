@@ -85,6 +85,7 @@ dependencies {
     //Swagger - ui
     implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
     implementation("org.springdoc:springdoc-openapi-common:1.6.8")
+    implementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.8")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
 
