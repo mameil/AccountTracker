@@ -23,25 +23,23 @@ class SwaggerConfig {
     ): OpenAPI {
         return OpenAPI()
             .components(Components())
-            .
-            .info(Info().version("0.0.0").title("title").description("description"))
+            .info(Info().version("0.0.0").title("AccountBook").description("내가 사용하기 위해 만든 가계부 project"))
     }
 
     @Bean
     fun mainGroupedApi(
     ) : GroupedOpenApi {
         return GroupedOpenApi.builder()
-            .group("My API Controller")
-            .pathsToExclude("/monitoring/**")
+            .group("AccountBook")
+            .packagesToScan("com.kyu9.accountbook.swagger")
             .build()
     }
 
-    @Bean
-    fun actuatorGroupedApi() : GroupedOpenApi {
-        return GroupedOpenApi.builder()
-            .group("Actuator API Controller")
-            .pathsToMatch("/monitoring/**")
-            .build()
-    }
+//    @Bean
+//    fun actuatorGroupedApi() : GroupedOpenApi {
+//        return GroupedOpenApi.builder()
+//            .group("Actuator API Controller")
+//            .build()
+//    }
 
 }

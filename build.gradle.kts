@@ -88,7 +88,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.8")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
-
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
     //Swagger - core
 //    implementation("io.springfox:springfox-boot-starter:3.0.0")
 

@@ -47,16 +47,22 @@ logging:
 
 
 springdoc:
-#  packages-to-scan: com.kyu9.accountbook.swagger
-  default-consumes-media-type: application/json;charset=UTF-8
-  default-produces-media-type: application/json;charset=UTF-8
+  packages-to-scan: com.kyu9.accountbook.swagger
   swagger-ui:
-    #path: demo-ui.html            # Swagger UI 경로 => localhost:8000/demo-ui.html
-    tags-sorter: alpha            # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
-    operations-sorter: alpha      # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
+    version: v1.0.0
+    path: /api-docs
+    tags-sorter: alpha
+    operations-sorter: alpha
+    disable-swagger-default-url: true
   api-docs:
     path: /api-docs/json
     groups:
       enabled: true
   cache:
     disabled: true
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  group-configs:
+    - group: accountBook
+      packagesToScan:
+        - com.kyu9.accountbook.swagger
