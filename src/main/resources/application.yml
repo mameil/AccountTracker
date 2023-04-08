@@ -62,7 +62,7 @@ springdoc:
     disabled: true
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
-  group-configs:
-    - group: accountBook
-      packagesToScan:
-        - com.kyu9.accountbook.swagger
+#  group-configs:
+#    - group: accountBook
+#      packagesToScan:
+#        - com.kyu9.accountbook.swagger
