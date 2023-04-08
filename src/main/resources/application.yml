@@ -45,24 +45,19 @@ logging:
             sql:
               BasicBinder: trace
 
-
 springdoc:
-  packages-to-scan: com.kyu9.accountbook.swagger
+  api-docs:
+    enabled: false
+    package-controllers: com.kyu9.accountbook.swagger
   swagger-ui:
-    version: v1.0.0
-    path: /api-docs
+    url: AccountBook.yaml
+    path: /swagger-ui
+    disable-swagger-default-url: true
+    display-request-duration: true
     tags-sorter: alpha
     operations-sorter: alpha
-    disable-swagger-default-url: true
-  api-docs:
-    path: /api-docs/json
-    groups:
-      enabled: true
-  cache:
-    disabled: true
-  default-consumes-media-type: application/json;charset=UTF-8
-  default-produces-media-type: application/json;charset=UTF-8
-#  group-configs:
-#    - group: accountBook
-#      packagesToScan:
-#        - com.kyu9.accountbook.swagger
+    doc-expansion: none
+    urls-primary-name: TEST API
+    persist-authorization: true
+    query-config-enabled: true
+  pre-loading-enabled: true
