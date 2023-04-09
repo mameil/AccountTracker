@@ -83,13 +83,11 @@ dependencies {
     implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
-//    implementation("org.springdoc:springdoc-openapi-core:1.1.49")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
-//    implementation("org.springdoc:springdoc-openapi-common:1.6.8")
-//    implementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.8")
-    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
-//    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
-
+    implementation("org.springdoc:springdoc-openapi-common:1.6.9")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+    implementation("jakarta.annotation:jakarta.annotation-api:1.3.5")
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.9")
 
 
     //Openapi Generator
@@ -146,7 +144,8 @@ task<Delete>("removeGeneratedFromYaml"){
     group = "0.action"
     delete(
         fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/model"),
-        fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/api")
+        fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/swagger/api"),
+        fileTree("${projectDir}/generated/src/main/kotlin/com/kyu9/accountbook/SpringDocConfigurations.kt")
     )
 }
 
