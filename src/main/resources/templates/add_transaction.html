@@ -168,7 +168,8 @@
             }),
             success: function (data) {
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");
-                console.log(data)
+                console.log(data);
+                resetInput();
             },
             error: function (data) {
                 alert("ERROR! CHECK LOG");
