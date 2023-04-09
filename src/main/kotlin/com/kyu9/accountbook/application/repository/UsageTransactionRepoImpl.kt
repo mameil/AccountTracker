@@ -9,5 +9,4 @@ import org.springframework.stereotype.Service
 class UsageTransactionRepoImpl(
     @Autowired private val usageTransactionRepository: UsageTransactionRepository
 ): BaseJpaRepo<UsageTransaction, String, UsageTransactionRepository>(usageTransactionRepository){
-
 }

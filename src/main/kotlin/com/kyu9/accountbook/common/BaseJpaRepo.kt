@@ -6,7 +6,7 @@ import java.util.*
 
 @Log4j2
 abstract class BaseJpaRepo<T : Any, ID : Any, REPO: JpaRepository<T, ID>> {
-    private lateinit var repo: REPO
+    lateinit var repo: REPO
 
     constructor()
 
