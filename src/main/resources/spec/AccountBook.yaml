@@ -273,6 +273,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+  /transaction/all:
+    get:
+      tags:
+        - "Transaction"
+      summary: "get all transactions"
+      description: "get all transactions"
+      operationId: getAllTransactions
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetListTransResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
   /transaction/{utid}:
     get:
       tags:
@@ -634,6 +654,14 @@ components:
         id:
           type: string
           description: "unique transaction id"
+
+    GetListTransResponseDto:
+      type: object
+      properties:
+        transList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetSingleTransResponseDto'
 
     GetSingleTransResponseDto:
       type: object
