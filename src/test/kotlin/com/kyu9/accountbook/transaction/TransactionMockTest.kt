@@ -73,4 +73,38 @@ class TransactionMockTest: TestFrame() {
             400
         )
     }
+
+    @Test
+    fun findAllTranTest(){
+        postPerform(
+                "거래 생성 되는거 확인",
+                "/transaction",
+                "{\n  \"amount\": 1111,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"1111\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        postPerform(
+                "거래 생성 되는거 확인2",
+                "/transaction",
+                "{\n  \"amount\": 2222,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"2222\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        postPerform(
+                "거래 생성 되는거 확인3",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"registeredAt\": \"${MyTime.toYyyymmddhhmmss(MyTime.now())}\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        getPerform(
+                "모든 거래를 확인해보자",
+                "/transaction/all"
+        )
+                .andExpect{
+                    MockMvcResultMatchers.jsonPath("$[0].amount").value(3333)
+                    MockMvcResultMatchers.jsonPath("$[0].title").value("3333")
+                    MockMvcResultMatchers.jsonPath("$[1].amount").value(2222)
+                    MockMvcResultMatchers.jsonPath("$[1].title").value("2222")
+                    MockMvcResultMatchers.jsonPath("$[2].amount").value(1111)
+                    MockMvcResultMatchers.jsonPath("$[2].title").value("1111")
+                }
+    }
 }
