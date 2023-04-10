@@ -54,7 +54,7 @@ class TransactionService(
     }
 
     fun getAllTransaction(): GetListTransResponseDto {
-        val map = transactionRepoImpl.repo.findAll().map {
+        val map = transactionRepoImpl.getAllEntityOrderByCreatedDesc().map {
             GetSingleTransResponseDto(
                     utid = it.id,
                     amount = it.amount.toInt(),

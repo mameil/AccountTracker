@@ -38,12 +38,12 @@ logging:
     org:
       springframework:
         web : info
-      hibernate:
-        SQL: debug
-        type:
-          descriptor:
-            sql:
-              BasicBinder: trace
+#      hibernate:
+#        SQL: debug
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: trace
 
 springdoc:
 #  api-docs:
