@@ -34,4 +34,9 @@ class ViewController {
         return "today_transaction"
     }
 
+    @GetMapping("/tran/all")
+    fun allTran(): String{
+        return "all_transaction"
+    }
+
 }
