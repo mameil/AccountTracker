@@ -12,6 +12,7 @@ plugins {
 
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
+    id("org.hidetake.ssh")
 }
 
 group = "com.kyu9"
@@ -80,7 +81,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     //Swagger - plugin
-    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
+//    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
+    classpath("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
