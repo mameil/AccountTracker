@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.springframework.boot") version "2.5.7"
+    id("org.springframework.boot") version "2.6.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.graalvm.buildtools.native") version "0.9.18"
     kotlin("jvm") version "1.7.22"
@@ -12,7 +12,7 @@ plugins {
 
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
-    id("org.hidetake.ssh")
+    id("org.hidetake.ssh") version "2.11.2"
 }
 
 group = "com.kyu9"
@@ -27,6 +27,17 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/kotlin", "/generated/src/main")
+        }
+        resources {
+//            srcDirs("src/main/resources", "spec") // spec 디렉토리를 classpath에 추가
+        }
+    }
 }
 
 repositories {
@@ -81,8 +92,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     //Swagger - plugin
-//    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
-    classpath("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
+    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
+//    classpath("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
     //Swagger - ui
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
@@ -133,7 +144,7 @@ tasks.withType<KotlinCompile> {
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
     inputSpec.set("${projectDir}/src/main/resources/spec/AccountBook.yaml")
     outputDir.set("${projectDir}/generated")
-    configFile.set("${projectDir}/src/main/resources/spec/config.json")
+    configFile.set("${projectDir}/src/main/resources/spec/swagger-config.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
 

@@ -34,10 +34,10 @@ server:
 
 logging:
   level:
-    root: info
+    root: debug
     org:
       springframework:
-        web : info
+        web : debug
 #      hibernate:
 #        SQL: debug
 #        type:
@@ -45,14 +45,14 @@ logging:
 #            sql:
 #              BasicBinder: trace
 
+
 springdoc:
-#  api-docs:
-#    enabled: false
-  packagesToScan: com.kyu9.accountbook.swagger
-  default-consumes-media-type: application/json;charset=UTF-8
-  default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:
     path: /swagger-ui.html
+    display-request-duration: false
+    groups-order: DESC
+    operationsSorter: method
     disable-swagger-default-url: true
-    display-request-duration: true
-    operations-sorter: alpha
+    show-actuator: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
