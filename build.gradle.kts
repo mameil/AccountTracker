@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.springframework.boot") version "2.6.2"
+    id("org.springframework.boot") version "2.5.7"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.graalvm.buildtools.native") version "0.9.18"
     kotlin("jvm") version "1.7.22"
@@ -34,9 +34,9 @@ sourceSets {
         java {
             srcDirs("src/main/kotlin", "/generated/src/main")
         }
-        resources {
-//            srcDirs("src/main/resources", "spec") // spec 디렉토리를 classpath에 추가
-        }
+//        resources {
+//            srcDirs("src/main/resources", "generated/src/main/resources")
+//        }
     }
 }
 
@@ -142,9 +142,9 @@ tasks.withType<KotlinCompile> {
 
 
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
-    inputSpec.set("${projectDir}/src/main/resources/spec/AccountBook.yaml")
+    inputSpec.set("${projectDir}/src/main/resources/static/spec/AccountBook.yaml")
     outputDir.set("${projectDir}/generated")
-    configFile.set("${projectDir}/src/main/resources/spec/swagger-config.json")
+    configFile.set("${projectDir}/src/main/resources/static/spec/config.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
 
