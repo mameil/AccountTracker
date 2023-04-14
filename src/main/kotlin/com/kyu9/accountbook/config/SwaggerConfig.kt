@@ -30,4 +30,5 @@ class SwaggerConfig(){
             .group("Accountbook")
             .packagesToScan("com.kyu9.accountbook")
             .build()
+
 }

@@ -142,9 +142,9 @@ tasks.withType<KotlinCompile> {
 
 
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
-    inputSpec.set("${projectDir}/src/main/resources/static/spec/AccountBook.yaml")
+    inputSpec.set("${projectDir}/src/main/resources/specs/AccountBook.yaml")
     outputDir.set("${projectDir}/generated")
-    configFile.set("${projectDir}/src/main/resources/static/spec/config.json")
+    configFile.set("${projectDir}/src/main/resources/specs/AccountBook-spec.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
 
