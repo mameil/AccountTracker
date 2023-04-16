@@ -13,6 +13,7 @@ plugins {
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
     id("org.hidetake.ssh") version "2.11.2"
+    id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
 }
 
 group = "com.kyu9"
@@ -97,6 +98,7 @@ dependencies {
 
     //Swagger - ui
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+    implementation("org.springdoc:springdoc-openapi-core:1.1.49")
     implementation("org.springdoc:springdoc-openapi-common:1.6.9")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
     implementation("jakarta.annotation:jakarta.annotation-api:1.3.5")
@@ -144,7 +146,7 @@ tasks.withType<KotlinCompile> {
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){
     inputSpec.set("${projectDir}/src/main/resources/specs/AccountBook.yaml")
     outputDir.set("${projectDir}/generated")
-    configFile.set("${projectDir}/src/main/resources/specs/AccountBook-spec.json")
+    configFile.set("${projectDir}/src/main/resources/specs/spec.json")
     generatorName.set("kotlin-spring")
     group = "0.action"
 
