@@ -2,7 +2,6 @@ package com.kyu9.accountbook.common
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.fasterxml.jackson.datatype.joda.ser.LocalDateTimeSerializer
 import lombok.Data
 import java.time.LocalDateTime
 import javax.persistence.MappedSuperclass
