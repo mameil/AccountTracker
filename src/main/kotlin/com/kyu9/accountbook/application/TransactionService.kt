@@ -9,6 +9,7 @@ import com.kyu9.accountbook.swagger.model.PostTranRequestDto
 import com.kyu9.accountbook.swagger.model.PostTransResponseDto
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,14 @@ class TransactionService(
 ) {
 
     fun storeFromDto(tranReqDto: PostTranRequestDto): PostTransResponseDto {
-        val registered = if (tranReqDto.registeredAt == null) MyTime.now() else MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAt)
+//        val registered = if (tranReqDto.registeredAt == null) MyTime.now() else MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAt)
+
+        var registered: LocalDateTime
+        if (tranReqDto.registeredAt == null && tranReqDto.registeredAtYyyymmdd == null) {
+            registered = MyTime.now()
+        } else {
+            registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd!!)
+        }
 
         return transactionRepoImpl.storeEntity(
                 UsageTransaction(

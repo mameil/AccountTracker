@@ -121,6 +121,8 @@ class TransactionMockTest: TestFrame() {
                 "모든 거래로 조회했을 때 yyyymmdd 필드가 적용되었는지 확인",
                 "/transaction/all"
         )
-                .andDo(MockMvcResultHandlers.print())
+                .andExpect{
+                    MockMvcResultMatchers.jsonPath("$[0].registeredAt").value("20230329000000")
+                }
     }
 }
