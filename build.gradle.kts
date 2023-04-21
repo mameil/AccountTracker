@@ -82,7 +82,7 @@ dependencies {
     //Swagger - plugin
 //    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
 
-    //Swagger - SpringDoc
+    //Swagger - SpringDoc(not used)
 //    implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
 //    implementation("org.springdoc:springdoc-openapi-common:1.6.9")
 //    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
@@ -90,9 +90,7 @@ dependencies {
 //    implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.9")
 
     //Swagger - SpringFox
-//    implementation("io.springfox:springfox-swagger2:2.9.2")
     implementation("io.springfox:springfox-swagger2:3.0.0")
-//    implementation("io.springfox:springfox-swagger-ui:2.9.2")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 

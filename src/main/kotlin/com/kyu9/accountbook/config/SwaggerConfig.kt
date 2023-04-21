@@ -14,6 +14,7 @@
 //@Configuration
 ////@PropertySource("classpath:spec/AccountBook.yaml", factory = YamlPropertySourceFactory::class)
 //class SwaggerConfig {
+////springdoc version
 //    @Bean
 //    @Primary
 //    fun openApi(

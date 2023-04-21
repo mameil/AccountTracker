@@ -9,6 +9,7 @@ import java.io.IOException
 
 
 class YamlPropertySourceFactory : PropertySourceFactory {
+    //made for springdoc config >> not used now
     override fun createPropertySource(name: String?, encodedResource: EncodedResource): PropertiesPropertySource {
         val factory = YamlPropertiesFactoryBean()
         factory.setResources(encodedResource.resource)
