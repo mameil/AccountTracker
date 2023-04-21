@@ -23,7 +23,11 @@ class TransactionService(
         var registered: LocalDateTime
         if (tranReqDto.registeredAt == null && tranReqDto.registeredAtYyyymmdd == null) {
             registered = MyTime.now()
-        } else {
+        }
+        else if (tranReqDto.registeredAt != null && tranReqDto.registeredAtYyyymmdd == null) {
+            registered = MyTime.toLocalDateTime(tranReqDto.registeredAt!!)
+        }
+        else {
             registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd!!)
         }
 
