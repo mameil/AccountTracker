@@ -629,8 +629,10 @@ components:
           example: 2800
         registeredAt:
           type: string
-          nullable: false
-          description: "registered time yyyyMMdd HH24:mm:si"
+          description: "transaction registered yyyyMMdd HH24:mm:si"
+        registeredAtYyyymmdd:
+          type: string
+          description: "transaction registered yyyyMMdd"
         title:
           type: string
           description: "main purpose for the transaction"

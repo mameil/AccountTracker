@@ -43,6 +43,15 @@ class MyTime {
             )
         }
 
+        fun toLocalDateTimeWithYyyymmdd(yyyymmdd: String): LocalDateTime{
+            return LocalDateTime.of(
+                yyyymmdd.substring(0, 4).toInt(),
+                yyyymmdd.substring(4, 6).toInt(),
+                yyyymmdd.substring(6, 8).toInt(),
+                    0,0, 0
+            )
+        }
+
         fun now(): LocalDateTime{
             println(toYyyymmddhhmmss(LocalDateTime.now()))
             return LocalDateTime.now()

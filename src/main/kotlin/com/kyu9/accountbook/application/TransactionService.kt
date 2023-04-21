@@ -17,7 +17,7 @@ class TransactionService(
 ) {
 
     fun storeFromDto(tranReqDto: PostTranRequestDto): PostTransResponseDto {
-        val registered = if (tranReqDto.registeredAt == null) MyTime.now() else MyTime.toLocalDateTime(tranReqDto.registeredAt)
+        val registered = if (tranReqDto.registeredAt == null) MyTime.now() else MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAt)
 
         return transactionRepoImpl.storeEntity(
                 UsageTransaction(

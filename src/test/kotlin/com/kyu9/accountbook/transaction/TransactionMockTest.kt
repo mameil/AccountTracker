@@ -107,4 +107,20 @@ class TransactionMockTest: TestFrame() {
                     MockMvcResultMatchers.jsonPath("$[2].title").value("1111")
                 }
     }
+
+    @Test
+    fun post_register_transaction_with_yyyymmdd(){
+
+        postPerform(
+                "거래 등록 시 yyyymmdd 필드 추가된거 어떻게 들어가는지 확인",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"registeredAtYyyymmdd\": \"20230329\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        getPerform(
+                "모든 거래로 조회했을 때 yyyymmdd 필드가 적용되었는지 확인",
+                "/transaction/all"
+        )
+                .andDo(MockMvcResultHandlers.print())
+    }
 }
