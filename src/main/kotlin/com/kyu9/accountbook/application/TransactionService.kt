@@ -24,8 +24,8 @@ class TransactionService(
         if (tranReqDto.registeredAt == null && tranReqDto.registeredAtYyyymmdd == null) {
             registered = MyTime.now()
         }
-        else if (tranReqDto.registeredAt != null && tranReqDto.registeredAtYyyymmdd == null) {
-            registered = MyTime.toLocalDateTime(tranReqDto.registeredAt!!)
+        else if (tranReqDto.registeredAt == null && tranReqDto.registeredAtYyyymmdd == "") {
+            registered = MyTime.now()
         }
         else {
             registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd!!)

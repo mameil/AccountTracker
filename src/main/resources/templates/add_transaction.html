@@ -177,7 +177,7 @@
                 "title": $("#usage").val(),
                 "content": $("#desc").val(),
                 "moneyType": document.getElementsByName("moneyType")[0].value,
-                "registeredAt": document.getElementsByName("yyyymmdd")
+                "registeredAtYyyymmdd": $("#yyyymmdd").val()
             }),
             success: function (data) {
                 document.getElementById("tag").value = "";
@@ -186,6 +186,7 @@
                 document.getElementById("desc").value = "";
                 document.getElementById("moneyType").value = "";
                 document.getElementById("yyyymmdd").value = "";
+
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");
             },
             error: function (data) {
