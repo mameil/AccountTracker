@@ -33,6 +33,7 @@ class TransactionService(
 
         return transactionRepoImpl.storeEntity(
                 UsageTransaction(
+                        userId = tranReqDto.userId!!,
                         amount = tranReqDto.amount?.toLong()!!,
                         registered = registered,
                         title = tranReqDto.title!!,
@@ -48,6 +49,7 @@ class TransactionService(
     fun getSingleTransaction(utid: String): GetSingleTransResponseDto {
         return transactionRepoImpl.getEntityWithId(utid).let {
             GetSingleTransResponseDto(
+                    userId = it.userId,
                     utid = it.id,
                     amount = it.amount.toInt(),
                     registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
@@ -68,6 +70,7 @@ class TransactionService(
     fun getAllTransaction(): GetListTransResponseDto {
         val map = transactionRepoImpl.getAllEntityOrderByCreatedDesc().map {
             GetSingleTransResponseDto(
+                    userId = it.userId,
                     utid = it.id,
                     amount = it.amount.toInt(),
                     registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
