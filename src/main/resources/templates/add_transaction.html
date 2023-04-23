@@ -181,6 +181,15 @@
         return null;
     }
 
+    function getSelectedRadioValue(name) {
+        var radios = document.getElementsByName(name);
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                return radios[i].value;
+            }
+        }
+    }
+
     function recordTran() {
         $.ajax({
             url: "/transaction",
@@ -191,19 +200,12 @@
                 "amount": $("#amount").val(),
                 "title": $("#usage").val(),
                 "content": $("#desc").val(),
-                "moneyType": document.getElementsByName("moneyType")[0].value,
+                "moneyType": getSelectedRadioValue("moneyType"),
                 "registeredAtYyyymmdd": $("#yyyymmdd").val(),
                 "userId": getCookie("userId")
             }),
             success: function (data) {
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");
-
-                // document.getElementById("tag").value = "";
-                // document.getElementById("amount").value = "";
-                // document.getElementById("usage").value = "";
-                // document.getElementById("desc").value = "";
-                // document.getElementById("moneyType").value = "";
-                // document.getElementById("yyyymmdd").value = "";
                 resetInput();
 
             },
