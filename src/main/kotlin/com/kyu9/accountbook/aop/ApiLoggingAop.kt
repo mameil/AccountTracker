@@ -42,6 +42,9 @@ class ApiLoggingAop {
 
         val result = joinPoint.proceed()
 
+        //todo 우선 지금 그냥 result 해버리면 좀 불편하게 나옴
+        //<200 OK OK,[GetSingleTagDto(id=1, name=음식, color=RED, created=20230327213248, updated=20230327213248), GetSingleTagDto(id=2, name=디저트, color=ORANGE, created=20230327213310, updated=20230327213310), GetSingleTagDto(id=3, name=인터넷쇼핑, color=YELLOW, created=20230327213319, updated=20230327213319), GetSingleTagDto(id=4, name=편의점, color=GREEN, created=20230327213329, updated=20230327213329), GetSingleTagDto(id=5, name=술값, color=BLUE, created=20230327213338, updated=20230327213338), GetSingleTagDto(id=6, name=생활용품, color=NAVY, created=20230327213347, updated=20230327213347), GetSingleTagDto(id=7, name=미용, color=PURPLE, created=20230327213355, updated=20230327213355), GetSingleTagDto(id=8, name=통신비, color=SKYBLUE, created=20230327213406, updated=20230327213406), GetSingleTagDto(id=9, name=의류, color=GRAY, created=20230327213417, updated=20230327213417)],[]>
+        //이런식으로 나오는데 파싱 방법에 대해서 고민필요함
 //        logger.info("[RES] {}::{}() => {}", className, methodName, result)
         logger.info("[RES] {}", result)
         logger.info("########################################################################################")
@@ -50,7 +53,7 @@ class ApiLoggingAop {
     }
 
     private fun removePlaceholder(input: String?): String {
-        val regex = "\\$\\{.#?\\}".toRegex()
+        val regex = "\\$\\{.*?\\}".toRegex()
         return if(input == null) "Url Parsed Error!!" else regex.replace(input, "")
     }
 
