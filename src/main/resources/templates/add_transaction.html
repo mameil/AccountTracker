@@ -180,14 +180,16 @@
                 "registeredAtYyyymmdd": $("#yyyymmdd").val()
             }),
             success: function (data) {
-                document.getElementById("tag").value = "";
-                document.getElementById("amount").value = "";
-                document.getElementById("usage").value = "";
-                document.getElementById("desc").value = "";
-                document.getElementById("moneyType").value = "";
-                document.getElementById("yyyymmdd").value = "";
-
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");
+
+                // document.getElementById("tag").value = "";
+                // document.getElementById("amount").value = "";
+                // document.getElementById("usage").value = "";
+                // document.getElementById("desc").value = "";
+                // document.getElementById("moneyType").value = "";
+                // document.getElementById("yyyymmdd").value = "";
+                resetInput();
+
             },
             error: function (data) {
                 alert("ERROR! CHECK LOG");
@@ -210,6 +212,7 @@
         document.getElementById("usage").value = "";
         document.getElementById("desc").value = "";
         document.getElementById("moneyType").value = "";
+        document.getElementById("yyyymmdd").value = "";
     }
 
     function getCurrentYyyymmdd() {
@@ -223,8 +226,6 @@
 
         // yyyyMMdd 형태로 출력
         const formattedDate = `${year}${month}${day}`;
-
-        console.log(formattedDate); // 예시 출력: 20230421
 
         return formattedDate;
     }
