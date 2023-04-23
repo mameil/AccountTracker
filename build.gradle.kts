@@ -50,6 +50,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.google.guava:guava:30.1.1-jre")
 
+    implementation("org.springframework:spring-aop") //2.3.4 이후부터는 따로 필요 없음
+    implementation("org.apache.logging.log4j:log4j-core")
+
     implementation ("org.springframework:spring-context:5.3.15")
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -58,7 +61,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-
 
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
