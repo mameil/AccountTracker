@@ -6,12 +6,10 @@ import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.*
 import org.aspectj.lang.reflect.CodeSignature
 import org.aspectj.lang.reflect.MethodSignature
-import org.json.simple.JSONObject
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.util.*
@@ -20,7 +18,7 @@ import java.util.stream.Stream
 
 @Aspect
 @Log4j2
-class LoggingAspect {
+class ApiLoggingAop {
 
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
@@ -31,13 +29,14 @@ class LoggingAspect {
     @Around("onRequest()")
     fun logRequestAndResponse(joinPoint: ProceedingJoinPoint): Any? {
         val requestAttributes = RequestContextHolder.getRequestAttributes()
-        val request = (requestAttributes as? ServletRequestAttributes)?.request
+//        val request = (requestAttributes as? ServletRequestAttributes)?.request
 
-        val methodName = joinPoint.signature.name
-        val className = joinPoint.signature.declaringTypeName
-        val args = joinPoint.args.joinToString(", ") { it.toString() }
+//        val methodName = joinPoint.signature.name
+//        val className = joinPoint.signature.declaringTypeName
+//        val args = joinPoint.args.joinToString(", ") { it.toString() }
         val requestUrl = getRequestUrl(joinPoint, joinPoint.target.javaClass)
 
+        logger.info("#######################################API CALLED#######################################")
 //        logger.info("[REQ] {}::{}({})", className, methodName, args)
         logger.info("[REQ] {}::{}", removePlaceholder(requestUrl), params(joinPoint))
 
@@ -45,18 +44,19 @@ class LoggingAspect {
 
 //        logger.info("[RES] {}::{}() => {}", className, methodName, result)
         logger.info("[RES] {}", result)
+        logger.info("########################################################################################")
 
         return result
     }
 
     private fun removePlaceholder(input: String?): String {
-        val regex = "\\$\\{.*?\\}".toRegex()
+        val regex = "\\$\\{.#?\\}".toRegex()
         return if(input == null) "Url Parsed Error!!" else regex.replace(input, "")
     }
 
     /*
-    https://gaemi606.tistory.com/entry/Spring-Boot-AOP를-활용해-로그-출력하기-REST-API >> 감사합니당
-    * */
+    https://gaemi606.tistory.com/entry/Spring-Boot-AOP를-활용해-로그-출력하기-REST-API >> thanks
+    */
     private fun params(joinPoint: JoinPoint): Map<*, *>? {
         val codeSignature = joinPoint.signature as CodeSignature
         val parameterNames = codeSignature.parameterNames
