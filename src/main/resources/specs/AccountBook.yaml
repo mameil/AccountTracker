@@ -627,6 +627,10 @@ components:
           nullable: false
           description: "usage amount"
           example: 2800
+        userId:
+          type: string
+          description: "user id"
+          example: "kdshim"
         registeredAt:
           type: string
           description: "transaction registered yyyyMMdd HH24:mm:si"
@@ -675,6 +679,10 @@ components:
           type: integer
           description: "usage amount"
           example: 2800
+        userId:
+          type: string
+          description: "user id"
+          example: "kdshim"
         registeredAt:
           type: string
           description: "registered time yyyyMMdd HH24:mm:si"
