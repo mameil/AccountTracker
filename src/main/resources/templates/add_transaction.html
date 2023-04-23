@@ -29,6 +29,7 @@
     <div class="container-login100">
         <div class="my-wrap-login100">
             <form class="login100-form validate-form" onsubmit="recordTran(); return false;">
+                <span class="login100-form-title_sub" id = "loginId"></span>
                 <span class="login100-form-title">어디에 돈을 쓰셨나요??</span>
 
                 <div class="wrap-input100 validate-input">
@@ -164,6 +165,20 @@
                 alert("no tags");
             }
         })
+
+        var username = getCookie("userId");
+        document.getElementById("loginId").innerHTML = username + "님 환영합니다";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
     }
 
     function recordTran() {
@@ -177,7 +192,8 @@
                 "title": $("#usage").val(),
                 "content": $("#desc").val(),
                 "moneyType": document.getElementsByName("moneyType")[0].value,
-                "registeredAtYyyymmdd": $("#yyyymmdd").val()
+                "registeredAtYyyymmdd": $("#yyyymmdd").val(),
+                "userId": getCookie("userId")
             }),
             success: function (data) {
                 alert("기록 완료! 오늘도 잊지 않고 살아요!");

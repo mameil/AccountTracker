@@ -102,6 +102,7 @@
 
                 if (data.successAble === true) {
                     alert("로그인 성공");
+                    setCookie("userId", $("#id").val(), 1);
                     location.href = "/view/tran";
                 } else {
                     alert("해당 아이디에 대한 비밀번호가 입력하신 비밀번호와 다릅니다");
@@ -117,6 +118,17 @@
     function findId() {
         window.location.replace("/view/login/found");
     }
+
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
 </script>
 <!--===============================================================================================-->
 <!--<script src="/js/main.js"></script>-->
