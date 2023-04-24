@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import org.springframework.transaction.UnexpectedRollbackException
 import java.math.BigDecimal
+import javax.transaction.Transactional
 
 @Service
 @RequiredArgsConstructor
@@ -24,9 +26,12 @@ class TagApiControllerImpl(
         return ResponseEntity.ok(tagService.getAllTags())
     }
 
+    @Transactional
     override fun deleteSingleTag(tagId: BigDecimal): ResponseEntity<Unit> {
         //todo difference between Kotlin.Int and BidDecimal..?
         tagService.removeTag(tagId.intValueExact())
+//        tagService.removeTagError(tagId.intValueExact()) //for @Transactional rollback TEST
+
         return ResponseEntity(HttpStatus.OK)
     }
 

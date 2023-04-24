@@ -5,14 +5,11 @@ import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.Tag
-import com.kyu9.accountbook.swagger.model.GetListTagDto
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
-import lombok.RequiredArgsConstructor
-import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.UnexpectedRollbackException
 import javax.transaction.Transactional
 
 @Service
@@ -53,6 +50,10 @@ class TagService(
 
     fun removeTag(id: Int){
         tagRepoImpl.removeEntityWithId(id.toLong())
+    }
+
+    fun removeTagError(id: Int){
+        tagRepoImpl.deleteFunctionTest(id.toLong())
     }
 
     fun updateTag(id: Int, dto: PostSingleTagDto): GetSingleTagDto{
