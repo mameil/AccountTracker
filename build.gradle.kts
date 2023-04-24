@@ -43,16 +43,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
-    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2:2.7.9")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.google.guava:guava:30.1.1-jre")
-
     implementation("org.springframework:spring-aop") //2.3.4 이후부터는 따로 필요 없음
-    implementation("org.apache.logging.log4j:log4j-core")
-
     implementation ("org.springframework:spring-context:5.3.15")
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -62,7 +59,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
-// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
     //db
@@ -83,6 +79,9 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+
+    implementation("org.slf4j:jcl-over-slf4j")
+    implementation("ch.qos.logback:logback-classic")
 
     //Swagger - plugin
 //    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
@@ -136,7 +135,6 @@ tasks.withType<KotlinCompile> {
     }
 
 }
-
 
 
 tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateFromYaml"){

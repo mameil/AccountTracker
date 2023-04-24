@@ -7,12 +7,19 @@ import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
+import lombok.extern.java.Log
+import lombok.extern.log4j.Log4j
+import lombok.extern.log4j.Log4j2
+import lombok.extern.slf4j.Slf4j
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CachePut
 import org.springframework.stereotype.Service
 import org.springframework.transaction.UnexpectedRollbackException
 import javax.transaction.Transactional
 
 @Service
+@Log4j2
 class TagService(
     private val tagRepoImpl: TagRepoImpl,
 
@@ -20,6 +27,8 @@ class TagService(
     private val tagRepository: TagRepository
 ) {
     fun storeTag(dto: PostSingleTagDto): GetSingleTagDto{
+//        log.info("")
+
         tagRepoImpl.storeEntity(
             Tag.of(
                 dto.name!!,
