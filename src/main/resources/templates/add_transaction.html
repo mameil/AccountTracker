@@ -167,6 +167,10 @@
         })
 
         var username = getCookie("userId");
+        if(username == null) {
+            alert("로그인이 필요합니다");
+            location.href = "/view/login";
+        }
         document.getElementById("loginId").innerHTML = username + "님 환영합니다";
     }
 
