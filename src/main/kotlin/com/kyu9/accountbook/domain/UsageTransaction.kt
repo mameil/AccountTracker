@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.domain
 
 import com.kyu9.accountbook.common.BaseEntity
+import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.properties.MoneyType
 import org.hibernate.annotations.GenericGenerator
@@ -55,6 +56,6 @@ data class UsageTransaction(
             title = title,
             content = content,
             tagId = tagId,
-            moneyType = MoneyType.valueOf(moneyType.uppercase())
+            moneyType = MoneyType.getMoneyType(moneyType.uppercase()) ?: MoneyType.DEFAULT
     )
 }

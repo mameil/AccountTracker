@@ -142,4 +142,17 @@ class TransactionMockTest: TestFrame() {
                     MockMvcResultMatchers.jsonPath("$[0].userId").value("testIDIDID")
                 }
     }
+
+    @Test
+    fun find_JSONERROR(){
+        val req = "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230329\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"ERROR\"\n}"
+        postPerform(
+                "거래 등록 시 yyyymmdd 필드 추가된거 어떻게 들어가는지 확인",
+                "/transaction",
+                req,
+                400
+        )
+                .andDo(MockMvcResultHandlers.print())
+
+    }
 }
