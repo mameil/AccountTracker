@@ -72,7 +72,7 @@
                     tableHtml += `
     <tr>
 <!--      <td style="font-weight:bold">${item.utid}</td>-->
-      <td>${item.registeredAt}</td>
+      <td>${formatDate(item.registeredAt)}</td>
       <td>${item.title} : ${item.content}</td>
       <td>${item.amount}</td>
       <td>${item.moneyType}</td>
@@ -98,6 +98,13 @@
         window.location.href = "/view/tran"
     }
 
+
+    function formatDate(yyyymmdd) {
+        const yyyy = yyyymmdd.substr(0, 4);
+        const mm = yyyymmdd.substr(4, 2);
+        const dd = yyyymmdd.substr(6, 2);
+        return `${yyyy} / ${mm} / ${dd}`;
+    }
 </script>
 
 </body>

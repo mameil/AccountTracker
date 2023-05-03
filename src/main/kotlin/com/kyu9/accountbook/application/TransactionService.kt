@@ -68,12 +68,13 @@ class TransactionService(
     }
 
     fun getAllTransaction(): GetListTransResponseDto {
+        //tag 을 조인해서 가져오는 방식 언젠간 해야함..
         val map = transactionRepoImpl.getAllEntityOrderByCreatedDesc().map {
             GetSingleTransResponseDto(
                     userId = it.userId,
                     utid = it.id,
                     amount = it.amount.toInt(),
-                    registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
+                    registeredAt = MyTime.toYyyyMmDd(it.registered),
                     title = it.title,
                     content = it.content,
                     tagId = it.tagId.toInt(),
