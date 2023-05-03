@@ -34,21 +34,21 @@
                     <i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
                 </a>
             </div>
-            <table id="tranTable" border="1" style="text-align: center; width: 100%; height: 90%">
+            <table id="tranTable" border="1" style="text-align: center; width: 100%; height: 90%; border-collapse: collapse">
                 <thead>
                 <tr>
-                    <th>utid</th>
-                    <th>title</th>
+<!--                    <th>utid</th>-->
+                    <th>yyyymmdd</th>
+<!--                    <th>title</th>-->
+                    <th>title+content</th>
                     <th>amount</th>
-                    <th>amount</th>
-                    <th>registeredAt</th>
-                    <th>Money Type</th>
+                    <th>money type</th>
                     <th>tagId</th>
-                    <th>created</th>
-                    <th>updated</th>
+<!--                    <th>created</th>-->
+<!--                    <th>updated</th>-->
                 </tr>
                 </thead>
-                <tbody id="tableBody">
+                <tbody id="tableBody" style="overflow: auto">
                 </tbody>
             </table>
         </div>
@@ -71,15 +71,14 @@
                 data.transList.forEach(function (item) {
                     tableHtml += `
     <tr>
-      <td style="font-weight:bold">${item.utid}</td>
-      <td>${item.title}</td>
-      <td>${item.content}</td>
+<!--      <td style="font-weight:bold">${item.utid}</td>-->
+      <td>${item.registeredAt}</td>
+      <td>${item.title} : ${item.content}</td>
       <td>${item.amount}</td>
       <td>${item.moneyType}</td>
-      <td>${item.registeredAt}</td>
       <td>${item.tagId}</td>
-      <td>${item.created}</td>
-      <td>${item.updated}</td>
+<!--      <td>${item.created}</td>-->
+<!--      <td>${item.updated}</td>-->
     </tr>
   `;
                 });
@@ -96,7 +95,7 @@
     }
 
     function registerTran() {
-        window.location.replace("/view/tran");
+        window.location.href = "/view/tran"
     }
 
 </script>
