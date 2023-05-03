@@ -1,12 +1,15 @@
 package com.kyu9.accountbook.config
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.kyu9.accountbook.aop.ApiLoggingAop
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import org.springframework.web.client.RestTemplate
 
 
 @Configuration
@@ -20,11 +23,22 @@ class Config(
         objectMapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.registerModule(JavaTimeModule())
+        objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
         return objectMapper
     }
 
     @Bean
     fun apiLoggingAop(): ApiLoggingAop {
         return ApiLoggingAop()
+    }
+
+    @Bean
+    fun acbRestTemplate(): RestTemplate {
+        val element = MappingJackson2HttpMessageConverter()
+        element.objectMapper = objectMapper()
+        val restTemplate = RestTemplate()
+        restTemplate.messageConverters = listOf(element)
+
+        return restTemplate
     }
 }

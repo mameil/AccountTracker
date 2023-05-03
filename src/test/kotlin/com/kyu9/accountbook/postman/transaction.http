@@ -1,0 +1,14 @@
+POST http://localhost:10001/transaction
+Content-Type: application/json
+#Content-Type: text/xml; charset=EUC-KR
+
+{
+  "amount": 2800,
+  "userId": "test",
+  "registeredAt": "string",
+  "registeredAtYyyymmdd": "string",
+  "title": "string",
+  "content": "string",
+  "tagId": 9999999,
+  "moneyType": "ERROR"
+}

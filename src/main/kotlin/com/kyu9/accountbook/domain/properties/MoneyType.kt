@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.domain.properties
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue
 import java.lang.Exception
 
 enum class MoneyType {
@@ -8,19 +9,21 @@ enum class MoneyType {
     FREE,
     MINE,
 
+    @JsonEnumDefaultValue
     DEFAULT
     ;
 
     companion object {
         @JsonCreator
-        fun getMoneyType(moneyType: String): MoneyType? {
-            try{
-                return MoneyType.valueOf(moneyType)
-            }catch (e: Exception){
-                return null;
+        fun getMoneyType(value: String): MoneyType? {
+            return try {
+                valueOf(value)
+            } catch (e: Exception) {
+                null
             }
         }
 
-
     }
+
+
 }

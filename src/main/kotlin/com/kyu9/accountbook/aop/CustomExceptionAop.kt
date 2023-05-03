@@ -22,12 +22,12 @@ class CustomExceptionAop: ResponseEntityExceptionHandler(){
         ), HttpStatus.BAD_REQUEST)
     }
 
-    @ExceptionHandler(Exception::class)
-    fun handleCommonException(exception: Exception): ResponseEntity<ErrorResponseDto>{
-        return ResponseEntity(
-            ErrorResponseDto(
-                "000_000", exception.message
-            ), HttpStatus.BAD_REQUEST
-        )
-    }
+//    @ExceptionHandler(Exception::class)
+//    fun handleCommonException(exception: Exception): ResponseEntity<ErrorResponseDto>{
+//        return ResponseEntity(
+//            ErrorResponseDto(
+//                "000_000", exception.message
+//            ), HttpStatus.BAD_REQUEST
+//        )
+//    }
 }
