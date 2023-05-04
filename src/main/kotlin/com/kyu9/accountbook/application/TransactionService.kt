@@ -28,12 +28,12 @@ class TransactionService(
             registered = MyTime.now()
         }
         else {
-            registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd!!)
+            registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd?:MyTime.toYyyyMmDd(MyTime.now()))
         }
 
         return transactionRepoImpl.storeEntity(
                 UsageTransaction(
-                        userId = tranReqDto.userId!!,
+                        userId = tranReqDto.userId?:"Unknown",
                         amount = tranReqDto.amount?.toLong()!!,
                         registered = registered,
                         title = tranReqDto.title!!,
@@ -69,7 +69,7 @@ class TransactionService(
 
     fun getAllTransaction(): GetListTransResponseDto {
         //tag 을 조인해서 가져오는 방식 언젠간 해야함..
-        val map = transactionRepoImpl.getAllEntityOrderByCreatedDesc().map {
+        val map = transactionRepoImpl.getAllEntityOrderByRegisteredDesc().map {
             GetSingleTransResponseDto(
                     userId = it.userId,
                     utid = it.id,
