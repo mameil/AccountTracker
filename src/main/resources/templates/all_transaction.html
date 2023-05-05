@@ -19,8 +19,8 @@
     <!--===============================================================================================-->
     <!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -60,7 +60,7 @@
 <script>
     window.onload = function () {
         $.ajax({
-            url: "/transaction/all",
+            url: "/acb/transaction/all",
             type: "GET",
             dataType: "json",
 
@@ -95,7 +95,7 @@
     }
 
     function registerTran() {
-        window.location.href = "/view/tran"
+        window.location.href = "/acb/view/tran"
     }
 
 

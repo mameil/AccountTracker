@@ -19,8 +19,8 @@
     <!--===============================================================================================-->
     <!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -126,7 +126,7 @@
     document.getElementById('yyyymmdd').placeholder = "yyyymmdd ex)"+getCurrentYyyymmdd();
     window.onload = function () {
         $.ajax({
-            url: "/tag/list",
+            url: "/acbㅏ/tag/list",
             type: "GET",
             dataType: "json",
 
@@ -169,7 +169,7 @@
         var username = getCookie("userId");
         if(username == null) {
             alert("로그인이 필요합니다");
-            location.href = "/view/login";
+            location.href = "/acb/view/login";
         }
         document.getElementById("loginId").innerHTML = username + "님 환영합니다";
     }
@@ -196,7 +196,7 @@
 
     function recordTran() {
         $.ajax({
-            url: "/transaction",
+            url: "/acb/transaction",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
@@ -221,11 +221,11 @@
     }
 
     function todayTran() {
-        window.location.href = '/view/tran/today'
+        window.location.href = '/acb/view/tran/today'
     }
 
     function allTran() {
-        window.location.href = '/view/tran/all'
+        window.location.href = '/acb/view/tran/all'
     }
 
     function resetInput() {

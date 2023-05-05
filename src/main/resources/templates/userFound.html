@@ -19,8 +19,8 @@
     <!--===============================================================================================-->
     <!--    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">-->
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/acb/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -67,7 +67,7 @@
     function findId() {
         console.log("name : " + $("#name").val());
         $.ajax({
-            url: "/user/find/name?name=" + $("#name").val(),
+            url: "/acb/user/find/name?name=" + $("#name").val(),
             type: "GET",
             contentType: "application/json",
 

@@ -4,7 +4,7 @@ info:
   title: Account Book
   version: 1.0.0
 servers:
-  - url: http://localhost:10001/acb
+  - url: http://localhost:10001
 tags:
   - name: "Util"
     description: "Utility API"
