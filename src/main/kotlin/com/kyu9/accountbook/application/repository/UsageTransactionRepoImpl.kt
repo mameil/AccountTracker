@@ -13,4 +13,8 @@ class UsageTransactionRepoImpl(
     fun getAllEntityOrderByCreatedDesc(): List<UsageTransaction> {
         return repo.findAllByOrderByCreatedDesc()
     }
+
+    fun getAllEntityOrderByRegisteredDesc(): List<UsageTransaction> {
+        return repo.findAllByOrderByRegisteredDesc()
+    }
 }
