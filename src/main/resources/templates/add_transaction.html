@@ -74,12 +74,17 @@
                     <span class="symbol-input100">
                         <i class="fa fa-tag" aria-hidden="true"></i>
                     </span>
-                    <span class="input100" style="align-items: center">
-                        <label>
+                    <span class="input100" style="align-items: center; margin-top: 10px">
+                        <label style="margin-top: 15px">
                             <input type="radio" name="moneyType" value="FREE">
                             FREE
                         </label>
-                        <label>
+                        <label></label>
+                        <label></label>
+                        <label></label>
+                        <label></label>
+                        <label></label>
+                        <label style="margin-top: 15px">
                             <input type="radio" name="moneyType" value="MINE">
                             MINE
                         </label>
@@ -124,6 +129,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.getElementById('yyyymmdd').placeholder = "yyyymmdd ex)"+getCurrentYyyymmdd();
+
     window.onload = function () {
         $.ajax({
             url: "/acb/tag/list",
@@ -233,8 +239,14 @@
         document.getElementById("amount").value = "";
         document.getElementById("usage").value = "";
         document.getElementById("desc").value = "";
-        document.getElementById("moneyType").value = "";
         document.getElementById("yyyymmdd").value = "";
+
+        var radios = document.getElementsByName("moneyType");
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                radios[i].checked = false;
+            }
+        }
     }
 
     function getCurrentYyyymmdd() {
