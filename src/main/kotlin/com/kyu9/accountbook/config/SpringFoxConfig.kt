@@ -29,7 +29,7 @@ class SpringFoxConfig {
     private fun apiInfo(): ApiInfo? {
         return ApiInfoBuilder()
                 .title("AccountTracker API")
-                .description("Kyudo's AccountBook by kotlin springboot <br>main views<br> localhost:10001/view/login")
+                .description("Kyudo's AccountBook by kotlin springboot <br>main views<br> localhost:10001/acb/view/login")
                 .version("1.0")
                 .build()
     }
