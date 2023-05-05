@@ -17,4 +17,8 @@ class UsageTransactionRepoImpl(
     fun getAllEntityOrderByRegisteredDesc(): List<UsageTransaction> {
         return repo.findAllByOrderByRegisteredDesc()
     }
+
+    fun getAllEntityGroupByRegisteredYYYYMM(): List<UsageTransaction> {
+        return repo.findAllGroupByRegistered()
+    }
 }

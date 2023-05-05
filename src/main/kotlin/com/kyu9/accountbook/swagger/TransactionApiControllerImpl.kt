@@ -2,10 +2,7 @@ package com.kyu9.accountbook.swagger
 
 import com.kyu9.accountbook.application.TransactionService
 import com.kyu9.accountbook.swagger.api.TransactionApiDelegate
-import com.kyu9.accountbook.swagger.model.GetListTransResponseDto
-import com.kyu9.accountbook.swagger.model.GetSingleTransResponseDto
-import com.kyu9.accountbook.swagger.model.PostTranRequestDto
-import com.kyu9.accountbook.swagger.model.PostTransResponseDto
+import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -35,5 +32,9 @@ class TransactionApiControllerImpl(
 
     override fun getAllTransactions(): ResponseEntity<GetListTransResponseDto> {
         return ResponseEntity.ok(transactionService.getAllTransaction())
+    }
+
+    override fun getMonthlyTransactions(): ResponseEntity<GetMonthlyTranListResponseDto> {
+        return ResponseEntity.ok(transactionService.getMonthlyTransactions())
     }
 }

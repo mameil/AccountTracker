@@ -3,10 +3,7 @@ package com.kyu9.accountbook.application
 import com.kyu9.accountbook.application.repository.UsageTransactionRepoImpl
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.UsageTransaction
-import com.kyu9.accountbook.swagger.model.GetListTransResponseDto
-import com.kyu9.accountbook.swagger.model.GetSingleTransResponseDto
-import com.kyu9.accountbook.swagger.model.PostTranRequestDto
-import com.kyu9.accountbook.swagger.model.PostTransResponseDto
+import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -85,5 +82,10 @@ class TransactionService(
         }
 
         return GetListTransResponseDto(map)
+    }
+
+    fun getMonthlyTransactions(): GetMonthlyTranListResponseDto {
+        val allEntityGroupByRegisteredYYYYMM = transactionRepoImpl.getAllEntityGroupByRegisteredYYYYMM()
+        return GetMonthlyTranListResponseDto(listOf())
     }
 }

@@ -293,6 +293,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+
+  /transaction/monthly:
+    get:
+      tags:
+        - "Transaction"
+      summary: "get monthly transactions order by yyyymmdd desc"
+      description: "get monthly transactions order by yyyymmdd desc"
+      operationId: getMonthlyTransactions
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMonthlyTranListResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
   /transaction/{utid}:
     get:
       tags:
@@ -660,6 +682,27 @@ components:
         id:
           type: string
           description: "unique transaction id"
+
+    GetMonthlyTranListResponseDto:
+      type: object
+      properties:
+        transList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMonthlyTranResponseDto'
+
+    GetMonthlyTranResponseDto:
+      type: object
+      properties:
+        yyyymmdd:
+          type: string
+          description: "yyyymmdd"
+        mineAmount:
+          type: integer
+          description: "my own usage amount"
+        freeAmount:
+          type: integer
+          description: "free usage amount"
 
     GetListTransResponseDto:
       type: object
