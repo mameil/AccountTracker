@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 [INFO ] 2023-05-03 20:39:25.965 :       o.s.b.d.r.ChangeableUrls - The Class-Path manifest attribute in /Users/kyudoshim/.gradle/caches/modules-2/files-2.1/com.oracle.database.jdbc/ojdbc8/21.1.0.0/50044485aea10afd7defeee8109c5195b4d3cae2/ojdbc8-21.1.0.0.jar referenced one or more files that do not exist: file:/Users/kyudoshim/.gradle/caches/modules-2/files-2.1/com.oracle.database.jdbc/ojdbc8/21.1.0.0/50044485aea10afd7defeee8109c5195b4d3cae2/oraclepki.jar
 [INFO ] 2023-05-03 20:39:25.965 : o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -619,3 +620,44 @@
 [INFO ] 2023-05-03 21:51:35.770 :              o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 [INFO ] 2023-05-03 21:51:35.770 :      o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 [INFO ] 2023-05-03 21:51:35.772 :      o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
+=======
+[INFO ] 2023-05-05 11:00:34.898 :       o.s.b.d.r.ChangeableUrls - The Class-Path manifest attribute in /Users/kyudoshim/.gradle/caches/modules-2/files-2.1/com.oracle.database.jdbc/ojdbc8/21.1.0.0/50044485aea10afd7defeee8109c5195b4d3cae2/ojdbc8-21.1.0.0.jar referenced one or more files that do not exist: file:/Users/kyudoshim/.gradle/caches/modules-2/files-2.1/com.oracle.database.jdbc/ojdbc8/21.1.0.0/50044485aea10afd7defeee8109c5195b4d3cae2/oraclepki.jar
+[INFO ] 2023-05-05 11:00:34.899 : o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[INFO ] 2023-05-05 11:00:34.899 : o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[INFO ] 2023-05-05 11:00:35.366 : o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[INFO ] 2023-05-05 11:00:35.366 : o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+[INFO ] 2023-05-05 11:00:35.378 : o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+[INFO ] 2023-05-05 11:00:35.585 : o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[INFO ] 2023-05-05 11:00:35.585 : o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+[INFO ] 2023-05-05 11:00:35.599 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.TagRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+[INFO ] 2023-05-05 11:00:35.599 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.UsageTransactionRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+[INFO ] 2023-05-05 11:00:35.600 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.UserRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+[INFO ] 2023-05-05 11:00:35.600 : o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 0 JDBC repository interfaces.
+[INFO ] 2023-05-05 11:00:35.606 : o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[INFO ] 2023-05-05 11:00:35.606 : o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2023-05-05 11:00:35.678 : o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69 ms. Found 3 JPA repository interfaces.
+[INFO ] 2023-05-05 11:00:35.681 : o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[INFO ] 2023-05-05 11:00:35.681 : o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+[INFO ] 2023-05-05 11:00:35.684 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.TagRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+[INFO ] 2023-05-05 11:00:35.684 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.UsageTransactionRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+[INFO ] 2023-05-05 11:00:35.684 : o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.kyu9.accountbook.application.repository.UserRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+[INFO ] 2023-05-05 11:00:35.684 : o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+[INFO ] 2023-05-05 11:00:35.832 : o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$4c6ef01d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2023-05-05 11:00:35.849 : o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+[INFO ] 2023-05-05 11:00:36.072 :    o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+[INFO ] 2023-05-05 11:00:36.078 :      o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+[INFO ] 2023-05-05 11:00:36.078 :        o.a.c.c.StandardService - Starting service [Tomcat]
+[INFO ] 2023-05-05 11:00:36.078 :         o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+[INFO ] 2023-05-05 11:00:36.119 :              o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 2023-05-05 11:00:36.119 : o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1220 ms
+[WARN ] 2023-05-05 11:00:36.196 :       c.z.h.u.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+[INFO ] 2023-05-05 11:00:36.412 : o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/ACB?serverTimezone=UTC&characterEncoding=UTF-8'
+[INFO ] 2023-05-05 11:00:36.935 : o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[WARN ] 2023-05-05 11:00:37.431 : o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2023-05-05 11:00:37.612 : o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+[INFO ] 2023-05-05 11:00:37.743 : o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+[INFO ] 2023-05-05 11:00:37.761 : o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+[WARN ] 2023-05-05 11:00:37.799 :             o.t.t.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+[INFO ] 2023-05-05 11:00:37.916 :      o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+[INFO ] 2023-05-05 11:00:37.924 :    o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+>>>>>>> Stashed changes
