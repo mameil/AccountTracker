@@ -3,6 +3,7 @@ package com.kyu9.accountbook.transaction
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.common.TestFrame
 import com.kyu9.accountbook.swagger.model.PostTransResponseDto
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
@@ -157,7 +158,116 @@ class TransactionMockTest: TestFrame() {
     }
 
     @Test
+    @DisplayName("원별 사용내역 조회 api 테스트")
     fun inquiry_monthly_transaction(){
+        postPerform(
+                "거래 등록 - 202211",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20221101\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
 
+        postPerform(
+                "거래 등록 - 202212",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20221201\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        postPerform(
+                "거래 등록 - 202301",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230101\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        postPerform(
+                "거래 등록 - 202302",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230201\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        postPerform(
+                "거래 등록 - 202303",
+                "/transaction",
+                "{\n  \"amount\": 3333,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230301\",\n  \"title\": \"3333\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        getPerform(
+                "월별 거래 조회 - 월별로 나오는지 확인",
+                "/transaction/monthly"
+        )
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].yyyymmdd").value("202211"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].yyyymmdd").value("202212"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].yyyymmdd").value("202301"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].yyyymmdd").value("202302"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].yyyymmdd").value("202303"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].mineAmount").value("3333"))
+
+        postPerform(
+                "거래 등록 - 202303 합산",
+                "/transaction",
+                "{\n  \"amount\": 7777,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230301\",\n  \"title\": \"7777\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"MINE\"\n}"
+        )
+
+        getPerform(
+                "월별 거래 조회 - 202303 합산 확인",
+                "/transaction/monthly"
+        )
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].yyyymmdd").value("202211"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].yyyymmdd").value("202212"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].yyyymmdd").value("202301"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].yyyymmdd").value("202302"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].yyyymmdd").value("202303"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].mineAmount").value("11110"))
+
+        postPerform(
+                "거래 등록 - 202303 FREE Type grouping 확인",
+                "/transaction",
+                "{\n  \"amount\": 9999,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230301\",\n  \"title\": \"9999\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"FREE\"\n}"
+        )
+
+        getPerform(
+                "월별 거래 조회 - 202303 FREE 타입 금액 확인",
+                "/transaction/monthly"
+        )
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].yyyymmdd").value("202211"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].yyyymmdd").value("202212"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].yyyymmdd").value("202301"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].yyyymmdd").value("202302"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].yyyymmdd").value("202303"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].mineAmount").value("11110"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].freeAmount").value("9999"))
+
+        postPerform(
+                "거래 등록 - 202303 FREE Type 합 확인",
+                "/transaction",
+                "{\n  \"amount\": 1111,\n  \"userId\": \"testIDIDID\",\n  \"registeredAtYyyymmdd\": \"20230301\",\n  \"title\": \"9999\",\n  \"content\": \"테스트 전용 내요ㅇ\",\n  \"tagId\": 1234,\n  \"moneyType\": \"FREE\"\n}"
+        )
+
+        getPerform(
+                "월별 거래 조회 - 202303 FREE 타입 합계 확인",
+                "/transaction/monthly"
+        )
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].yyyymmdd").value("202211"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[0].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].yyyymmdd").value("202212"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[1].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].yyyymmdd").value("202301"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[2].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].yyyymmdd").value("202302"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[3].mineAmount").value("3333"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].yyyymmdd").value("202303"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].mineAmount").value("11110"))
+                .andExpect(MockMvcResultMatchers.jsonPath("transList[4].freeAmount").value("11110"))
     }
 }

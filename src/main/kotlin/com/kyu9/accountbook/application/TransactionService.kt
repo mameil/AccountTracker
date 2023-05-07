@@ -87,27 +87,26 @@ class TransactionService(
     }
 
     fun getMonthlyTransactions(): GetMonthlyTranListResponseDto {
-        val query = transactionRepoImpl.getAllEntityGroupByRegisteredYYYYMM()
-        val groupBy = query.groupBy { it.registeredYYYYMM }
-
         val listRes = arrayListOf<GetMonthlyTranResponseDto>()
-        groupBy.forEach{
-            mapped ->
-            run {
-                val yyyymm = mapped.key
-                var mineAmt: Int? = 0
-                var freeAmt: Int? = 0
-                mapped.value.forEach {
-                    when (it.moneyType) {
-                        MoneyType.MINE -> mineAmt = mineAmt?.plus(it.sumAmt?.toInt()!!)
-                        MoneyType.FREE -> freeAmt = freeAmt?.plus(it.sumAmt?.toInt()!!)
-                        else -> {
-                            CustomError.DATA_NOT_FOUND.doThrow()
+        transactionRepoImpl.getAllEntityGroupByRegisteredYYYYMM()
+                .groupBy { it.registeredYYYYMM }
+                .forEach{
+                    mapped ->
+                    run {
+                    val yyyymm = mapped.key
+                    var mineAmt: Int? = 0
+                    var freeAmt: Int? = 0
+                    mapped.value.forEach {
+                        when (it.moneyType) {
+                            MoneyType.MINE -> mineAmt = mineAmt?.plus(it.sumAmt?.toInt()!!)
+                            MoneyType.FREE -> freeAmt = freeAmt?.plus(it.sumAmt?.toInt()!!)
+                            else -> {
+                                CustomError.DATA_NOT_FOUND.doThrow()
+                            }
                         }
                     }
+                    listRes.add(GetMonthlyTranResponseDto(yyyymm, mineAmt, freeAmt))
                 }
-                listRes.add(GetMonthlyTranResponseDto(yyyymm, mineAmt, freeAmt))
-            }
         }
         return GetMonthlyTranListResponseDto(listRes)
     }
