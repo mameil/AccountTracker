@@ -54,15 +54,18 @@ dependencies {
     implementation("com.google.guava:guava:30.1.1-jre")
     implementation("org.springframework:spring-aop") //2.3.4 이후부터는 따로 필요 없음
     implementation ("org.springframework:spring-context:5.3.15")
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+
+
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
 
     //cache
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
     //db
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
@@ -72,16 +75,21 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.hibernate:hibernate-core:5.4.1.Final")
     implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+
+    //queryDSL
     implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
     implementation ("com.querydsl:querydsl-apt:${queryDslVersion}")
     implementation ("com.querydsl:querydsl-core:${queryDslVersion}")
     kapt("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
 
     //kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+
+    //common
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -89,6 +97,11 @@ dependencies {
 
     implementation("org.slf4j:jcl-over-slf4j")
     implementation("ch.qos.logback:logback-classic")
+    implementation("ch.qos.logback:logback-core")
+    implementation("org.slf4j:slf4j-api")
+    implementation("org.apache.logging.log4j:log4j-api")
+    implementation("org.apache.logging.log4j:log4j-to-slf4j")
+
 
     //Swagger - plugin
 //    implementation("org.openapitools:openapi-generator-gradle-plugin:6.0.0")
@@ -104,9 +117,6 @@ dependencies {
     implementation("io.springfox:springfox-swagger2:3.0.0")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
-
-
-
     //Openapi Generator
     implementation("io.swagger:swagger-annotations:1.6.2")
     implementation(group="javax.validation", name="validation-api", version="2.0.1.Final")
@@ -121,9 +131,6 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
     testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
     implementation("io.kotest:kotest-extensions-spring:4.4.3")
-    //mockk
-    testImplementation("io.mockk:mockk:1.9.3")
-
     //mockk
     testImplementation("io.mockk:mockk:1.12.4")
 
