@@ -6,15 +6,21 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.kyu9.accountbook.aop.ApiLoggingAop
+import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.web.client.RestTemplate
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
 
 
 @Configuration
 class Config(
+        @PersistenceContext
+        val entityManager: EntityManager
 ) {
+
     @Bean
     fun objectMapper(): ObjectMapper {
         //redis configuration 작성하면서 redisTemplate 에 사용될 objectmapper을 구현하면서 이름을 'objectMapper'로 해둬서 모든 api에서 적용되고있었음... ㅠㅠ
@@ -40,5 +46,10 @@ class Config(
         restTemplate.messageConverters = listOf(element)
 
         return restTemplate
+    }
+
+    @Bean
+    fun jpaQueryFactory(): JPAQueryFactory {
+        return JPAQueryFactory(entityManager)
     }
 }

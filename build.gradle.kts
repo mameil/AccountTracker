@@ -12,11 +12,14 @@ plugins {
 
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
+    id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
 }
 
 group = "com.kyu9"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
+
+val queryDslVersion = "5.0.0"
 
 configurations {
     all {
@@ -69,6 +72,10 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.hibernate:hibernate-core:5.4.1.Final")
     implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+    implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    implementation ("com.querydsl:querydsl-apt:${queryDslVersion}")
+    implementation ("com.querydsl:querydsl-core:${queryDslVersion}")
+    kapt("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 
     //kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -147,6 +154,18 @@ tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("gen
     //이거 config.json에 넣어도 안되던데 >> 코틀린 스프링부트에서는 적용이 안됨
     //생성된 ApiUtils에서 javax을 못읽어서 보니까 boot3.0.0부터는 javax가 아니라 jakarata로 바뀌었음 그래서 이걸로 바꿀러고했는데 아무튼 코틀린에선 사용 못함
 //    configOptions.put("useSpringBoot3", "true")
+}
+
+val querydslDir = "$buildDir/generated/querydsl"
+
+sourceSets.getByName("main") {
+    java.srcDir(querydslDir)
+}
+
+configurations {
+    named("querydsl") {
+        extendsFrom(configurations.compileClasspath.get())
+    }
 }
 
 task<Delete>("removeGeneratedFromYaml"){
