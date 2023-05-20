@@ -37,4 +37,8 @@ class TransactionApiControllerImpl(
     override fun getMonthlyTransactions(): ResponseEntity<GetMonthlyTranListResponseDto> {
         return ResponseEntity.ok(transactionService.getMonthlyTransactions())
     }
+
+    override fun getRecentDaysTransaction(days: Int): ResponseEntity<GetDailyListTransResponseDto> {
+        return ResponseEntity.ok(transactionService.getRecentDaysTransactions(days))
+    }
 }

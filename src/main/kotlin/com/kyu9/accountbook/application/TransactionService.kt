@@ -110,4 +110,24 @@ class TransactionService(
         }
         return GetMonthlyTranListResponseDto(listRes)
     }
+
+    fun getRecentDaysTransactions(days: Int): GetDailyListTransResponseDto {
+        return GetDailyListTransResponseDto(
+                transactionRepoImpl.getAllEntityBetweenRegisteredYyyymmdd(days).map {
+                    GetDailySingleTransResponseDto(
+                            yyyymmdd = it.registeredYYYYMMDD,
+                            utid = it.id,
+                            amount = it.amount.toInt(),
+                            userId = it.userId,
+                            registeredAt = MyTime.toYyyymmddhhmmss(it.registered),
+                            title = it.title,
+                            content = it.content,
+                            tagId = it.tagId.toInt(),
+                            moneyType = GetDailySingleTransResponseDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
+                            created = MyTime.toYyyymmddhhmmss(it.created),
+                            updated = MyTime.toYyyymmddhhmmss(it.updated)
+                    )
+                }
+        )
+    }
 }
