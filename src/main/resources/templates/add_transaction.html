@@ -91,6 +91,11 @@
                     </span>
                 </div>
 
+                <button class="login100-form-sub-btn" onclick="resetInput()" style="text-align: center">
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    기록중인거 초기화!!
+                </button>
+
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
                         저장하기
@@ -99,27 +104,19 @@
             </form>
 
             <div class="login100-pic js-tilt" data-tilt style="text-align: center">
-                <div>Tag 선택</div>
+                <div style="margin-bottom: 10px;">등록하려는 태그를 선택하세요</div>
                 <pre id="resp"></pre>
             </div>
 
             <!--            return false은 이벤트의 기본 동작을 중지-->
             <div class="text-center p-t-136" style="width: 100%">
                 <a class="txt2" onclick="todayTran()">
-                    오늘의 소비를 확인하기
                     <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    D-3 소비를 확인하기
                 </a>
-                <div></div>
-                <div></div>
-                <a class="txt2" onclick="resetInput()">
-                    기록중인거 초기화!!
+                <a class="txt2" onclick="allTran()" style="margin-left: 100px">
                     <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                </a>
-                <div></div>
-                <div></div>
-                <a class="txt2" onclick="allTran()">
                     현재까지의 모든 기록들 확인
-                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                 </a>
             </div>
 
