@@ -799,21 +799,10 @@ components:
           type: string
           description: "registered time yyyyMMdd for grouping"
           example: "20230520"
-        utid:
-          type: string
-          description: "unique transaction id"
         amount:
           type: integer
           description: "usage amount"
           example: 2800
-        userId:
-          type: string
-          description: "user id"
-          example: "kdshim"
-        registeredAt:
-          type: string
-          description: "registered time yyyyMMdd HH24:mm:si"
-          example: "20230520140229"
         title:
           type: string
           description: "main purpose for the transaction"
@@ -822,23 +811,11 @@ components:
           type: string
           description: "additional memo for the transaction"
           example: "제로콜라"
-        tagId:
-          type: integer
-          description: "tag type of the transaction"
-          example: 1
         moneyType:
           type: string
           enum:
             - FREE
             - MINE
-        created:
-          type: string
-          description: "created time yyyyMMdd HH24:mm:si"
-          example: "20230520140229"
-        updated:
-          type: string
-          description: "updated time yyyyMMdd HH24:mm:si"
-          example: "20230520140229"
 
     PostSingleTagDto:
       type: object
