@@ -27,24 +27,15 @@
 
 <div class="limiter">
     <div class="container-login100">
-        <div class="my-wrap-login100">
-            <div class="login100-form validate-form" data-tilt>
-                <div>오늘의 소비</div>
-            </div>
-            <div class="login100-pic js-tilt" data-tilt>
-                <div>Tag 선택</div>
-                <pre id="resp"></pre>
-            </div>
+        <div class="my-wrap-login100-align-center">
+            <div id="title">최근 소비</div>
 
-            <!--            return false은 이벤트의 기본 동작을 중지-->
+            <div id="myTable"></div>
 
-            <div class="text-center p-t-136">
-                <a class="txt2" onclick = "registerTran()">
-                    소비 입력하러 가기
-                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                </a>
-            </div>
-
+            <a class="txt2" onclick = "registerTran()">
+                소비 입력하러 가기
+                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+            </a>
         </div>
     </div>
 </div>
@@ -52,31 +43,91 @@
 <!--===============================================================================================-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function getTran() {
+    window.onload = function () {
+        const defaultDates = 3
+        // getDatesFromToday(defaultDates).forEach(date => {
+        //     var roundDiv = document.createElement('div');
+        //
+        //     var iName = document.createElement("i");
+        //     iName.className = "fa-regular fa-pot-food";
+        //
+        //     var button = document.createElement('div');
+        //     button.style = "width: 316px; text-align: left; margin-top: 5px; margin-bottom: 5px";
+        //     button.textContent = date;
+        //     button.style.paddingBottom = "10px";
+        //     button.appendChild(iName);
+        //     roundDiv.appendChild(button);
+        //
+        //     document.getElementById("title").appendChild(roundDiv);
+        // })
+
         $.ajax({
-            url: "/acb/transaction",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                "tagId": $("#tagId").val(),
-                "amount": $("#amount").val(),
-                "title": $("#usage").val(),
-                "content": $("#desc").val(),
-                "moneyType": $("#moneyType").val()
-            }),
-            success: function (data) {
-                alert("기록 완료! 오늘도 잊지 않고 살아요!");
-                console.log(data)
-            },
-            error: function (data) {
-                alert("ERROR! CHECK LOG");
-                console.log(data)
+            url: "/acb//transaction/recent/days?days=" + defaultDates,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                createTableFromData(data.transList, 'yyyymmdd')
             }
         })
+
     }
+
 
     function registerTran() {
         window.location.href = "/acb/view/tran";
+    }
+
+    function createTableFromData(data, dateField) {
+        var table = document.createElement('table');
+        table.style = "width: 100%; text-align: center;"
+        var fields = data;
+
+        // 테이블 헤더 생성
+        //초기화 해주는 로직은 서버로부터 전달받은 데이터들을 yyyymmdd 기준으로 파싱해서 yyyymmdd 을 distinct 으로 추출하는 과정임
+        var trList = [...new Set(data.map(item => item['yyyymmdd']))]
+        // trList = getDatesFromToday(3)
+        var headerRow = document.createElement('tr');
+        trList.forEach(function(field) {
+            var th = document.createElement('th');
+            th.textContent = "" + field;
+            th.style = "width: 33%; text-align: center;"
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        // 데이터 행 생성
+        // data.forEach(function(rowData) {
+        //     var row = document.createElement('tr');
+        //     fields.forEach(function(field) {
+        //         var cell = document.createElement('td');
+        //         cell.textContent = rowData[field];
+        //         row.appendChild(cell);
+        //     });
+        //     table.appendChild(row);
+        // });
+
+        // HTML 요소에 테이블 추가
+        var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
+        container.appendChild(table);
+    }
+
+    function getDatesFromToday(cnt) {
+        var dates = [];
+        var today = new Date();
+
+        for (var i = 0; i < cnt; i++) {
+            var date = new Date(today);
+            date.setDate(today.getDate() - i);
+
+            var year = date.getFullYear();
+            var month = (date.getMonth() - 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+
+            var yyyymmdd = year + month + day;
+            dates.push(yyyymmdd);
+        }
+
+        return dates;
     }
 
 </script>
