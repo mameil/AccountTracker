@@ -28,7 +28,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="my-wrap-login100-align-center">
-            <div id="title">최근 소비</div>
+            <div id="title">최근 소비 리스트(현재는 금일 기준 3일치)</div>
 
             <div id="myTable"></div>
 
@@ -45,21 +45,6 @@
 <script>
     window.onload = function () {
         const defaultDates = 3
-        // getDatesFromToday(defaultDates).forEach(date => {
-        //     var roundDiv = document.createElement('div');
-        //
-        //     var iName = document.createElement("i");
-        //     iName.className = "fa-regular fa-pot-food";
-        //
-        //     var button = document.createElement('div');
-        //     button.style = "width: 316px; text-align: left; margin-top: 5px; margin-bottom: 5px";
-        //     button.textContent = date;
-        //     button.style.paddingBottom = "10px";
-        //     button.appendChild(iName);
-        //     roundDiv.appendChild(button);
-        //
-        //     document.getElementById("title").appendChild(roundDiv);
-        // })
 
         $.ajax({
             url: "/acb//transaction/recent/days?days=" + defaultDates,
@@ -89,26 +74,61 @@
         var headerRow = document.createElement('tr');
         trList.forEach(function(field) {
             var th = document.createElement('th');
-            th.textContent = "" + field;
+            th.textContent = parseYyymmdd(field);
             th.style = "width: 33%; text-align: center;"
             headerRow.appendChild(th);
         });
         table.appendChild(headerRow);
 
         // 데이터 행 생성
-        // data.forEach(function(rowData) {
-        //     var row = document.createElement('tr');
-        //     fields.forEach(function(field) {
-        //         var cell = document.createElement('td');
-        //         cell.textContent = rowData[field];
-        //         row.appendChild(cell);
-        //     });
-        //     table.appendChild(row);
-        // });
+        data.forEach(function(rowData) {
+
+            // var row = document.createElement('tr');
+            // fields.forEach(function(field) {
+            //     var cell = document.createElement('td');
+            //     cell.textContent = rowData[field];
+            //     row.appendChild(cell);
+            // });
+            // table.appendChild(row);
+
+            // 테이블 요소 생성
+            const subtable = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // 테이블 헤더 생성
+            const headerRow = document.createElement('tr');
+            for (const key in rowData) {
+                const th = document.createElement('th');
+                th.textContent = key;
+                // headerRow.appendChild(th);
+            }
+            // thead.appendChild(headerRow);
+            // subtable.appendChild(thead);
+
+            // 테이블 데이터 생성
+            const dataRow = document.createElement('tr');
+            for (const key in rowData) {
+                const td = document.createElement('td');
+                td.textContent = rowData[key];
+                dataRow.appendChild(td);
+            }
+            tbody.appendChild(dataRow);
+            subtable.appendChild(tbody);
+            table.appendChild(subtable);
+        });
 
         // HTML 요소에 테이블 추가
         var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
         container.appendChild(table);
+    }
+
+    function parseYyymmdd(yyyymmdd) {
+        var year = yyyymmdd.substring(0, 4);
+        var month = yyyymmdd.substring(4, 6);
+        var day = yyyymmdd.substring(6, 8);
+
+        return year + "-" + month + "-" + day;
     }
 
     function getDatesFromToday(cnt) {
