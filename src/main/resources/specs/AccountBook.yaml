@@ -298,8 +298,8 @@ paths:
     get:
       tags:
         - "Transaction"
-      summary: "get recent transactions in specific days(int) from today"
-      description: "get recent transactions in specific days(int) from today"
+      summary: "get recent transactions in specific days(int) from today order by yyyymmdd desc"
+      description: "get recent transactions in specific days(int) from today order by yyyymmdd desc"
       operationId: getRecentDaysTransaction
       parameters:
         - name: "days"
