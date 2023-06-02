@@ -71,6 +71,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /util/json/parse:
+    post:
+      tags:
+        - "Util"
+      summary: "parse @ToString into json format"
+      description: "parse @ToString into json format"
+      operationId: parseJson
+      requestBody:
+        description: "parse json request - @ToString"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              example: "User(id=1, name=김철수, age=20)"
+              description: "@ToString"
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "json format"
+                description: "json format"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
   ######################################################
   ###### 사용자_API
   ######################################################
