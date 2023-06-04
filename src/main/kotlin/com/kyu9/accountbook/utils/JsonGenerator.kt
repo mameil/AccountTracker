@@ -8,18 +8,42 @@ import org.springframework.stereotype.Service
 class JsonGenerator {
 
     fun parseJson(toStringValue: String): String {
-        val propertyValues = toStringValue.substringAfter("(").substringBeforeLast(")").split(", ")
+        var propertyValues = toStringValue.substringAfter("(").substringBeforeLast(")").split(", ")
 
         val jsonObject = mutableMapOf<String, Any>()
 
         for (propertyValue in propertyValues) {
-            val (propertyName, propertyStringValue) = propertyValue.split("=")
+            var filteredValue = propertyValue
+            if(propertyValue.contains("(")) {
+                filteredValue = propertyValue.substring(propertyValue.lastIndexOf("(")+1)
+            }else if(propertyValue.contains(")")) {
+                filteredValue = propertyValue.substringBeforeLast(")")
+            }
+
+            var (propertyName, propertyStringValue) = filteredValue.split("=")
+
+            if(propertyStringValue.contains("null")) continue
+
 
             val pattern = Regex("-?\\d+")
             val propertyValueObject = if (propertyStringValue.matches(pattern)) {
-                propertyStringValue.toLong()
-            } else {
-                propertyStringValue
+                try {
+                    propertyStringValue.toInt()
+                } catch (e: NumberFormatException) {
+                    propertyStringValue
+                }
+            } else if(propertyStringValue.contains("true") || propertyStringValue.contains("false")) {
+                propertyStringValue.toBoolean()
+            }
+            else {
+                if(propertyStringValue.contains("(")) {
+                    while(propertyStringValue.contains("(")) {
+                        propertyStringValue = propertyStringValue.substringAfter("(")
+                    }
+                }
+                else {
+                    propertyStringValue
+                }
             }
 
             jsonObject[propertyName] = propertyValueObject
