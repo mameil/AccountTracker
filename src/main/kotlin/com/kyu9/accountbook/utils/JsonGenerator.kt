@@ -27,8 +27,15 @@ class JsonGenerator {
 
             val pattern = Regex("-?\\d+")
             val propertyValueObject = if (propertyStringValue.matches(pattern)) {
-                propertyStringValue.toLong()
-            } else {
+                try {
+                    propertyStringValue.toInt()
+                } catch (e: NumberFormatException) {
+                    propertyStringValue
+                }
+            } else if(propertyStringValue.contains("true") || propertyStringValue.contains("false")) {
+                propertyStringValue.toBoolean()
+            }
+            else {
                 if(propertyStringValue.contains("(")) {
                     while(propertyStringValue.contains("(")) {
                         propertyStringValue = propertyStringValue.substringAfter("(")
