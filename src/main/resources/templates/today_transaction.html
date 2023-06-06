@@ -28,7 +28,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="my-wrap-login100-align-center">
-            <div id="title">최근 소비 리스트(현재는 금일 기준 3일치)</div>
+            <div id="title">최근 소비 리스트(오늘 기준 3일치)</div>
 
             <div id="myTable"></div>
 
@@ -72,6 +72,7 @@
         var trList = [...new Set(data.map(item => item['yyyymmdd']))]
         // trList = getDatesFromToday(3)
         var headerRow = document.createElement('tr');
+        headerRow.style = "width: 100%; text-align: center;"
         trList.forEach(function(field) {
             var th = document.createElement('th');
             th.textContent = parseYyymmdd(field);
@@ -101,6 +102,7 @@
             for (const key in rowData) {
                 const th = document.createElement('th');
                 th.textContent = key;
+                th.style = "width: 100%"
                 // headerRow.appendChild(th);
             }
             // thead.appendChild(headerRow);
@@ -108,10 +110,14 @@
 
             // 테이블 데이터 생성
             const dataRow = document.createElement('tr');
+
+
+            var amt = 0;
             for (const key in rowData) {
                 if(key == 'yyyymmdd') continue;
                 const td = document.createElement('td');
                 td.textContent = rowData[key];
+                td.style = "width: 101px; text-align: center;"
                 dataRow.appendChild(td);
             }
             tbody.appendChild(dataRow);
@@ -149,6 +155,21 @@
         }
 
         return dates;
+    }
+
+    function getCurrentYyyymmdd() {
+        // 현재 날짜 객체 생성
+        const currentDate = new Date();
+
+        // 연도, 월, 일 가져오기
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+
+        // yyyyMMdd 형태로 출력
+        const formattedDate = `${year}${month}${day}`;
+
+        return formattedDate;
     }
 
 </script>
