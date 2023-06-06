@@ -58,4 +58,10 @@ data class UsageTransaction(
             tagId = tagId,
             moneyType = MoneyType.getMoneyType(moneyType.uppercase()) ?: MoneyType.DEFAULT
     )
+
+    class UTAmountSum(
+            val yyyymmdd: String,
+            val moneyType: MoneyType,
+            val amount: Long
+    )
 }
