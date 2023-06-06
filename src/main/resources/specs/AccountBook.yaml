@@ -823,6 +823,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GetDailySingleTransResponseDto'
+        amountSum:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetDailySumDto'
 
     GetDailySingleTransResponseDto:
       type: object
@@ -877,6 +881,24 @@ components:
         updated:
           type: string
           description: "updated time yyyyMMdd HH24:mm:si"
+
+    GetDailySumDto:
+      type: object
+      properties:
+        yyyymmdd:
+          type: string
+          description: "registered time yyyyMMdd for grouping"
+          example: "20230520"
+        cashType:
+          type: string
+          description: "cash type"
+          enum:
+            - FREE
+            - MINE
+        amountSum:
+          type: integer
+          description: "usage amount"
+          example: 2800
 
     #####################################
     #### 일반적으로 상춍

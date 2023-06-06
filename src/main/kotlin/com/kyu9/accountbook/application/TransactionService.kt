@@ -112,8 +112,10 @@ class TransactionService(
     }
 
     fun getRecentDaysTransactions(days: Int): GetDailyListTransResponseDto {
+        val d3Yyyymmdd = transactionRepoImpl.getAllEntityBetweenRegisteredYyyymmdd(days)
+
         return GetDailyListTransResponseDto(
-                transactionRepoImpl.getAllEntityBetweenRegisteredYyyymmdd(days).map {
+                d3Yyyymmdd.map {
                     GetDailySingleTransResponseDto(
                             yyyymmdd = it.registeredYYYYMMDD,
                             amount = it.amount.toInt(),
@@ -121,7 +123,30 @@ class TransactionService(
                             content = it.content,
                             moneyType = GetDailySingleTransResponseDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
                     )
+                },
+                calCachAmount(d3Yyyymmdd).map{
+                    GetDailySumDto(
+                            yyyymmdd = it.yyyymmdd,
+                            cashType = GetDailySumDto.CashType.valueOf(it.moneyType.toString().uppercase()),
+                            amountSum = it.amount.toInt()
+                    )
                 }
         )
+    }
+
+    fun calCachAmount(list: List<UsageTransaction>): List<UsageTransaction.UTAmountSum>{
+        var daily = list.groupBy { it.registeredYYYYMMDD to it.moneyType }
+        var dailySum = arrayListOf<UsageTransaction.UTAmountSum>()
+
+        daily.forEach {
+            var sum = 0
+            it.value.forEach {
+                it2 -> sum += it2.amount.toInt()
+            }
+
+            dailySum.add(UsageTransaction.UTAmountSum(it.key.first, it.key.second, sum.toLong()))
+        }
+
+        return dailySum
     }
 }
