@@ -193,11 +193,18 @@
 
     function getSelectedRadioValue(name) {
         var radios = document.getElementsByName(name);
+        var selectedValue = null;
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
-                return radios[i].value;
+                selectedValue =  radios[i].value;
             }
         }
+        if(selectedValue === null){
+            alert("돈의 출처를 선택해주셔야 합니다!!");
+            throw new Error("돈의 출처를 선택해주셔야 합니다!!")
+        }
+
+        return selectedValue;
     }
 
     function recordTran() {
