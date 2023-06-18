@@ -827,6 +827,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GetDailySumDto'
+        amountTotal:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetDailyTotalDto'
 
     GetDailySingleTransResponseDto:
       type: object
@@ -911,6 +915,18 @@ components:
           type: integer
           description: "usage amount"
           example: 2800
+
+    GetDailyTotalDto:
+      type: object
+      properties:
+        yyyymmdd:
+          type: string
+          description: "registered time yyyyMMdd for grouping"
+          example: "20230520"
+        totalString:
+          type: string
+          description: "금액 타입: 금액 형식의 문자열"
+          example: "내돈: 0 / 복지: 6500"
 
     #####################################
     #### 일반적으로 상춍

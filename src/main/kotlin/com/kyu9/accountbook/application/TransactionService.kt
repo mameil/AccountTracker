@@ -116,7 +116,6 @@ class TransactionService(
         val yyyymmddSet = d3Yyyymmdd.groupBy { it.registeredYYYYMMDD }
 
         val arr = mutableListOf<GetDailySingleTransResponseDto>()
-
         yyyymmddSet.forEach {
             var infoList = mutableListOf<GetDailySingleTransResponseInfoDto>()
             it.value.map {
@@ -135,6 +134,30 @@ class TransactionService(
             ))
         }
 
+        val totalArr = mutableListOf<GetDailyTotalDto>()
+        yyyymmddSet.forEach(){
+            var mine: Int = 0
+            var free: Int = 0
+            it.value.forEach {
+                when (it.moneyType) {
+                    MoneyType.MINE -> {
+                        mine += it.amount.toInt()
+                    }
+                    MoneyType.FREE -> {
+                        free += it.amount.toInt()
+                    }
+                    else -> {
+                        CustomError.DATA_NOT_FOUND.doThrow()
+                    }
+                }
+            }
+
+            totalArr.add(GetDailyTotalDto(
+                    yyyymmdd = it.key,
+                    totalString = "복지: ${free}원 / 내돈: ${mine}원"
+            ))
+        }
+
 
         return GetDailyListTransResponseDto(
                 arr,
@@ -144,7 +167,8 @@ class TransactionService(
                             cashType = GetDailySumDto.CashType.valueOf(it.moneyType.toString().uppercase()),
                             amountSum = it.amount.toInt()
                     )
-                }
+                },
+                totalArr
         )
     }
 

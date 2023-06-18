@@ -23,6 +23,14 @@ enum class MoneyType {
             }
         }
 
+        fun getHumanableName(value: MoneyType): String?{
+            return when(value){
+                FREE -> "무료"
+                MINE -> "내 돈"
+                DEFAULT -> "기본값"
+            }
+        }
+
     }
 
 

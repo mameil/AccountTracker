@@ -52,7 +52,7 @@
             success: function(data) {
                 console.log(data)
                 // createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
-                listDailyTrans(data.transList, 'yyyymmdd', data.amountSum)
+                listDailyTrans(data.transList, 'yyyymmdd', data.amountTotal)
             }
         })
 
@@ -85,7 +85,8 @@
 
         // cash_type
         const cashTypeCell = document.createElement('td');
-        cashTypeCell.textContent = humanableMoneytype(obj.cashType) + " : " + obj.amountSum;
+        // cashTypeCell.textContent = humanableMoneytype(obj.cashType) + " : " + obj.amountSum;
+        cashTypeCell.textContent = obj.totalString
         row.appendChild(cashTypeCell);
 
         tbody.appendChild(row);
