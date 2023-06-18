@@ -58,9 +58,23 @@
 
     }
 
-
     function registerTran() {
         window.location.href = "/acb/view/tran";
+    }
+
+    function listDailyTrans(data, date, sum){
+        var table = document.createElement('table');
+        table.style = "width: 100%; text-align: center; flex-grow: 1; display: none"
+
+        settingTrans(data).then(
+            sum.forEach(function(rawData){
+                addValuesToTable(rawData, rawData.yyyymmdd)
+            })
+        )
+
+        // HTML 요소에 테이블 추가
+        var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
+        container.appendChild(table);
     }
 
     function addValuesToTable(obj, tableId) {
@@ -71,7 +85,7 @@
 
         // cash_type
         const cashTypeCell = document.createElement('td');
-        cashTypeCell.textContent = obj.cashType + " : " + obj.amountSum;
+        cashTypeCell.textContent = humanableMoneytype(obj.cashType) + " : " + obj.amountSum;
         row.appendChild(cashTypeCell);
 
         tbody.appendChild(row);
@@ -133,114 +147,6 @@
     }
 
 
-    function listDailyTrans(data, date, sum){
-        var table = document.createElement('table');
-        table.style = "width: 100%; text-align: center; flex-grow: 1; display: none"
-
-        settingTrans(data).then(
-            sum.forEach(function(rawData){
-                addValuesToTable(rawData, rawData.yyyymmdd)
-            })
-        )
-
-        // HTML 요소에 테이블 추가
-        var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
-        container.appendChild(table);
-
-    }
-
-    function createTableFromData(data, dateField, sumData) {
-        var table = document.createElement('table');
-        table.style = "width: 100%; text-align: center; border: 1px solid black; border-collapse: collapse;"
-        var fields = data;
-
-        // 테이블 헤더 생성
-        //초기화 해주는 로직은 서버로부터 전달받은 데이터들을 yyyymmdd 기준으로 파싱해서 yyyymmdd 을 distinct 으로 추출하는 과정임
-        var trList = [...new Set(data.map(item => item['yyyymmdd']))]
-        // trList = getDatesFromToday(3)
-        var headerRow = document.createElement('tr');
-        headerRow.id = "headerRow";
-        headerRow.style = "width: 100%; text-align: center;"
-        trList.forEach(function(field) {
-            var th = document.createElement('th');
-            th.textContent = parseYyymmdd(field);
-            th.id = field;
-            th.style = "width: 33%; text-align: center;"
-            headerRow.appendChild(th);
-        });
-        table.appendChild(headerRow);
-
-        // 데이터 행 생성
-        data.forEach(function(rowData) {
-
-            // var row = document.createElement('tr');
-            // fields.forEach(function(field) {
-            //     var cell = document.createElement('td');
-            //     cell.textContent = rowData[field];
-            //     row.appendChild(cell);
-            // });
-            // table.appendChild(row);
-
-            // 테이블 요소 생성
-            const subtable = document.createElement('table');
-            subtable.id = "subtable"
-            const thead = document.createElement('thead');
-            thead.id = "thead"
-            const tbody = document.createElement('tbody');
-            tbody.id = "tbody"
-
-            // 테이블 헤더 생성
-            const tdRow = document.createElement('tr');
-            for (const key in rowData) {
-                const th = document.createElement('th');
-                th.textContent = key;
-                th.style = "width: 100%"
-                // headerRow.appendChild(th);
-            }
-            // thead.appendChild(headerRow);
-            // subtable.appendChild(thead);
-
-            // 테이블 데이터 생성
-            const dataRow = document.createElement('tr');
-
-            var dtoYyyymmdd;
-            for (const key in rowData) {
-                if(key == 'yyyymmdd') {
-                    dtoYyyymmdd = key;
-                    continue;
-                }
-                const td = document.createElement('td');
-                td.textContent = rowData[key];
-                td.style = "width: 101px; text-align: center;"
-                dataRow.appendChild(td);
-            }
-
-            tbody.appendChild(dataRow);
-            subtable.appendChild(tbody);
-
-            //origin
-            // table.appendChild(subtable);
-
-            //요게 가장 밖으로 쌓여있는 tr부분
-            tdRow.appendChild(subtable);
-            table.appendChild(tdRow);
-
-        });
-
-        sumData.forEach(function(sum) {
-            const td = document.createElement('div');
-            td.textContent = sum['yyyymmdd'] + "일의 " + sum['cashType'] + "의 소비합 : " + sum['amountSum'];
-            td.style = "width: 101px; text-align: center;"
-            table.appendChild(td);
-        })
-
-
-
-        // HTML 요소에 테이블 추가
-        var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
-        container.appendChild(table);
-    }
-
     function parseYyymmdd(yyyymmdd) {
         var year = yyyymmdd.substring(0, 4);
         var month = yyyymmdd.substring(4, 6);
@@ -281,6 +187,13 @@
         const formattedDate = `${year}${month}${day}`;
 
         return formattedDate;
+    }
+
+    function humanableMoneytype(moneyType){
+        if(moneyType === "MINE")
+            return "내 돈"
+        else if(moneyType === "FREE")
+            return "복지"
     }
 
 </script>
