@@ -30,7 +30,7 @@
         <div class="my-wrap-login100-align-center">
             <div id="title">최근 소비 리스트(오늘 기준 3일치)</div>
 
-            <div id="myTable"></div>
+            <div id="myTable" style="display: flex; "></div>
 
             <a class="txt2" onclick = "registerTran()">
                 소비 입력하러 가기
@@ -46,12 +46,12 @@
     window.onload = function () {
         const defaultDates = 3
         $.ajax({
-            url: "/acb//transaction/recent/days?days=" + defaultDates,
+            url: "/acb/transaction/recent/days?days=" + defaultDates,
             type: "GET",
             dataType: "json",
             success: function(data) {
                 console.log(data)
-                createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
+                // createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
                 listDailyTrans(data.transList, 'yyyymmdd', data.amountSum)
             }
         })
@@ -63,13 +63,95 @@
         window.location.href = "/acb/view/tran";
     }
 
+    function addValuesToTable(obj, tableId) {
+        const table = document.getElementById(tableId);
+        const tbody = document.createElement('tbody');
+
+        const row = document.createElement('tr');
+
+        // cash_type
+        const cashTypeCell = document.createElement('td');
+        cashTypeCell.textContent = obj.cashType + " : " + obj.amountSum;
+        row.appendChild(cashTypeCell);
+
+        tbody.appendChild(row);
+        table.appendChild(tbody);
+    }
+
+    function settingTrans(data){
+        return new Promise((resolve, reject) => {
+            data.forEach(function(rawData){
+                generateHTMLTable(rawData)
+            })
+
+            resolve()
+        })
+    }
+
+    function generateHTMLTable(obj) {
+        // 테이블 컨테이너 요소 선택
+        const tableContainer = document.getElementById('myTable');
+
+        // 테이블 요소 생성
+        const table = document.createElement('table');
+        table.id = obj.yyyymmdd;
+        table.style = "width: 100%; height: 100%; text-align: center; border: 1px solid black; outline: 1px solid black;"
+
+        // 테이블 헤더 생성
+        const tableHeader = document.createElement('tr');
+
+        // yyyymmdd 값을 테이블 헤더로 추가
+        const th = document.createElement('th');
+        th.textContent = parseYyymmdd(obj.yyyymmdd);
+        th.style = "border: 1px solid black;"
+        tableHeader.appendChild(th);
+
+        // 테이블 헤더 추가
+        table.appendChild(tableHeader);
+
+        // 데이터 셀 생성
+
+        // infoList 값들을 세로 방향으로 추가
+        obj.infoList.forEach((data) => {
+            const tableBody = document.createElement('tbody');
+            const row = document.createElement('tr');
+            // row.style = "border: 1px solid black;"
+
+            // 해당 날짜의 데이터 값을 셀에 추가
+            const cell = document.createElement('td');
+            cell.textContent = `${data.title} - ${data.amount}`;
+            row.appendChild(cell);
+
+            tableBody.appendChild(row);
+
+            // 테이블 바디 추가
+            table.appendChild(tableBody);
+        });
+
+        // 테이블을 컨테이너에 추가
+        tableContainer.appendChild(table);
+    }
+
+
     function listDailyTrans(data, date, sum){
+        var table = document.createElement('table');
+        table.style = "width: 100%; text-align: center; flex-grow: 1; display: none"
+
+        settingTrans(data).then(
+            sum.forEach(function(rawData){
+                addValuesToTable(rawData, rawData.yyyymmdd)
+            })
+        )
+
+        // HTML 요소에 테이블 추가
+        var container = document.getElementById('myTable'); // 테이블을 추가할 요소의 ID
+        container.appendChild(table);
 
     }
 
     function createTableFromData(data, dateField, sumData) {
         var table = document.createElement('table');
-        table.style = "width: 100%; text-align: center;"
+        table.style = "width: 100%; text-align: center; border: 1px solid black; border-collapse: collapse;"
         var fields = data;
 
         // 테이블 헤더 생성
