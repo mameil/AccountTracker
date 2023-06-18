@@ -113,17 +113,31 @@ class TransactionService(
 
     fun getRecentDaysTransactions(days: Int): GetDailyListTransResponseDto {
         val d3Yyyymmdd = transactionRepoImpl.getAllEntityBetweenRegisteredYyyymmdd(days)
+        val yyyymmddSet = d3Yyyymmdd.groupBy { it.registeredYYYYMMDD }
+
+        val arr = mutableListOf<GetDailySingleTransResponseDto>()
+
+        yyyymmddSet.forEach {
+            var infoList = mutableListOf<GetDailySingleTransResponseInfoDto>()
+            it.value.map {
+                GetDailySingleTransResponseInfoDto(
+                        yyyymmdd = it.registeredYYYYMMDD,
+                        amount = it.amount.toInt(),
+                        title = it.title,
+                        content = it.content,
+                        moneyType = GetDailySingleTransResponseInfoDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
+                )
+            }.forEach(infoList::add)
+
+            arr.add(GetDailySingleTransResponseDto(
+                    yyyymmdd = it.key,
+                    infoList = infoList
+            ))
+        }
+
 
         return GetDailyListTransResponseDto(
-                d3Yyyymmdd.map {
-                    GetDailySingleTransResponseDto(
-                            yyyymmdd = it.registeredYYYYMMDD,
-                            amount = it.amount.toInt(),
-                            title = it.title,
-                            content = it.content,
-                            moneyType = GetDailySingleTransResponseDto.MoneyType.valueOf(it.moneyType.toString().uppercase()),
-                    )
-                },
+                arr,
                 calCachAmount(d3Yyyymmdd).map{
                     GetDailySumDto(
                             yyyymmdd = it.yyyymmdd,

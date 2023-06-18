@@ -835,6 +835,18 @@ components:
           type: string
           description: "registered time yyyyMMdd for grouping"
           example: "20230520"
+        infoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetDailySingleTransResponseInfoDto'
+
+    GetDailySingleTransResponseInfoDto:
+      type: object
+      properties:
+        yyyymmdd:
+          type: string
+          description: "registered time yyyyMMdd for grouping"
+          example: "20230520"
         amount:
           type: integer
           description: "usage amount"

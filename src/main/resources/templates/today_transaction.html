@@ -45,13 +45,14 @@
 <script>
     window.onload = function () {
         const defaultDates = 3
-
         $.ajax({
             url: "/acb//transaction/recent/days?days=" + defaultDates,
             type: "GET",
             dataType: "json",
             success: function(data) {
+                console.log(data)
                 createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
+                listDailyTrans(data.transList, 'yyyymmdd', data.amountSum)
             }
         })
 
@@ -60,6 +61,10 @@
 
     function registerTran() {
         window.location.href = "/acb/view/tran";
+    }
+
+    function listDailyTrans(data, date, sum){
+
     }
 
     function createTableFromData(data, dateField, sumData) {
