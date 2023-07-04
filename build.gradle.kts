@@ -134,6 +134,8 @@ dependencies {
     //mockk
     testImplementation("io.mockk:mockk:1.12.4")
 
+    //elastic search
+    implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
 }
 
