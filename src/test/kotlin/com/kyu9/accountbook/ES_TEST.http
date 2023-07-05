@@ -1,0 +1,13 @@
+#GET localhost:10001/acb/transaction/all
+
+#POST localhost:10001/acb/es/transaction
+#Content-Type: application/json
+#
+#{
+#  "userId": "a",
+#  "userName": "안녕하세요 오늘은 그냥 이렇게 테스트를 해보려고 합니다",
+#  "amt": 10000
+#}
+
+
+GET localhost:9200/transaction/_doc/a

@@ -41,6 +41,7 @@ logging:
   level:
     root: info
     org.springframework.web: info
+    org.springframework.data.elasticsearch.client.WIRE: trace
     hibernate:
       SQL: debug
       type:
@@ -68,6 +69,6 @@ springfox:
         api-docs:
           enabled: true
 
-elasticsearch:
-  host: localhost
-  port: 9200
+
+elasticsearch.url: localhost
+elasticsearch.port: 9200

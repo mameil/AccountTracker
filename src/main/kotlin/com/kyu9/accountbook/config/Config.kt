@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.kyu9.accountbook.aop.ApiLoggingAop
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.context.annotation.Bean
@@ -29,6 +30,7 @@ class Config(
         objectMapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.registerModule(JavaTimeModule())
+        objectMapper.registerModule(KotlinModule())
         objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
         return objectMapper
     }

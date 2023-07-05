@@ -11,9 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.kyu9.accountbook", "com.kyu9.accountbook.swagger.api", "com.kyu9.accountbook.swagger.model"])
-@EnableJpaRepositories(
-        excludeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = [TransactionRepository::class])]
-)
+//@EnableJpaRepositories(
+//        excludeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = [TransactionRepository::class])]
+//)
 @EnableCaching
 @EnableAspectJAutoProxy   //springboot 2.3.4버전 이후에는 따로 필요없음
 class AccountBookApplication

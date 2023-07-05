@@ -55,7 +55,7 @@ dependencies {
     implementation("org.springframework:spring-aop") //2.3.4 이후부터는 따로 필요 없음
     implementation ("org.springframework:spring-context:5.3.15")
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
-
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     //view
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
