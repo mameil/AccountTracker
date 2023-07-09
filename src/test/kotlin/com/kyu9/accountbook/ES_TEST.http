@@ -1,13 +1,36 @@
-#GET localhost:10001/acb/transaction/all
-
-#POST localhost:10001/acb/es/transaction
-#Content-Type: application/json
-#
-#{
-#  "userId": "a",
-#  "userName": "안녕하세요 오늘은 그냥 이렇게 테스트를 해보려고 합니다",
-#  "amt": 10000
-#}
+###
+GET localhost:10001/acb/transaction/all
 
 
+###
+POST localhost:10001/acb/es/transaction
+Content-Type: application/json
+
+{
+  "userId": "a",
+  "userName": "안녕하세요 오늘은 그냥 이렇게 테스트를 해보려고 합니다",
+  "amt": 10000
+}
+
+### 저장된 단일 데이터 조회
 GET localhost:9200/transaction/_doc/a
+
+### 저장된 모든 인덱스 내에 저장된 데이터 조회
+GET localhost:9200/transaction/_search
+
+### 리스트 저장
+POST localhost:10001/acb/es/transaction/list
+Content-Type: application/json
+
+[
+  {
+    "userId": "a",
+    "userName": "안녕하세요 오늘은 그냥 이렇게 테스트를 해보려고 합니다",
+    "amt": 10000
+  },
+  {
+    "userId": "bbb",
+    "userName": "할롱 할롱 할롱",
+    "amt": 5000
+  }
+]
