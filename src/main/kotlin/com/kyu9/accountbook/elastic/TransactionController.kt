@@ -48,4 +48,14 @@ class TransactionController(
     fun getSingleTransaction(@PathVariable id: String): ResponseEntity<Transaction> {
         return ResponseEntity.ok(transactionService.getTransactionById(id))
     }
+
+    @GetMapping("/transaction/name/{name}")
+    fun getSingleTransactionByName(@PathVariable name: String): ResponseEntity<Transaction> {
+        return ResponseEntity.ok(transactionService.getTransactionByName(name))
+    }
+
+    @GetMapping("/transaction/avg")
+    fun getAvgAmt(): ResponseEntity<Double> {
+        return ResponseEntity.ok(transactionService.getAllAmtAvg())
+    }
 }

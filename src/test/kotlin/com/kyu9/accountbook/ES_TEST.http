@@ -58,3 +58,26 @@ POST localhost:9200/transaction/_search?q=id:bbb
 
 ### ES 조건상관없이 전체 조회
 GET localhost:9200/transaction/_search
+
+
+### ES index 정보 조회
+PUT localhost:9200/transaction/_docs
+
+
+### ES querying
+GET localhost:9200/transaction/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "name": "할롱"
+    }
+  }
+}
+
+### ES @Query
+GET localhost:10001/acb/es/transaction/name/할롱
+
+### ES Avg
+GET localhost:10001/acb/es/transaction/avg
