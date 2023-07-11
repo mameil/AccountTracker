@@ -1,0 +1,57 @@
+### 영화 등록
+POST localhost:4445/es/movie/list
+Content-Type: application/json
+
+[
+  {
+    "title": "전우치",
+    "country": "대한민국",
+    "genre": [
+      "액션",
+      "코미디",
+      "모험"
+    ],
+    "rate": 8.22,
+    "releaseYear": 20091223,
+    "runningTime": 136
+  }
+]
+
+### 영화 전체 조회
+GET localhost:4445/es/movie/all
+
+### 영화 단일 조회
+GET localhost:4445/es/movie/ddd
+
+### 직접
+GET http://localhost:9200/movie/_count
+
+### ES에서 직접 모든 영화 등록된거 확인
+GET http://localhost:9200/movie/_search?pretty
+
+###########################################
+
+### ES Cluster 상태 조회
+GET http://localhost:9200/_cat/health?v
+
+### ES index 종류 조회(show tables)
+GET http://localhost:9200/_cat/indices?v
+
+### 동적 매핑(auto-ddl : create)
+### 영화 등록(직접 만든 spring-data-elasticsearch 을 통한 api)
+POST localhost:4445/es/movie/list
+Content-Type: application/json
+
+[
+  {
+    "title": "전우치",
+    "country": "대한민국",
+    "genre": [
+      "액션",
+      "코미디",
+      "모험"
+    ],
+    "rate": 8.22,
+    "releaseYear": 20091223,
+    "runningTime": 136
+  }
