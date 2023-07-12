@@ -140,6 +140,8 @@ dependencies {
     testImplementation("org.testcontainers:elasticsearch:1.16.3")
     testImplementation("org.testcontainers:junit-jupiter:1.16.3")
 
+    testImplementation("pl.allegro.tech:embedded-elasticsearch:2.7.0")
+
 }
 
 springBoot{
