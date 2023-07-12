@@ -1,0 +1,343 @@
+### 영화 등록
+POST localhost:4445/es/movie/list
+Content-Type: application/json
+
+[
+  {
+    "title": "전우치",
+    "country": "대한민국",
+    "genre": [
+      "액션",
+      "코미디",
+      "모험"
+    ],
+    "rate": 8.22,
+    "releaseYear": 20091223,
+    "runningTime": 136
+  }
+]
+
+### 영화 전체 조회
+GET localhost:4445/es/movie/all
+
+### 영화 단일 조회
+GET localhost:4445/es/movie/ddd
+
+### 직접
+GET http://localhost:9200/movie/_count
+
+### ES에서 직접 모든 영화 등록된거 확인
+GET http://localhost:9200/movie/_search?pretty
+
+###########################################
+GET http://localhost:9200/_cat/plugins
+
+### ES Cluster 상태 조회
+GET http://localhost:9200/_cat/health?v
+
+### ES index 종류 조회(show tables)
+GET http://localhost:9200/_cat/indices?v
+
+### 동적 매핑(auto-ddl : create)
+### 영화 등록(직접 만든 spring-data-elasticsearch 을 통한 api)
+POST localhost:4445/es/movie/list
+Content-Type: application/json
+
+[
+  {
+    "title": "전우치",
+    "country": "대한민국",
+    "genre": [
+      "액션",
+      "코미디",
+      "모험"
+    ],
+    "rate": 8.22,
+    "releaseYear": 20091223,
+    "runningTime": 136
+  }
+]
+### ES 특정 index의 정보 조회(desc table)
+GET http://localhost:9200/movie
+
+### index 의 모든 document 확인 (select * from table)
+GET http://localhost:9200/movie/_search
+
+### ES 특정 index 삭제(drop table)
+DELETE http://localhost:9200/movie
+
+### 정적 매핑
+### ES 특정 index 등록(create table #1) - primary 2, replica 4
+### index 을 생성하면서 한꺼번에 해당 설정 가능 > 단일 index 생성 후 PUT movie/_setting | PUT movie/_mapping 을 통해서도 수정 가능
+PUT http://localhost:9200/movie
+Content-Type: application/json
+
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "long"
+      },
+      "title": {
+        "type": "text"
+      },
+      "genre": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "country": {
+        "type": "keyword"
+      },
+      "runningTime": {
+        "type": "integer"
+      },
+      "releaseYear": {
+        "type": "integer"
+      },
+      "createdAt": {
+        "type": "date"
+      }
+    }
+  }
+}
+
+### ES 특정 index의 정보 조회(desc table)
+GET http://localhost:9200/movie
+
+### ES 에서 ID 없이 신규등록하는 경우에 POST 메소드로 보내야함 >> 자동으로 ES가 아이디를 채번해줌
+### 자동으로 생성되는 아이디는 시퀀스X 랜덤값O
+### +추가로 정적으로 만드는 경우에도 새로 document 을 넣어줄 때 정적으로 만들때 없었던 필드(reviewRate) 는 동적으로 생성해줌
+### index 의 매핑은 동적으로 변경되는 것에 대해서는 제약이 없음
+POST http://localhost:9200/movie/_doc
+Content-Type: application/json
+
+{
+  "title": "전우치",
+  "country": "대한민국",
+  "genre": [
+    "액션",
+    "코미디",
+    "모험"
+  ],
+  "reviewRate": 8.22,
+  "releaseYear": 20091223,
+  "runningTime": 136
+}
+
+### ES 특정 index에 들어가 있는 모든 document 조회
+GET http://localhost:9200/movie/_search?pretty
+
+### ES 특정 index의 단일 정보 삭제
+DELETE http://localhost:9200/movie/_doc/e3CMQokBtYV1D4kuz_XZ
+
+
+### ES index 내에 document CREATE(id 지정)
+PUT http://localhosT:9200/movie/_doc/1
+Content-Type: application/json
+
+{
+  "title": "전우치",
+  "genre": [
+    "액션",
+    "코미디",
+    "모험"
+  ],
+  "country": "대한민국",
+  "runningTime": 136,
+  "releaseYear": 20091223,
+  "reviewRate": 8.22
+}
+
+### document READ
+GET http://localhost:9200/movie/_doc/1
+
+### document update_1
+POST http://localhost:9200/movie/_doc/1
+Content-Type: application/json
+
+{
+  "title": "전우치2222222222222222222",
+  "genre": [
+    "액션",
+    "코미디",
+    "모험"
+  ],
+  "country": "대한민국",
+  "runningTime": 136,
+  "releaseYear": 20091223,
+  "reviewRate": 8.22
+}
+
+### document READ
+GET http://localhost:9200/movie/_doc/1
+
+### document update_2
+POST http://localhost:9200/movie/_update/1
+Content-Type: application/json
+
+{
+  "doc": {
+    "title": "전우치333333333333"
+  }
+}
+
+### document READ_2
+### 수정된만큼 version 이 올라감 >> 처음 등록 - 1 > 전우치22222로 수정 - 2 > 전우치3333로 수정 - 3
+GET http://localhost:9200/movie/_doc/1
+
+### document DELETE
+DELETE http://localhost:9200/movie/_doc/1
+
+### document READ_DELETED
+GET http://localhost:9200/movie/_doc/1
+
+
+##########################################
+###벌크 등록
+
+### 인덱스 중복이 일어나지 않도록 우선 숫자확인
+GET http://localhost:9200/movie/_count
+
+### document 벌크 등록
+POST http://localhost:9200/_bulk
+Content-Type: application/json
+
+< ./MovieDocuments.json
+
+### 등록된 30개의 데이터 확인
+GET http://localhost:9200/movie/_count
+
+### 등록된 30개의 데이터 눈으로 확인
+GET http://localhost:9200/movie/_search
+
+### Metric 통계 관련 - sum, min, max, avg
+### 등록된 30개의 유명한 영화들의 평균 평점
+GET http://localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "avgDuration": {
+      "avg": {
+        "field": "reviewRate"
+      }
+    }
+  }
+}
+
+### 등록된 30개의 유명한 영화들의 평균 러닝타임 집계
+GET http://localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "avgDuration": {
+      "avg": {
+        "field": "runningTime"
+      }
+    }
+  }
+}
+
+### 등록된 30개의 유명한 영화들의 평균 리뷰 집계
+GET http://localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "aggs": {
+    "avg_review_rate": {
+      "avg": {
+        "field": "reviewRate"
+      }
+    }
+  }
+}
+
+
+### 등록된 30개의 유명한 영화들의 러닝타임 관련 집계
+GET http://localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "statDuration": {
+      "stats": {
+        "field": "runningTime"
+      }
+    }
+  }
+}
+
+### Bucket 통계 관련 - 특정 기준으로 그룹핑과정을 통한 집계(group by)
+### 러닝 타임이 0 ~ 100, 100 ~ 130, 130 ~ 200
+GET http://localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "range_aggs": {
+      "range": {
+        "field": "runningTime",
+        "ranges": [
+          {
+            "from": 0,
+            "to": 100
+          },
+          {
+            "from": 100,
+            "to": 130
+          },
+          {
+            "from": 130,
+            "to": 200
+          }
+        ]
+      }
+    }
+  }
+}
+
+### ES 에게 직접 쿼리DSL 을 통해서 조회를 하는 것이 가능 >> 다양한 종류와 기능들이 있음
+### 검색
+GET localhost:9200/movie/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": {
+        "range": {
+          "releaseYear": {
+            "gte": 20000000
+          }
+        }
+      },
+      "filter": {
+        "term": {
+          "genre": "드라마"
+        }
+      }
+    }
+  }
+}
+
+### queryDsl 와 같은 부류인 SearchSource을 통해서 원하는 조건을 통해서 조회 가능 + querydsl 을 통해서 쿼리생성가능
+GET localhost:4445/es/movie/all/releaseYear/over/20000000/genre/드라마
+
+### elasticsearchRepository 에서 제공해주는 메소드로 간단하게 조회 가능
+GET localhost:4445/es/movie/all/genre/범죄
+
+### native query 을 통해서 원하는 쿼리를 넣어줄 수 있음
+GET localhost:4445/es/movie/all/review/avg

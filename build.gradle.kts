@@ -48,6 +48,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-log4j2:2.7.9")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    testImplementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("com.fasterxml.jackson.core:jackson-databind")
@@ -136,6 +137,8 @@ dependencies {
 
     //elastic search
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+    testImplementation("org.testcontainers:elasticsearch:1.16.3")
+    testImplementation("org.testcontainers:junit-jupiter:1.16.3")
 
 }
 
