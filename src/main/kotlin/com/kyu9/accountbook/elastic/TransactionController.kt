@@ -34,6 +34,16 @@ class TransactionController(
     }
 
     @PostMapping(
+            value = ["/transaction/{id}"],
+            produces = ["application/json"],
+            consumes = ["application/json"]
+    )
+    fun fixTransaction( @Valid @RequestBody dto: PostTranReqDto, @PathVariable id: String
+    ): ResponseEntity<String> {
+        return ResponseEntity.ok(transactionService.postTransaction(id, dto.userName, dto.amt))
+    }
+
+    @PostMapping(
             value = ["/transaction/list"],
             produces = ["application/json"],
             consumes = ["application/json"]

@@ -341,3 +341,40 @@ GET localhost:4445/es/movie/all/genre/범죄
 
 ### native query 을 통해서 원하는 쿼리를 넣어줄 수 있음
 GET localhost:4445/es/movie/all/review/avg
+
+### get transaction
+GET localhost:9200/transaction/_search
+
+### delete transaction
+DELETE localhost:9200/transaction/_doc/1
+
+### post transaction by self
+POST localhost:10001/acb/es/transaction
+Content-Type: application/json
+
+{
+  "userId": "test",
+  "userName": "kdshim",
+  "amt": 9999
+}
+
+
+### get transaction
+GET localhost:10001/acb/es/transaction/test
+
+
+### fix transaction username
+POST localhost:10001/acb/es/transaction
+Content-Type: application/json
+
+{
+  "userId": "test",
+  "userName": "kdshim22222222",
+  "amt": 1000
+}
+
+### get transaction
+GET localhost:10001/acb/es/transaction/test
+
+### get all transaction
+GET localhost:9200/transaction/_search
