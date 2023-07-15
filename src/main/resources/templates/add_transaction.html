@@ -276,6 +276,13 @@
                 radios[i].checked = false;
             }
         }
+
+        var days = document.getElementsByName("dayy");
+        for (var i = 0; i < days.length; i++) {
+            if (days[i].checked) {
+                days[i].checked = false;
+            }
+        }
     }
 
     function getCurrentYyyymmdd() {
