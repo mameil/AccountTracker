@@ -305,6 +305,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
+
   /transaction/all:
     get:
       tags:
@@ -319,6 +320,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetListTransResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+  /transaction/last/recorded/yyyymmdd:
+    get:
+      tags:
+        - "Transaction"
+      summary: "get last day when transaction recorded"
+      description: "get last day when transaction recorded"
+      operationId: getLastTransactionRecordedDay
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLastRecordedDayResponseDto'
         400:
           description: "Bad Request"
           content:
@@ -815,6 +837,14 @@ components:
           type: string
           description: "updated time yyyyMMdd HH24:mm:si"
           example: "20230520140229"
+
+    GetLastRecordedDayResponseDto:
+      type: object
+      properties:
+        lastRecordedDay:
+          type: string
+          description: "last recorded day"
+          example: "20230520"
 
     GetDailyListTransResponseDto:
       type: object
