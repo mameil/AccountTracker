@@ -10,5 +10,5 @@ data class Transaction @PersistenceConstructor constructor(
         @Id
         val id: String,
         val name: String,
-        val amt: Int
+        val amt: String
 )

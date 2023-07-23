@@ -28,7 +28,7 @@ class ETService(
 
     fun postTransaction(userId: String?, userName: String?, amt: Int?): String? {
         return transactionRepository
-                .save(Transaction(userId!!, userName!!, amt!!))
+                .save(Transaction(userId!!, userName!!, amt!!.toString()))
                 .id
     }
 

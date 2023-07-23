@@ -109,6 +109,41 @@ Content-Type: application/json
   }
 }
 
+### test
+PUT http://localhost:9200/movie/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "title": {
+      "type": "text"
+    },
+    "genre": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "country": {
+      "type": "text"
+    },
+    "runningTime": {
+      "type": "integer"
+    },
+    "releaseYear": {
+      "type": "integer"
+    },
+    "createdAt": {
+      "type": "date"
+    }
+  }
+}
+
 ### ES 특정 index의 정보 조회(desc table)
 GET http://localhost:9200/movie
 
@@ -358,9 +393,22 @@ Content-Type: application/json
   "amt": 9999
 }
 
+### post transaction by self
+POST localhost:10001/acb/es/transaction
+Content-Type: application/json
+
+{
+  "userId": "index change test",
+  "userName": "kdshim",
+  "amt": 111
+}
+
 
 ### get transaction
 GET localhost:10001/acb/es/transaction/test
+
+### transaction def
+GET localhost:9200/transaction/_search
 
 
 ### fix transaction username
@@ -378,3 +426,119 @@ GET localhost:10001/acb/es/transaction/test
 
 ### get all transaction
 GET localhost:9200/transaction/_search
+
+### global document lcok
+PUT localhost:9200/fs/lock/global/_create
+Content-Type: application/json
+
+{
+
+}
+
+### lock check
+PUT http://localhost:9200/movie/_doc/1
+Content-Type: application/json
+
+{
+  "title": "전우치",
+  "genre": [
+    "액션",
+    "코미디",
+    "모험"
+  ],
+  "country": "대한민국",
+  "runningTime": 136,
+  "releaseYear": 20091223,
+  "reviewRate": 8.22
+}
+
+### version exception
+PUT http://localhost:9200/movie/_doc/1?version=1
+Content-Type: application/json
+
+{
+  "title": "에러에러에러",
+  "genre": [
+    "액션",
+    "코미디",
+    "모험"
+  ],
+  "country": "대한민국",
+  "runningTime": 136,
+  "releaseYear": 20091223,
+  "reviewRate": 8.22
+}
+
+### lock check
+GET http://localhost:9200/movie/_doc/1
+
+### check version 1
+GET http://localhost:9200/movie/_doc/1?version=1
+
+
+### additional data
+POST http://localhost:9200/movie/_doc/g1oXgYkB70mW5YuFPxBz
+Content-Type: application/json
+
+{
+  "title": "오펜하이머",
+  "country": "미국",
+  "genre": [
+    "다큐멘터리"
+  ],
+  "reviewRate": 5.55,
+  "releaseYear": 20230830,
+  "runningTime": 150
+}
+
+### find additional data
+GET http://localhost:9200/movie/_doc/g1oXgYkB70mW5YuFPxBz?version=1
+
+
+### additional data2
+PUT http://localhost:9200/movie/_doc/2
+Content-Type: application/json
+
+{
+  "title": "엘레멘탈",
+  "country": "미국",
+  "genre": [
+    "다큐멘터리"
+  ],
+  "reviewRate": 5.55,
+  "releaseYear": 20230830,
+  "runningTime": 150.222
+}
+
+### find additional datat2
+GET http://localhost:9200/movie/_doc/2
+
+### additional data3
+PUT http://localhost:9200/movie/_doc/3
+Content-Type: application/json
+
+{
+  "title": 9999,
+  "country": 1234,
+  "genre": [
+    "다큐멘터리"
+  ],
+  "reviewRate": 5.55,
+  "releaseYear": 20230830,
+  "runningTime": 150.222
+}
+
+### get all datas
+GET http://localhost:9200/movie/_mapping
+
+### add new column in index
+PUT http://localhost:9200/movie/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "newColumn": {
+      "type": "text"
+    }
+  }
+}
