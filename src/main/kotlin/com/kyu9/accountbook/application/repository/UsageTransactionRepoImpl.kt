@@ -58,4 +58,9 @@ class UsageTransactionRepoImpl(
         )
     }
 
+    fun getLastTransactionRecordedDay(): UsageTransaction {
+        return repo.findFirstByOrderByRegisteredYYYYMMDDDesc()
+    }
+
+
 }

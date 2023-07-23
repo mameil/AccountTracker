@@ -542,3 +542,6 @@ Content-Type: application/json
     }
   }
 }
+
+### check out
+GET http://localhost:10001/acb/transaction/last/recorded/yyyymmdd

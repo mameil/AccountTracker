@@ -187,4 +187,12 @@ class TransactionService(
 
         return dailySum
     }
+
+    fun getLastTransactionRecordedDay(): GetLastRecordedDayResponseDto? {
+        return transactionRepoImpl.getLastTransactionRecordedDay()?.let {
+            GetLastRecordedDayResponseDto(
+                    lastRecordedDay = it.registeredYYYYMMDD
+            )
+        }
+    }
 }
