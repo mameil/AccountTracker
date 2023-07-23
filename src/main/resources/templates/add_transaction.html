@@ -30,7 +30,9 @@
         <div class="my-wrap-login100">
             <form class="login100-form validate-form" onsubmit="recordTran(); return false;">
                 <span class="login100-form-title_sub" id = "loginId"></span>
-                <span class="login100-form-title">어디에 돈을 쓰셨나요??</span>
+                <span class="login100-form-title_sub">어디에 돈을 쓰셨나요??</span>
+                <span id="lastRecorded"></span>
+
 
                 <div class="wrap-input100 validate-input">
                     <input class="input100" type="text" id="tag" name="tag" placeholder="Select Tag from RIGHT">
@@ -186,7 +188,7 @@
                 })
 
 
-                // $("#resp").text(madeStr);
+
 
             },
             error: function (data) {
@@ -200,7 +202,23 @@
             location.href = "/acb/view/login";
         }
         document.getElementById("loginId").innerHTML = username + "님 환영합니다";
+
+        $.ajax({
+            url: "/acb/transaction/last/recorded/yyyymmdd",
+            type: "GET",
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data == null) {
+                    $("#lastRecorded").text("(마지막으로 기록한 날짜가 없습니다)");
+                } else {
+                    $("#lastRecorded").text("(마지막으로 기록한 날짜 : " + formatDate(data.lastRecordedDay) + ")");
+                }
+            }
+        })
     }
+
 
     function getCookie(name) {
         var nameEQ = name + "=";
@@ -302,6 +320,13 @@
 
     function getChanged(days){
         document.getElementById("yyyymmdd").value = (parseInt(getCurrentYyyymmdd()) - days).toString();
+    }
+
+    function formatDate(yyyymmdd) {
+        const yyyy = yyyymmdd.substr(0, 4);
+        const mm = yyyymmdd.substr(4, 2);
+        const dd = yyyymmdd.substr(6, 2);
+        return `${yyyy} / ${mm} / ${dd}`;
     }
 </script>
 
