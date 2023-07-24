@@ -545,3 +545,12 @@ Content-Type: application/json
 
 ### check out
 GET http://localhost:10001/acb/transaction/last/recorded/yyyymmdd
+
+### check index info
+GET http://localhost:9200/_cat/indices?v
+
+### check index info
+GET http://localhost:9200/movie
+
+### movie shards distribution in cluster
+GET http://localhost:9200/_cat/shards/movie?v
