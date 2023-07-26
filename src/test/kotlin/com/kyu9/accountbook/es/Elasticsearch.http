@@ -472,9 +472,22 @@ Content-Type: application/json
 ### lock check
 GET http://localhost:9200/movie/_doc/1
 
-### check version 1
-GET http://localhost:9200/movie/_doc/1?version=1
+### change title of movie doc 1
+POST http://localhost:9200/movie/_doc/1
+Content-Type: application/json
 
+{
+  "title": "에러에러에러"
+}
+
+### delete movie doc 1
+DELETE http://localhost:9200/movie/_doc/1
+
+### check version 1
+GET http://localhost:9200/movie/_doc/1
+
+### chekc
+GET http://localhost:9200/movie/_search
 
 ### additional data
 POST http://localhost:9200/movie/_doc/g1oXgYkB70mW5YuFPxBz
