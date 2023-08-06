@@ -10,6 +10,8 @@ interface UsageTransactionRepository: JpaRepository<UsageTransaction, String> {
 
     fun findAllByOrderByRegisteredDesc(): List<UsageTransaction>
 
+    fun findAllByOrderByRegistered(): List<UsageTransaction>
+
     @Query("SELECT ut.registeredYYYYMM, ut.moneyType, sum(ut.amount) FROM UsageTransaction ut GROUP BY ut.registeredYYYYMM, ut.moneyType ORDER BY ut.registeredYYYYMM DESC")
     fun findAllGroupByRegistered(): List<MonthlyTran>
 

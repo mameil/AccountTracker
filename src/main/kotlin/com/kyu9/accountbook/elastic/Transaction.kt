@@ -9,6 +9,24 @@ import javax.persistence.Id
 data class Transaction @PersistenceConstructor constructor(
         @Id
         val id: String,
-        val name: String,
-        val amt: String
-)
+        val userId: String,
+        val amt: String,
+        val registered: String,
+        val usedAt: String,
+        val used: String,
+        var category: String
+) {
+    constructor(
+            id: String,
+            userId: String,
+            amt: String
+    ) : this(
+            id = id,
+            userId = userId,
+            amt = amt,
+            registered = "",
+            usedAt = "",
+            used = "",
+            category = ""
+    )
+}

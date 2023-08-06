@@ -4,6 +4,7 @@ import com.kyu9.accountbook.common.BaseEntity
 import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.properties.MoneyType
+import com.kyu9.accountbook.elastic.Transaction
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Parameter
 import java.time.LocalDateTime
@@ -64,4 +65,18 @@ data class UsageTransaction(
             val moneyType: MoneyType,
             val amount: Long
     )
+
+    companion object{
+        fun toDocument(usage: UsageTransaction): Transaction{
+            return Transaction(
+                    id = usage.id!!,
+                    userId = usage.userId,
+                    amt = usage.amount.toString(),
+                    registered = usage.registeredYYYYMMDD,
+                    usedAt = usage.title,
+                    used = usage.content,
+                    category = ""
+            )
+        }
+    }
 }

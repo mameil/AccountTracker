@@ -5,6 +5,7 @@ import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.QUsageTransaction
 import com.kyu9.accountbook.domain.UsageTransaction
 import com.kyu9.accountbook.domain.dto.MonthlyTran
+import com.kyu9.accountbook.elastic.TransactionRepository
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.Expressions
 import com.querydsl.core.types.dsl.NumberExpression
@@ -21,7 +22,8 @@ import java.util.logging.Logger
 @Log4j2
 class UsageTransactionRepoImpl(
     @Autowired private val usageTransactionRepository: UsageTransactionRepository,
-    @Autowired private val jpaQueryFactory: JPAQueryFactory
+    @Autowired private val jpaQueryFactory: JPAQueryFactory,
+    @Autowired private val esRepo: TransactionRepository
 ): BaseJpaRepo<UsageTransaction, String, UsageTransactionRepository>(usageTransactionRepository){
     private val logger: org.slf4j.Logger = LoggerFactory.getLogger(this.javaClass)
 
@@ -31,6 +33,10 @@ class UsageTransactionRepoImpl(
 
     fun getAllEntityOrderByRegisteredDesc(): List<UsageTransaction> {
         return repo.findAllByOrderByRegisteredDesc()
+    }
+
+    fun getAllEntityOrderByRegistered(): List<UsageTransaction> {
+        return repo.findAllByOrderByRegistered()
     }
 
     fun getAllEntityGroupByRegisteredYYYYMM(): List<MonthlyTran> {
@@ -60,6 +66,10 @@ class UsageTransactionRepoImpl(
 
     fun getLastTransactionRecordedDay(): UsageTransaction {
         return repo.findFirstByOrderByRegisteredYYYYMMDDDesc()
+    }
+
+    fun migrateAllToElasticSearch() {
+        repo.findAll().forEach{ esRepo.save(UsageTransaction.toDocument(it)) }
     }
 
 

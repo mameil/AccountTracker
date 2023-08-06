@@ -1,19 +1,27 @@
 package com.kyu9.accountbook.application
 
+import com.kyu9.accountbook.application.repository.TagRepoImpl
+import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.application.repository.UsageTransactionRepoImpl
 import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.UsageTransaction
 import com.kyu9.accountbook.domain.properties.MoneyType
+import com.kyu9.accountbook.elastic.Transaction
+import com.kyu9.accountbook.elastic.TransactionRepository
 import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
+import org.elasticsearch.cluster.ClusterState.Custom
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import javax.transaction.Transactional
 
 @Service
 @RequiredArgsConstructor
 class TransactionService(
-        private val transactionRepoImpl: UsageTransactionRepoImpl
+        private val transactionRepoImpl: UsageTransactionRepoImpl,
+        private val transactionRepository: TransactionRepository,
+        private val tagRepoImpl: TagRepository
 ) {
 
     fun storeFromDto(tranReqDto: PostTranRequestDto): PostTransResponseDto {
@@ -194,5 +202,18 @@ class TransactionService(
                     lastRecordedDay = it.registeredYYYYMMDD
             )
         }
+    }
+
+    @Transactional
+    fun migrateAllToElasticSearch() {
+        val documentList = arrayListOf<Transaction>()
+
+        transactionRepoImpl.getAllEntityOrderByRegistered().forEach {
+            var document = UsageTransaction.toDocument(it)
+            document.category = tagRepoImpl.findById(it.tagId).orElseThrow(CustomError.DATA_NOT_FOUND::doThrow).name
+            documentList.add(document)
+        }
+
+        transactionRepository.saveAll(documentList)
     }
 }

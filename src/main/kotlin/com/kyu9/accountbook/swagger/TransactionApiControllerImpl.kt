@@ -45,4 +45,9 @@ class TransactionApiControllerImpl(
     override fun getLastTransactionRecordedDay(): ResponseEntity<GetLastRecordedDayResponseDto> {
         return ResponseEntity.ok(transactionService.getLastTransactionRecordedDay())
     }
+
+    override fun migrateTransactionDataToElasticSearch(): ResponseEntity<Unit> {
+        transactionService.migrateAllToElasticSearch()
+        return ResponseEntity(HttpStatus.OK)
+    }
 }
