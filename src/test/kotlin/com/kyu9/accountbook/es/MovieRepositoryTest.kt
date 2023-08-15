@@ -14,7 +14,7 @@ class MovieRepositoryTest {
 
     @Test
     fun `save movie`() {
-        val transaction = Transaction("99", "2", 1234)
+        val transaction = Transaction("99", "2", "1234")
         val saved = transactionRepository.save(transaction)
         Assertions.assertEquals(transaction, saved)
 

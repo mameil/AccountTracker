@@ -1,7 +1,6 @@
 package com.kyu9.accountbook.util
 
 import com.kyu9.accountbook.common.TestFrame
-import io.kotest.core.spec.style.AnnotationSpec
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

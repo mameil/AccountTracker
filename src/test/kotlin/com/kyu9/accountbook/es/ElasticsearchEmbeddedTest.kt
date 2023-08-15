@@ -45,8 +45,8 @@ class ElasticsearchEmbeddedTest {
 
         val tr = Transaction(
                 id = "1",
-                name = "qwer",
-                amt = 1000
+                userId = "qwer",
+                amt = "1000"
         )
 
         transactionRepository.save(tr)

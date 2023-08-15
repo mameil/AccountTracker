@@ -128,12 +128,15 @@ dependencies {
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.h2database:h2:2.0.202")
+
     //kotest
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
-    implementation("io.kotest:kotest-extensions-spring:4.4.3")
+//    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
+//    testImplementation("io.kotest:kotest-runner-junit5:4.4.3")
+//    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+//    testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
+//    implementation("io.kotest:kotest-extensions-spring:4.4.3")
     //mockk
-    testImplementation("io.mockk:mockk:1.12.4")
+//    testImplementation("io.mockk:mockk:1.12.4")
 
     //elastic search
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
@@ -197,13 +200,15 @@ configure<SourceSetContainer>{
     }
 }
 
-
+tasks.named<JavaCompile>("compileJava") {
+    enabled = false
+}
 
 tasks.named("generateFromYaml").configure {
     dependsOn("removeGeneratedFromYaml")
 }
 
-tasks.withType<Test> {
+tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
