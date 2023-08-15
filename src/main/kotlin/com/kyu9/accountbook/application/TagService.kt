@@ -93,8 +93,6 @@ class TagService(
         //ver3 query >> 이건 원하는대로 잘만됨
         deleteTagQuery(OptionalTag)
 
-        val found = tagRepoImpl.getOptionalWithId(id.toLong())
-
         OptionalTag.id = id.toLong()
         OptionalTag.name = dto.name!!
         OptionalTag.color = dto.color!!

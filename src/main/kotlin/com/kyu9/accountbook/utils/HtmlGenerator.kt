@@ -9,7 +9,7 @@ class HtmlGenerator {
 
     fun generateHtmlFromJson(keys: List<String>, values: String): String {
         mapper = ObjectMapper()
-        val values = mapper.readValue(values, List::class.java)
+        val vLists = mapper.readValue(values, List::class.java)
 
         val html = StringBuilder()
 
@@ -22,7 +22,7 @@ class HtmlGenerator {
         }
         html.append("</tr>")
         html.append("<tr>")
-        values.forEach {
+        vLists.forEach {
             html.append("<td>$it</td>")
         }
         html.append("</tr>")

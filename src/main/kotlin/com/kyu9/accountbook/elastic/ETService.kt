@@ -60,8 +60,6 @@ class ETService(
         println(avg)
         return avg.value
 
-
-        return 0.0
     }
 
 

@@ -28,7 +28,7 @@ class ApiLoggingAop {
 
     @Around("onRequest()")
     fun logRequestAndResponse(joinPoint: ProceedingJoinPoint): Any? {
-        val requestAttributes = RequestContextHolder.getRequestAttributes()
+//        val requestAttributes = RequestContextHolder.getRequestAttributes()
 //        val request = (requestAttributes as? ServletRequestAttributes)?.request
 
 //        val methodName = joinPoint.signature.name
@@ -88,7 +88,7 @@ class ApiLoggingAop {
     private fun getUrl(method: Method, annotationClass: Class<out Annotation>, baseUrl: String): String? {
         val annotation: Annotation = method.getAnnotation(annotationClass)
         val value: Array<String>
-        var httpMethod: String? = null
+        var httpMethod: String? = ""
         try {
             value = annotationClass.getMethod("value").invoke(annotation) as Array<String>
             httpMethod = annotationClass.simpleName.replace("Mapping", "").uppercase(Locale.getDefault())

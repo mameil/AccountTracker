@@ -50,14 +50,14 @@ class TagRepoImpl(
 //        logger.info("이 로그가 나오면 정상적으로 catch 되고 진행되었다는 의미")
 
         //해결방법 2. delete 로직을 애초에 findById 해서 있으면 delete 날리는 방식으로 수정 ifPresentOrElse 으로 사용하자
-        tagRepository.findById(id).ifPresentOrElse(
-            {
-                tagRepository.delete(it)
-            },
-            {
-                logger.error("$id 로 저장되어있는 tag가 존재하지 않아 삭제되지 않았습니다")
-            }
-        )
+//        tagRepository.findById(id).ifPresentOrElse(
+//            {
+//                tagRepository.delete(it)
+//            },
+//            {
+//                logger.error("$id 로 저장되어있는 tag가 존재하지 않아 삭제되지 않았습니다")
+//            }
+//        )
     }
 
 //    @Cacheable(value = ["tags"])

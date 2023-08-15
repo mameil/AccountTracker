@@ -18,10 +18,9 @@ enum class CustomError(val code: String, val msg: String)   {
         throw CustomException(this)
     }
 
-    fun doThrowWithAdditionalMsg(additionalMsg: String): RuntimeException{
-        //todo make additional message
-        throw CustomException(this)
-    }
+//    fun doThrowWithAdditionalMsg(additionalMsg: String): RuntimeException{
+//        throw CustomException(this)
+//    }
 
     companion object{
         fun getCodeFromMsg(msg: String): String{

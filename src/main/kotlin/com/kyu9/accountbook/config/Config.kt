@@ -27,7 +27,7 @@ class Config(
         //redis configuration 작성하면서 redisTemplate 에 사용될 objectmapper을 구현하면서 이름을 'objectMapper'로 해둬서 모든 api에서 적용되고있었음... ㅠㅠ
         //redis 쪽에서 확실하게 redisObjectMapper로 이름을 바꿔주고, 이쪽에서는 다시 재명시
         val objectMapper = ObjectMapper()
-        objectMapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+//        objectMapper.propertyNamingStrategy = PropertyNamingStrategy.
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.registerModule(JavaTimeModule())
         objectMapper.registerModule(KotlinModule())

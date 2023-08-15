@@ -1,6 +1,5 @@
 package com.kyu9.accountbook.application
 
-import com.kyu9.accountbook.application.repository.TagRepoImpl
 import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.application.repository.UsageTransactionRepoImpl
 import com.kyu9.accountbook.common.CustomError
@@ -11,7 +10,6 @@ import com.kyu9.accountbook.elastic.Transaction
 import com.kyu9.accountbook.elastic.TransactionRepository
 import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
-import org.elasticsearch.cluster.ClusterState.Custom
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import javax.transaction.Transactional
@@ -20,7 +18,7 @@ import javax.transaction.Transactional
 @RequiredArgsConstructor
 class TransactionService(
         private val transactionRepoImpl: UsageTransactionRepoImpl,
-        private val transactionRepository: TransactionRepository,
+        private val transactionElasticRepository: TransactionRepository,
         private val tagRepoImpl: TagRepository
 ) {
 
@@ -197,11 +195,9 @@ class TransactionService(
     }
 
     fun getLastTransactionRecordedDay(): GetLastRecordedDayResponseDto? {
-        return transactionRepoImpl.getLastTransactionRecordedDay()?.let {
-            GetLastRecordedDayResponseDto(
-                    lastRecordedDay = it.registeredYYYYMMDD
-            )
-        }
+        return GetLastRecordedDayResponseDto(
+                lastRecordedDay = transactionRepoImpl.getLastTransactionRecordedDay().registeredYYYYMMDD
+        )
     }
 
     @Transactional
@@ -214,6 +210,11 @@ class TransactionService(
             documentList.add(document)
         }
 
-        transactionRepository.saveAll(documentList)
+        val tobeList = arrayListOf<Transaction>()
+        documentList.minus(transactionElasticRepository.findAll().toSet()).forEach {
+            tobeList.add(it)
+        }
+
+        transactionElasticRepository.saveAll(tobeList)
     }
 }
