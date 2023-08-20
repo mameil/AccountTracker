@@ -1,6 +1,9 @@
+# todo > docker 내부에서 cfg 파일 분리해야함 to run in docker 주석 삭제필요
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ACB?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    # to run in docker
+#    url: jdbc:mysql://docker.for.mac.localhost:3306/ACB?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
@@ -71,4 +74,6 @@ springfox:
 
 
 elasticsearch.url: localhost
+#to run in docker
+#elasticsearch.url: docker.for.mac.localhost
 elasticsearch.port: 9200
