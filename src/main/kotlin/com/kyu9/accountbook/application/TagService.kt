@@ -135,20 +135,24 @@ class TagService(
     fun forDeadLockTest1(tagId1: Long){
         val e1 = tagRepository.findById(tagId1).get()
 
-        var eName1: Int = e1.name.toInt()
+        println("$e1 Before======================")
+        var eName1: Int = e1.name.toInt() + 1
 
-        e1.name = eName1++.toString()
+        e1.name = eName1.toString()
 
         tagRepository.save(e1)
+        println("$e1 After======================")
     }
 
     fun forDeadLockTest2(tagId2: Long){
         val e2 = tagRepository.findById(tagId2).get()
 
-        var eName2: Int = e2.name.toInt()
+        println("$e2 Before======================")
+        var eName2: Int = e2.name.toInt() - 1
 
-        e2.name = eName2--.toString()
+        e2.name = eName2.toString()
 
         tagRepository.save(e2)
+        println("$e2 After======================")
     }
 }

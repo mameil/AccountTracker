@@ -15,6 +15,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -45,6 +46,7 @@ server:
 logging:
   level:
     root: info
+    org.hibernate: debug
     org.springframework.web: info
     org.springframework.data.elasticsearch.client.WIRE: trace
     hibernate:

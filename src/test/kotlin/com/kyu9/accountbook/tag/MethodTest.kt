@@ -40,6 +40,10 @@ class MethodTest: TestFrame(){
 
         tran1.join()
         trans2.join()
+
+        tagService.getAllTags().forEach {
+            println(it)
+        }
     }
 
 }
