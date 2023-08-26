@@ -29,6 +29,8 @@ spring:
   jackson:
     deserialization:
       READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE: true
+  main:
+    allow-bean-definition-overriding: true
 
 
 server:

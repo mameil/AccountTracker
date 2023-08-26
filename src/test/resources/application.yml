@@ -17,6 +17,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  main:
+    allow-bean-definition-overriding: true
 
 logging:
   level:
@@ -26,3 +28,8 @@ logging:
         web : info
       hibernate:
         type: info
+
+elasticsearch.url: localhost
+#to run in docker
+#elasticsearch.url: docker.for.mac.localhost
+elasticsearch.port: 9200

@@ -16,17 +16,18 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
         basePackageClasses = [TransactionRepository::class]
 )
 class ElasticsearchConfig{
-    @Value("\${elasticsearch.url}")
+//    @Value("\${elasticsearch.url}")
     private lateinit var elasticsearchUrl: String
 
-    @Value("\${elasticsearch.port}")
+//    @Value("\${elasticsearch.port}")
     private lateinit var elasticsearchPort: String
 
 
     @Bean
     fun elasticsearchClient(): RestHighLevelClient {
         return RestClients
-                .create(ClientConfiguration.builder().connectedTo("$elasticsearchUrl:$elasticsearchPort").build())
+//                .create(ClientConfiguration.builder().connectedTo("$elasticsearchUrl:$elasticsearchPort").build())
+                .create(ClientConfiguration.builder().connectedTo("localhost:9200").build())
                 .rest()
     }
 }

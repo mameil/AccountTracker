@@ -132,18 +132,23 @@ class TagService(
         return tagRepoImpl.getEntityWithId(id.toLong())
     }
 
-    @Transactional
-    fun forDeadLockTest(tagId1: Long, tagId2: Long){
-        val e1 = tagRepoImpl.getEntityWithId(tagId1)
-        val e2 = tagRepoImpl.getEntityWithId(tagId2)
+    fun forDeadLockTest1(tagId1: Long){
+        val e1 = tagRepository.findById(tagId1).get()
 
         var eName1: Int = e1.name.toInt()
-        var eName2: Int = e2.name.toInt()
 
         e1.name = eName1++.toString()
-        e2.name = eName2++.toString()
 
-        tagRepoImpl.storeEntity(e1)
-        tagRepoImpl.storeEntity(e2)
+        tagRepository.save(e1)
+    }
+
+    fun forDeadLockTest2(tagId2: Long){
+        val e2 = tagRepository.findById(tagId2).get()
+
+        var eName2: Int = e2.name.toInt()
+
+        e2.name = eName2--.toString()
+
+        tagRepository.save(e2)
     }
 }

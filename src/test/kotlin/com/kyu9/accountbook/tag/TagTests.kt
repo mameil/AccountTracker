@@ -213,4 +213,5 @@ class TagTests: TestFrame() {
         Assert.assertNotNull(cacheManager.getCache("tags"))
 
     }
+
 }
