@@ -7,16 +7,15 @@ import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
-import lombok.extern.java.Log
-import lombok.extern.log4j.Log4j
 import lombok.extern.log4j.Log4j2
-import lombok.extern.slf4j.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CachePut
+import org.springframework.data.jpa.repository.Lock
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
-import org.springframework.transaction.UnexpectedRollbackException
-import javax.transaction.Transactional
+import org.springframework.transaction.annotation.Isolation
+import org.springframework.transaction.annotation.Propagation
+import org.springframework.transaction.annotation.Transactional
+import javax.persistence.LockModeType
 
 @Service
 @Log4j2
@@ -132,7 +131,8 @@ class TagService(
         return tagRepoImpl.getEntityWithId(id.toLong())
     }
 
-    fun forDeadLockTest1(tagId1: Long){
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+    fun forDeadLockMinus(tagId1: Long){
         val e1 = tagRepository.findById(tagId1).get()
 
         println("$e1 Before======================")
@@ -144,7 +144,8 @@ class TagService(
         println("$e1 After======================")
     }
 
-    fun forDeadLockTest2(tagId2: Long){
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+    fun forDeadLockPlus(tagId2: Long){
         val e2 = tagRepository.findById(tagId2).get()
 
         println("$e2 Before======================")
@@ -154,5 +155,19 @@ class TagService(
 
         tagRepository.save(e2)
         println("$e2 After======================")
+    }
+
+    @Transactional
+    fun minusTransaction(tagId: Long, tagId2: Long){
+        forDeadLockMinus(tagId)
+
+        forDeadLockMinus(tagId2)
+    }
+
+    @Transactional
+    fun plusTransaction(tagId2: Long, tagId: Long){
+        forDeadLockPlus(tagId2)
+
+        forDeadLockPlus(tagId)
     }
 }
