@@ -33,6 +33,12 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, git
+
 
 server:
   port: 10001
