@@ -20,6 +20,7 @@ docker run -d --name KD-acb --network kd-network -p 10002:10001 myapp
 docker ps
 
 # check health UP
-curl -X GET localhost:10002/acb/actuator -v
+curl -X GET localhost:10002/acb/actuator/health -v
 
-
+# check latest git commit
+curl -X GET localhost:10002/acb/actuator/git -v
