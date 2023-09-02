@@ -34,10 +34,14 @@ spring:
     allow-bean-definition-overriding: true
 
 management:
+  endpoint:
+    health:
+      show-details: always
   endpoints:
+    enabled-by-default: true
     web:
       exposure:
-        include: health, info, git
+        include: "*"
 
 
 server:

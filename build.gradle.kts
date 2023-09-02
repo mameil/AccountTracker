@@ -96,6 +96,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
 
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.slf4j:jcl-over-slf4j")
     implementation("ch.qos.logback:logback-classic")
     implementation("ch.qos.logback:logback-core")
