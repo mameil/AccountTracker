@@ -10,6 +10,7 @@ import java.io.InputStreamReader
 @Component
 class CustomActuatorConfig : HealthIndicator {
     override fun health(): Health {
+        //todo : 이거 로컬에서는 깃이 연결되어 있어서 로컬에서는 되는데 도커에서는 안됨 >> 빌드할 때 미리 프로젝트 어딘가에 박아두고 그걸 가지고 사용하도록 수정필요
         val map: MutableMap<String, String> = HashMap()
 
         var commitMsgFromGit: Process = Runtime.getRuntime().exec("git log --format=%B -n 1")
