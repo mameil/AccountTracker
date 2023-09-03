@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.EnableAspectJAutoProxy
 import org.springframework.context.annotation.FilterType
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.kyu9.accountbook", "com.kyu9.accountbook.swagger.api", "com.kyu9.accountbook.swagger.model"])
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 //)
 @EnableCaching
 @EnableAspectJAutoProxy   //springboot 2.3.4버전 이후에는 따로 필요없음
+@EnableScheduling //schedule 기능을 사용하기 위해서
 class AccountBookApplication
 
 fun main(args: Array<String>) {
