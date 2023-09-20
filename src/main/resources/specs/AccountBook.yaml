@@ -14,12 +14,14 @@ tags:
     description: "Transaction API"
   - name: "Tag"
     description: "Tag API"
+  - name: "Test"
+    description: "for test"
 
 paths:
   /check/working:
     get:
       tags:
-        - "Util"
+        - "Test"
       summary: "check yaml working"
       description: "check yaml working"
       operationId: checkYaml
@@ -38,6 +40,58 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseDto'
         500:
           description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+  /test/testInfo:
+    post:
+      tags:
+        - "Test"
+      summary: "register single test info for ES"
+      description: "register single test info for ES"
+      operationId: postTestInfo
+      requestBody:
+        description: "register single test info for ES"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestInfoDto'
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+  /test/testInfo/{name}:
+    get:
+      tags:
+        - "Test"
+      summary: "get single test info for ES"
+      description: "get single test info for ES"
+      operationId: getTestInfo
+      parameters:
+          - name: "name"
+            in: "path"
+            description: "test info name"
+            required: true
+            schema:
+                type: "string"
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestInfoDto'
+        400:
+          description: "Bad Request"
           content:
             application/json:
               schema:
@@ -590,6 +644,18 @@ paths:
 
 components:
   schemas:
+    TestInfoDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "name"
+          example: "kdshim"
+        desc:
+          type: string
+          description: "desc"
+          example: "this is for test"
+
     GetListTagDto:
       type: object
       properties:
