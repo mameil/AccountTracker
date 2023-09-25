@@ -81,3 +81,64 @@ GET localhost:10001/acb/es/transaction/name/할롱
 
 ### ES Avg
 GET localhost:10001/acb/es/transaction/avg
+
+
+###
+# curl -X POST "http://localhost:5601/api/saved_objects/_create" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
+#{
+# "attributes": {
+# "title": "Your Saved Search Title",
+# "description": "Your Saved Search Description",
+# "searchSourceJSON": "{\"index\":\"your-index-pattern-id\",\"query\":{\"query\":\"your-query\"},\"filter\":[]}"
+# },
+# "type": "search"
+#}'
+POST http://localhost:5601/api/saved_objects/search
+kbn-xsrf: true
+Content-Type: application/json
+
+{
+  "attributes": {
+    "title": "Your Saved Search Title",
+    "description": "Your Saved Search Description",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": {
+        "index": "transaction",
+        "query": {},
+        "filter": []
+      }
+    }
+  }
+}
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
