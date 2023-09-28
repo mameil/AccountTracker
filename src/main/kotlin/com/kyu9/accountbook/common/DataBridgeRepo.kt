@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface DataBridgeRepo<
         ID : Any,
-        ES : DataBridgeAble<JPA, ES>, JPA : DataBridgeAble<JPA, ES>,
-        ESREPO : ElasticsearchRepository<ES, ID>, JPAREPO : JpaRepository<JPA, ID>> {
+        ES : DataBridgeAble<RDB, ES>, RDB : DataBridgeAble<RDB, ES>,
+        ES_REPO : ElasticsearchRepository<ES, ID>, RDB_REPO : JpaRepository<RDB, ID>> {
 
-    val esRepo: ESREPO
-    val jpaRepo: JPAREPO
+    val esRepo: ES_REPO
+    val jpaRepo: RDB_REPO
 
-    fun saveDataBoth(dataBridgeAble: DataBridgeAble<JPA, ES>) {
+    fun saveDataBoth(dataBridgeAble: DataBridgeAble<RDB, ES>) {
         jpaRepo.save(dataBridgeAble.toRDB())
         esRepo.save(dataBridgeAble.toES())
     }
