@@ -4,7 +4,6 @@ import com.kyu9.accountbook.elastic.TestInfo
 import com.kyu9.accountbook.elastic.TestInfoService
 import com.kyu9.accountbook.swagger.api.TestApiDelegate
 import com.kyu9.accountbook.swagger.model.TestInfoDto
-import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -19,7 +18,7 @@ class TestApiControllerImpl(
     }
 
     override fun postTestInfo(testInfoDto: TestInfoDto): ResponseEntity<Unit> {
-        testInfoService.save(TestInfo(testInfoDto.name!!, testInfoDto.desc!!))
+        testInfoService.save(TestInfo(testInfoDto.name!!, testInfoDto.desc!!, creator, created))
         return ResponseEntity(HttpStatus.OK)
     }
 }
