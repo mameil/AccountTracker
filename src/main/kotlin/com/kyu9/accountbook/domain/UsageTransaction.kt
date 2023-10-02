@@ -72,7 +72,7 @@ data class UsageTransaction(
                     id = usage.id!!,
                     userId = usage.userId,
                     amt = usage.amount.toString(),
-                    registered = usage.registeredYYYYMMDD,
+                    registered = usage.registered,
                     usedAt = usage.title,
                     used = usage.content,
                     category = ""

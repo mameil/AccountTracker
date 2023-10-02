@@ -18,7 +18,7 @@ class TestApiControllerImpl(
     }
 
     override fun postTestInfo(testInfoDto: TestInfoDto): ResponseEntity<Unit> {
-        testInfoService.save(TestInfo(testInfoDto.name!!, testInfoDto.desc!!, creator, created))
+        testInfoService.save(TestInfo(testInfoDto.name!!, testInfoDto.desc!!))
         return ResponseEntity(HttpStatus.OK)
     }
 }

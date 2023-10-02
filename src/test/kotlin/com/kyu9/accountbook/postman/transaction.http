@@ -12,3 +12,71 @@ Content-Type: application/json
   "tagId": 9999999,
   "moneyType": "ERROR"
 }
+
+
+###
+GET http://localhost:9200/transaction/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "daily": {
+      "date_histogram": {
+        "field": "registered",
+        "calendar_interval": "day"
+      },
+      "aggs": {
+        "amount_sum": {
+          "sum": {
+            "field": "amount"
+          }
+        },
+        "tag_id_terms": {
+          "terms": {
+            "field": "tag_id"
+          }
+        }
+      }
+    }
+  }
+}
+
+### check index mapping
+GET http://localhost:9200/transaction/_mapping
+
+
+### update index > fielddata
+PUT http://localhost:9200/transaction/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "registered": {
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+
+### update index > localdate
+PUT http://localhost:9200/transaction/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "registered": {
+      "type":     "date",
+      "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+    }
+  }
+}
+
+### delete all documents > registered field is not date type
+DELETE http://localhost:9200/transaction
+
+### check deleted documents
+GET http://localhost:9200/transaction/_search
+
+### check index mapping
+GET http://localhost:9200/transaction/_mapping

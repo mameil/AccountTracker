@@ -20,4 +20,6 @@ data class TestInfo(
         override fun toRDB(): TestInfoEntity {
                 return TestInfoEntity(name, desc, created, creator)
         }
+
+        constructor(name: String, desc: String): this(name, desc, "CLIENT", LocalDateTime.now())
 }

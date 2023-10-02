@@ -1,7 +1,9 @@
 package com.kyu9.accountbook.elastic
 
+import com.kyu9.accountbook.common.MyTime
 import org.springframework.data.annotation.PersistenceConstructor
 import org.springframework.data.elasticsearch.annotations.Document
+import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.Id
 
@@ -11,7 +13,7 @@ data class Transaction @PersistenceConstructor constructor(
         val id: String,
         val userId: String,
         val amt: String,
-        val registered: String,
+        val registered: LocalDateTime,
         val usedAt: String,
         val used: String,
         var category: String
@@ -24,7 +26,7 @@ data class Transaction @PersistenceConstructor constructor(
             id = id,
             userId = userId,
             amt = amt,
-            registered = "",
+            registered = MyTime.now(),
             usedAt = "",
             used = "",
             category = ""

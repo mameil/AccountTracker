@@ -10,12 +10,12 @@ import javax.persistence.Id
 data class TestInfoEntity(
         @Id
         val name: String,
-        var desc: String,
+        var describtion: String,
         val created: LocalDateTime = MyTime.now(),
         val creator: String = "KD.SHIM"
 ): DataBridgeAble<TestInfoEntity, TestInfo>{
     override fun toES(): TestInfo {
-        return TestInfo(name, desc, creator, created)
+        return TestInfo(name, describtion, creator, created)
     }
 
     override fun toRDB(): TestInfoEntity {
