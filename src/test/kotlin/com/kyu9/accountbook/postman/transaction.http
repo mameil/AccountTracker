@@ -80,3 +80,108 @@ GET http://localhost:9200/transaction/_search
 
 ### check index mapping
 GET http://localhost:9200/transaction/_mapping
+
+### recreate index named transaction
+PUT http://localhost:9200/transaction
+
+### update mapping information of  new index named transaction
+PUT http://localhost:9200/transaction/_mapping
+Content-Type: application/json
+
+{
+  "mapping": {
+    "properties": {
+      "id": { "type": "text" },
+      "userid": { "type": "text" },
+      "amt": {"type": "integer"},
+      "registered": { "type": "date" },
+      "usedAt": { "type": "text" },
+      "used": { "type": "text" },
+      "category": {
+        "type": "text",
+        "fielddata": true
+      }
+    }
+  }
+}
+
+### check transaction statistics
+GET localhost:9200/transaction/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "category_terms": {
+      "terms": {
+        "field": "category"
+      },
+      "aggs": {
+        "amount_sum": {
+          "sum": {
+            "field": "amt"
+          }
+        }
+      }
+    }
+  }
+}
+
+###      "reason": "Text fields are not optimised for operations that require per-document field data like aggregations and sorting, so these operations are disabled by default. Please use a keyword field instead. Alternatively, set fielddata=true on [category] in order to load field data by uninverting the inverted index. Note that this can use significant memory.",
+### 위와 같은 에러발생 >> 텍스트 필드를 기반으로 진행하는 집계에 대해서는 메타 데이터를 필요로 함
+### 그래서 category 부분에다가 fielddata=true 를 추가해줘야 함 >> 이제 다시 위에 있는 통계를 실행하면 됨
+PUT localhost:9200/transaction/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "category": {
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+
+### >> integer 는 fielddata 란이 없음 >> 이거 에러남
+PUT localhost:9200/transaction/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "amt": {
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+
+### 월별 > 카테고리간의 > 금액의 총액
+GET localhost:9200/transaction/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "monthly_category_spending": {
+      "date_histogram": {
+        "field": "registered",
+        "calendar_interval": "month"
+      },
+      "aggs": {
+        "category": {
+          "terms": {
+            "field": "category.keyword",
+            "size": 10
+          },
+          "aggs": {
+            "total_spending": {
+              "sum": {
+                "field": "amt"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

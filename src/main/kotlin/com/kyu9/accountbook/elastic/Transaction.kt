@@ -12,7 +12,7 @@ data class Transaction @PersistenceConstructor constructor(
         @Id
         val id: String,
         val userId: String,
-        val amt: String,
+        val amt: Int,
         val registered: LocalDateTime,
         val usedAt: String,
         val used: String,
@@ -21,12 +21,13 @@ data class Transaction @PersistenceConstructor constructor(
     constructor(
             id: String,
             userId: String,
-            amt: String
+            amt: String,
+            registered: LocalDateTime,
     ) : this(
             id = id,
             userId = userId,
-            amt = amt,
-            registered = MyTime.now(),
+            amt = amt.toInt(),
+            registered = registered,
             usedAt = "",
             used = "",
             category = ""

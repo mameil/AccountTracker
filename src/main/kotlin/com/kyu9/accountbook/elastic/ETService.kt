@@ -15,6 +15,7 @@ import org.elasticsearch.search.aggregations.metrics.Avg
 import org.elasticsearch.search.builder.SearchSourceBuilder
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 
 @Service
@@ -28,7 +29,7 @@ class ETService(
 
     fun postTransaction(userId: String?, userName: String?, amt: Int?): String? {
         return transactionRepository
-                .save(Transaction(userId!!, userName!!, amt!!.toString()))
+                .save(Transaction(userId!!, userName!!, amt!!.toString(), LocalDateTime.now()))
                 .id
     }
 

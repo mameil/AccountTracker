@@ -71,7 +71,7 @@ data class UsageTransaction(
             return Transaction(
                     id = usage.id!!,
                     userId = usage.userId,
-                    amt = usage.amount.toString(),
+                    amt = usage.amount.toInt(),
                     registered = usage.registered,
                     usedAt = usage.title,
                     used = usage.content,
