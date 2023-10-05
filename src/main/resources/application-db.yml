@@ -1,0 +1,10 @@
+# localhost config
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ACB?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+
+elasticsearch.url: localhost
+elasticsearch.port: 9200
