@@ -240,6 +240,12 @@ task<Exec>("Sync Branches"){
     commandLine("./script/integration_sync.sh")
 }
 
+task<Exec>("publish_to_docker"){
+    group = "0.action"
+
+    commandLine("./script/docker_compose.sh")
+}
+
 //tasks.named("test").configure{ group = "0.action" }
 tasks.named("build").configure{ group = "0.action" }
 tasks.named("clean").configure{ group = "0.action" }
