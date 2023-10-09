@@ -10,7 +10,7 @@ echo >> delete old image
 docker rmi myapp
 sleep 1
 
-cd ../
+#cd ../
 
 echo >> create new jar
 ./gradlew clean build

@@ -208,6 +208,14 @@ tasks.named<JavaCompile>("compileJava") {
     enabled = false
 }
 
+tasks.named("build").configure {
+    dependsOn("generateGitProperties")
+}
+
+tasks.named("processResources").configure {
+    dependsOn("generateGitProperties")
+}
+
 tasks.named("generateFromYaml").configure {
     dependsOn("removeGeneratedFromYaml")
 }
