@@ -3,7 +3,7 @@ package com.kyu9.accountbook.common
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MyTime {
+class MyTime(localDateTime: LocalDateTime) {
     var localDateTime: LocalDateTime = LocalDateTime.now()
 
     companion object{
@@ -32,6 +32,10 @@ class MyTime {
             return localDateTime?.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         }
 
+        fun toHumanable(localDateTime: LocalDateTime): String{
+            return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        }
+
         fun toLocalDateTime(yyyyMMddHHmmss: String): LocalDateTime{
             return LocalDateTime.of(
                 yyyyMMddHHmmss.substring(0, 4).toInt(),
@@ -56,6 +60,13 @@ class MyTime {
             println(toYyyymmddhhmmss(LocalDateTime.now()))
             return LocalDateTime.now()
         }
+
+        fun of(localDateTime: LocalDateTime): MyTime{
+            return MyTime(localDateTime)
+        }
     }
 
+    fun toYyyymmddhhmmss(): String{
+        return toHumanable(localDateTime)
+    }
 }

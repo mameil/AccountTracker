@@ -10,6 +10,9 @@ plugins {
     kotlin("plugin.jpa") version "1.7.22"
     kotlin("kapt") version "1.7.21"
 
+    //git information
+    id("com.gorylenko.gradle-git-properties") version "2.3.1"
+
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
     id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
@@ -245,6 +248,13 @@ task<Exec>("publish_to_docker"){
 
     commandLine("./script/docker_compose.sh")
 }
+
+
+tasks.named("generateGitProperties"){
+    gitProperties.gitPropertiesResourceDir.set(file("${projectDir}/src/main/resources"))
+    gitProperties.gitPropertiesName = "application-git.properties"
+}
+
 
 //tasks.named("test").configure{ group = "0.action" }
 tasks.named("build").configure{ group = "0.action" }

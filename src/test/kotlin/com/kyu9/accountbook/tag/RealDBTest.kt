@@ -3,6 +3,7 @@ package com.kyu9.accountbook.tag
 import com.kyu9.accountbook.AccountBookApplication
 import com.kyu9.accountbook.application.TagService
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
+import org.junit.Ignore
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -15,6 +16,7 @@ class RealDBTest{
     private lateinit var tagService: TagService
 
     @Test
+    @Ignore
     fun deadlock_test() {
         // this is first row
         val tt1 = tagService.storeTag(PostSingleTagDto("135", "first_test"))

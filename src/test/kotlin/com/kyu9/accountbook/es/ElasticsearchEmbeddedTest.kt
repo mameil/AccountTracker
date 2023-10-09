@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.es
 
 import com.kyu9.accountbook.AccountBookApplication
+import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.elastic.Transaction
 import com.kyu9.accountbook.elastic.TransactionRepository
 import org.junit.jupiter.api.AfterAll
@@ -46,7 +47,8 @@ class ElasticsearchEmbeddedTest {
         val tr = Transaction(
                 id = "1",
                 userId = "qwer",
-                amt = "1000"
+                amt = "1000",
+                registered = MyTime.now()
         )
 
         transactionRepository.save(tr)
