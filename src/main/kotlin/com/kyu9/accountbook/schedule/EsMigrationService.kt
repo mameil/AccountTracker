@@ -17,7 +17,7 @@ class EsMigrationService(
     private val log: Logger = LoggerFactory.getLogger(EsMigrationService::class.java)
 
 
-    @Scheduled(cron = "0 0 0 * * *")
+//    @Scheduled(cron = "0 0 0 * * *")
     fun dailyMigration(){
         log.info("=== Daily Migration - transactions ===")
         log.info("started at ${MyTime.now()}")
