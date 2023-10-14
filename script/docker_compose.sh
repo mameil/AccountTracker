@@ -13,7 +13,7 @@ sleep 1
 #cd ../
 
 echo >> create new jar
-./gradlew clean build
+./gradlew clean build -x test
 sleep 1
 
 echo >> create new image from recent jar

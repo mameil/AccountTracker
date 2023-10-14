@@ -11,7 +11,7 @@ plugins {
     kotlin("kapt") version "1.7.21"
 
     //git information
-    id("com.gorylenko.gradle-git-properties") version "2.3.1"
+    id("com.gorylenko.gradle-git-properties") version "2.4.1"
 
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
@@ -156,6 +156,14 @@ springBoot{
     mainClass.set("com.kyu9.accountbook.AccountBookApplicationKt")
 }
 
+buildscript {
+    dependencies {
+        "classpath"("org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r") {
+            isForce = true
+        }
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -216,6 +224,10 @@ tasks.named("processResources").configure {
     dependsOn("generateGitProperties")
 }
 
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 tasks.named("generateFromYaml").configure {
     dependsOn("removeGeneratedFromYaml")
 }
@@ -256,6 +268,12 @@ task<Exec>("publish_to_docker"){
 
     commandLine("./script/docker_compose.sh")
 }
+
+tasks.withType<Jar>().configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+
 
 
 tasks.named("generateGitProperties"){
