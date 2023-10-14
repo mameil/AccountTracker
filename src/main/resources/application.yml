@@ -18,9 +18,9 @@ spring:
     check-template-location: true
   cache:
     type: redis
-  redis:
-    cache:
-      value-serializer: org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
+#  redis:
+#    cache:
+#      value-serializer: org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
   jackson:
     deserialization:
       READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE: true

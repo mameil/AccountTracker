@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
 //@EnableJpaRepositories(
 //        excludeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = [TransactionRepository::class])]
 //)
-@EnableCaching
+//@EnableCaching
 @EnableAspectJAutoProxy   //springboot 2.3.4버전 이후에는 따로 필요없음
 @EnableScheduling //schedule 기능을 사용하기 위해서
 class AccountBookApplication

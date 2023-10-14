@@ -65,12 +65,12 @@ class TagRepoImpl(
         return super.storeEntity(t)
     }
 
-    @CacheEvict(value = ["tags"], allEntries = true)
+//    @CacheEvict(value = ["tags"], allEntries = true)
     override fun removeEntityWithId(id: Long) {
         super.removeEntityWithId(id)
     }
 
-    @Cacheable(value = ["tags"])
+//    @Cacheable(value = ["tags"])
     override fun getEntityWithId(id: Long): Tag {
         return super.getEntityWithId(id)
     }

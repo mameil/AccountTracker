@@ -120,7 +120,7 @@ class TagService(
         tagRepoImpl.deleteWithEntity_query(tag)
     }
 
-    @CachePut(value = ["tags"])
+//    @CachePut(value = ["tags"])
     fun updateEntity(id: Int, dto: PostSingleTagDto): Tag{
         tagRepoImpl.getOptionalWithId(id.toLong()).ifPresent{
             it.name = dto.name!!
