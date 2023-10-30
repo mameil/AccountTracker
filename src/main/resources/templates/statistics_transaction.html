@@ -30,7 +30,7 @@
         <div class="my-wrap-login100-align-center">
             <div id="title">소비 통계</div>
 
-            <div id="myTable" style="display: flex; "></div>
+            <div id="myTable" style="text-align: center"></div>
 
             <a class="txt2" onclick = "registerTran()">
                 소비 입력하러 가기
@@ -46,13 +46,36 @@
     window.onload = function () {
         const defaultDates = 3
         $.ajax({
-            url: "/acb/transaction/statistics/view" + defaultDates,
+            url: "/acb/transaction/statistics/view",
             type: "GET",
             dataType: "json",
             success: function(data) {
                 console.log(data)
                 // createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
-                listDailyTrans(data.transList, 'yyyymmdd', data.amountTotal)
+                // 주어진 JSON 응답 데이터
+
+                let tableHTML = "<table border='1'>";
+                tableHTML += "<tr><th>구분</th><th>값</th></tr>";
+
+                const keysToDisplay = {
+                    "dailyName": "당일일자(yyyymmdd)",
+                    "dailySum": "당일합계",
+                    "weeklyName": "금주일자(MMww)",
+                    "weeklySum": "금주합계",
+                    "monthlyName": "당월일자(MM)",
+                    "monthlySum": "당월합계",
+                };
+
+                for (const key in keysToDisplay) {
+                    const label = keysToDisplay[key];
+                    const value = data[key];
+                    tableHTML += `<tr><td>${label}</td><td>${value}</td></tr>`;
+                }
+
+                tableHTML += "</table>";
+
+                const tableContainer = document.getElementById('myTable');
+                tableContainer.innerHTML = tableHTML;
             }
         })
 
