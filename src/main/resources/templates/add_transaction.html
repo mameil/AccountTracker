@@ -42,33 +42,45 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="amount" name="amount" placeholder="Amount">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div class="wrap-input100_ver2 validate-input" style="font-size: 14px"> 금액: </div>
+                    <div class="wrap-input100_ver2_1 validate-input">
+                        <input class="input100" type="text" id="amount" name="amount" placeholder="Amount">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="usage" name="usage" placeholder="Usage">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div class="wrap-input100_ver2 validate-input" style="font-size: 14px"> 위치: </div>
+                    <div class="wrap-input100_ver2_1 validate-input">
+                        <input class="input100" type="text" id="usage" name="usage" placeholder="Usage">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="desc" name="desc" placeholder="Desc">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div class="wrap-input100_ver2 validate-input" style="font-size: 14px"> 내용:</div>
+                    <div class="wrap-input100_ver2_1 validate-input">
+                        <input class="input100" type="text" id="desc" name="desc" placeholder="Desc">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" id="yyyymmdd" name="yyyymmdd" placeholder="$getCurrentYyyymmdd()">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div class="wrap-input100_ver2 validate-input" style="font-size: 14px"> 일자:</div>
+                    <div class="wrap-input100_ver2_1 validate-input">
+                        <input class="input100" type="text" id="yyyymmdd" name="yyyymmdd" placeholder="$getCurrentYyyymmdd()">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
                 <label style="margin-top: 0px">
                     <input type="radio" name="dayy" value="D-1" onchange="getChanged(parseInt(this.value.slice(2)))">

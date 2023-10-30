@@ -277,6 +277,18 @@ iframe {
   z-index: 1;
   margin-bottom: 10px;
 }
+.wrap-input100_ver2 {
+  position: relative;
+  width: 10%;
+  z-index: 1;
+  margin-top: 10px;
+}
+.wrap-input100_ver2_1 {
+  position: relative;
+  width: 90%;
+  z-index: 1;
+  margin-bottom: 10px;
+}
 .wrap-input70 {
   position: relative;
   width: 70%;
