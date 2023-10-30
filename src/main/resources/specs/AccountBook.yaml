@@ -492,6 +492,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
+  /transaction/statistics/view:
+    get:
+      tags:
+        - "Transaction"
+      summary: "inquiry daily, weekly, monthly statistics"
+      description: "inquiry daily, weekly, monthly statistics"
+      operationId: inquiryViewStatistics
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetViewStatisticsDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
   /transaction/admin/migration/elastic:
     get:
       tags:
@@ -920,6 +941,38 @@ components:
           type: string
           description: "updated time yyyyMMdd HH24:mm:si"
           example: "20230520140229"
+
+    GetViewStatisticsDto:
+      type: object
+      properties:
+        statisticsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetViewStatisticsSingleDto'
+
+    GetViewStatisticsSingleDto:
+      type: object
+      properties:
+        dailyName:
+          type: string
+          description: "date yyyymmdd"
+        dailySum:
+          type: string
+          description: "daily statistics sum"
+        weeklyName:
+          type: string
+          description: "weekly statistics name"
+          example: "10M2W"
+        weeklySum:
+          type: string
+          description: "weekly statistics sum"
+        monthlyName:
+          type: string
+          description: "monthly name"
+          example: "October"
+        monthlySum:
+          type: string
+          description: "monthly statistics sum"
 
     GetLastRecordedDayResponseDto:
       type: object
