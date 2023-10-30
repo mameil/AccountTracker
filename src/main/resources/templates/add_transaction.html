@@ -145,14 +145,18 @@
             </div>
 
             <!--            return false은 이벤트의 기본 동작을 중지-->
-            <div class="text-center p-t-136" style="width: 100%">
-                <a class="txt2" onclick="todayTran()">
-                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    최근 소비를 확인하기
+            <div class="text-center p-t-136" style="width: 100%;">
+                <a class="txt2" onclick="todayTran()" style="font-size: 20px">
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true" style="font-size: 20px"></i>
+                    최근 소비 보기 |
                 </a>
-                <a class="txt2" onclick="allTran()" style="margin-left: 100px">
-                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    현재까지의 모든 기록들 확인
+                <a class="txt2" onclick="todayTran()" style="font-size: 20px">
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true" style="font-size: 20px"></i>
+                    통계 보기 |
+                </a>
+                <a class="txt2" onclick="allTran()" style="font-size: 20px">
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true" style="font-size: 20px"></i>
+                    모든 기록 보기
                 </a>
             </div>
 
@@ -286,7 +290,7 @@
     }
 
     function todayTran() {
-        window.location.href = '/acb/view/tran/today'
+        window.location.href = '/acb/view/tran/statistics'
     }
 
     function allTran() {

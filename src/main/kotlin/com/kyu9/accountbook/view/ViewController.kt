@@ -39,4 +39,9 @@ class ViewController {
         return "all_transaction"
     }
 
+    @GetMapping("/tran/statistics")
+    fun statisticsTran(): String{
+        return "statistics_transaction"
+    }
+
 }
