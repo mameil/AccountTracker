@@ -50,4 +50,8 @@ class TransactionApiControllerImpl(
         transactionService.migrateAllToElasticSearch()
         return ResponseEntity(HttpStatus.OK)
     }
+
+    override fun inquiryViewStatistics(): ResponseEntity<GetViewStatisticsSingleDto> {
+        return ResponseEntity.ok(transactionService.inquiryViewStatistics())
+    }
 }

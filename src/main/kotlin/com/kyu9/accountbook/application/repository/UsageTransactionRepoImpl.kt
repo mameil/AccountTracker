@@ -7,15 +7,12 @@ import com.kyu9.accountbook.domain.UsageTransaction
 import com.kyu9.accountbook.domain.dto.MonthlyTran
 import com.kyu9.accountbook.elastic.TransactionRepository
 import com.querydsl.core.types.Projections
-import com.querydsl.core.types.dsl.Expressions
-import com.querydsl.core.types.dsl.NumberExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
-import lombok.extern.log4j.Log4j
 import lombok.extern.log4j.Log4j2
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.logging.Logger
+import java.time.LocalDateTime
 
 
 @Service
@@ -62,6 +59,18 @@ class UsageTransactionRepoImpl(
                 startYyyymmdd,
                 endYyyymmdd
         )
+    }
+
+    fun getAllEntityBetweenRegisteredYyyymmddEqual(yyyymmdd: String): List<UsageTransaction>{
+        return repo.findAllByRegisteredYYYYMMDD(yyyymmdd)
+    }
+
+    fun getAllEntityByRegisteredYyyymm(yyyymm: String): List<UsageTransaction>{
+        return repo.findAllByRegisteredYYYYMM(yyyymm)
+    }
+
+    fun getAllEntityByResigtered(from: String, to: String): List<UsageTransaction>{
+        return repo.findAllByRegisteredYYYYMMDDBetween(from, to)
     }
 
     fun getLastTransactionRecordedDay(): UsageTransaction {

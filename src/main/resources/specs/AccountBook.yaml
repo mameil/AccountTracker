@@ -505,7 +505,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetViewStatisticsDto'
+                $ref: '#/components/schemas/GetViewStatisticsSingleDto'
         400:
           description: "Bad Request"
           content:

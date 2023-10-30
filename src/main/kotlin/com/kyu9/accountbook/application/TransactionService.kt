@@ -11,8 +11,15 @@ import com.kyu9.accountbook.elastic.TransactionRepository
 import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.IsoFields
+import java.time.temporal.TemporalAdjusters
+import java.util.*
 import javax.transaction.Transactional
+
 
 @Service
 @RequiredArgsConstructor
@@ -216,5 +223,44 @@ class TransactionService(
         }
 
         transactionElasticRepository.saveAll(tobeList)
+    }
+
+    fun inquiryViewStatistics(): GetViewStatisticsSingleDto? {
+        val now = MyTime.now()
+        val today = MyTime.toYyyyMmDd(now)
+        val todayTran = transactionRepoImpl.getAllEntityBetweenRegisteredYyyymmddEqual(today).sumOf { it.amount.toInt() }
+
+        val date = LocalDate.parse(today, DateTimeFormatter.BASIC_ISO_DATE)
+
+        // 해당 날짜가 속한 월의 첫 번째 날과 마지막 날 계산
+//        val firstDayOfMonth = date.with(TemporalAdjusters.firstDayOfMonth())
+//        val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth())
+//        println("해당 월의 시작일: $firstDayOfMonth")
+//        println("해당 월의 마지막일: $lastDayOfMonth")
+
+        // 입력된 날짜가 속한 주의 시작일과 종료일 계산
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        val firstDayOfWeek = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).format(formatter)
+        val lastDayOfWeek = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)).format(formatter)
+        println("해당 주의 시작일: $firstDayOfWeek")
+        println("해당 주의 종료일: $lastDayOfWeek")
+
+        // 주차 계산 (주차를 정확하게 계산하려면 일요일부터 시작되는 주차가 사용되어야 할 수도 있습니다)
+        val weekNumber = date[IsoFields.WEEK_OF_WEEK_BASED_YEAR]
+        val formattedDate = date.format(DateTimeFormatter.ofPattern("MM'월'W'주'"))
+        val weeklyTran = transactionRepoImpl.getAllEntityByResigtered(firstDayOfWeek, lastDayOfWeek).sumOf { it.amount.toInt() }
+
+        val month = MyTime.toYyyyMm(MyTime.now())
+        val monthlyTran = transactionRepoImpl.getAllEntityByRegisteredYyyymm(month).sumOf { it.amount.toInt() }
+
+
+        return GetViewStatisticsSingleDto(
+                dailyName = today,
+                dailySum = todayTran.toString(),
+                weeklyName = "${formattedDate} - ${date.dayOfWeek}",
+                weeklySum = weeklyTran.toString(),
+                monthlyName = month.substring(4, 6) + "월",
+                monthlySum = monthlyTran.toString()
+        )
     }
 }
