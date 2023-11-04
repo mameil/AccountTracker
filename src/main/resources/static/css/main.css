@@ -588,6 +588,15 @@ input[type="radio"] {
   text-align: center; /* 텍스트 가운데 정렬 */
 }
 
+radio-label {
+  text-align: center; /* 텍스트를 가운데 정렬합니다. */
+  width: 33%;
+}
+
+.radio-label input[type="radio"] {
+  margin-right: 5px; /* 라디오 버튼을 텍스트 앞에 약간의 간격을 둡니다. */
+}
+
 
 
 /*------------------------------------------------------------------

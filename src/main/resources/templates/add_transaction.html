@@ -82,28 +82,20 @@
                         </span>
                     </div>
                 </div>
-                <label style="margin-top: 0px">
-                    <input type="radio" name="dayy" value="D-1" onchange="getChanged(parseInt(this.value.slice(2)))">
-                    D-1
-                </label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label style="margin-top: 0px">
-                    <input type="radio" name="dayy" value="D-2" onchange="getChanged(parseInt(this.value.slice(2)))">
-                    D-2
-                </label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label style="margin-top: 0px">
-                    <input type="radio" name="dayy" value="D-3" onchange="getChanged(parseInt(this.value.slice(2)))">
-                    D-3
-                </label>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <label class="radio-label">
+                        <input type="radio" name="dayy" value="D-1" onchange="getChanged(parseInt(this.value.slice(2)))">
+                        D-1
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="dayy" value="D-2" onchange="getChanged(parseInt(this.value.slice(2)))">
+                        D-2
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="dayy" value="D-3" onchange="getChanged(parseInt(this.value.slice(2)))">
+                        D-3
+                    </label>
+                </div>
                 <div class="wrap-input100 validate-input">
                     <!--                    <input class="input100" type="text" id="moneyType" name="moneyType" placeholder="Source From" style="display: none">-->
                     <span class="focus-input100"></span>
