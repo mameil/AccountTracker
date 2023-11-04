@@ -28,7 +28,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="my-wrap-login100-align-center">
-            <div id="title">소비 통계</div>
+            <div id="title">월간, 주간, 일간 통계</div>
 
             <div id="myTable" style="text-align: center"></div>
 
@@ -50,32 +50,53 @@
             type: "GET",
             dataType: "json",
             success: function(data) {
-                console.log(data)
-                // createTableFromData(data.transList, 'yyyymmdd', data.amountSum)
-                // 주어진 JSON 응답 데이터
+                // 데이터를 키와 값으로 분리
+                const keys = Object.keys(data);
+                const values = Object.values(data);
 
-                let tableHTML = "<table border='1'>";
-                tableHTML += "<tr><th>구분</th><th>값</th></tr>";
+                // 테이블 생성
+                const tableContainer = document.getElementById("myTable");
+                const table = document.createElement("table");
+                table.classList.add("styled-table");
 
-                const keysToDisplay = {
-                    "dailyName": "당일일자(yyyymmdd)",
-                    "dailySum": "당일합계",
-                    "weeklyName": "금주일자(MMww)",
-                    "weeklySum": "금주합계",
-                    "monthlyName": "당월일자(MM)",
-                    "monthlySum": "당월합계",
-                };
+                // 첫 번째 행 (헤더) 생성
+                const headerRow = document.createElement("tr");
+                keys.forEach((key) => {
+                    const th = document.createElement("th");
+                    switch(key){
+                        case "dailyName":
+                            th.textContent = "Day(yyyy-mm-dd)";
+                            break;
+                        case "dailySum":
+                            th.textContent = "Daily Total";
+                            break;
+                        case "weeklyName":
+                            th.textContent = "Weekly(MM-WW)";
+                            break;
+                        case "weeklySum":
+                            th.textContent = "Weekly Total";
+                            break;
+                        case "monthlyName":
+                            th.textContent = "Monthly";
+                            break;
+                        case "monthlySum":
+                            th.textContent = "Monthly Total";
+                            break;
+                    }
+                    headerRow.appendChild(th);
+                });
+                table.appendChild(headerRow);
 
-                for (const key in keysToDisplay) {
-                    const label = keysToDisplay[key];
-                    const value = data[key];
-                    tableHTML += `<tr><td>${label}</td><td>${value}</td></tr>`;
-                }
+                // 두 번째 행 (데이터) 생성
+                const dataRow = document.createElement("tr");
+                values.forEach((value) => {
+                    const td = document.createElement("td");
+                    td.textContent = value;
+                    dataRow.appendChild(td);
+                });
+                table.appendChild(dataRow);
 
-                tableHTML += "</table>";
-
-                const tableContainer = document.getElementById('myTable');
-                tableContainer.innerHTML = tableHTML;
+                tableContainer.appendChild(table);
             }
         })
 
