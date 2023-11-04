@@ -17,7 +17,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.IsoFields
 import java.time.temporal.TemporalAdjusters
-import java.util.*
 import javax.transaction.Transactional
 
 
@@ -236,11 +235,13 @@ class TransactionService(
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val firstDayOfWeek = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).format(formatter)
         val lastDayOfWeek = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)).format(formatter)
+        println(firstDayOfWeek)
+        println(lastDayOfWeek)
 
         // 주차 계산 (주차를 정확하게 계산하려면 일요일부터 시작되는 주차가 사용되어야 할 수도 있습니다)
         val weekNumber = date[IsoFields.WEEK_OF_WEEK_BASED_YEAR]
         val formattedDate = date.format(DateTimeFormatter.ofPattern("MM'월'W'주'"))
-        val weeklyTran = transactionRepoImpl.getAllEntityByResigtered(firstDayOfWeek, lastDayOfWeek).sumOf { it.amount.toInt() }
+        val weeklyTran = transactionRepoImpl.getAllEntityByRegistered(firstDayOfWeek.replace("-", ""), lastDayOfWeek.replace("-", "")).sumOf { it.amount.toInt() }
 
         val month = MyTime.toYyyyMm(MyTime.now())
         val monthlyTran = transactionRepoImpl.getAllEntityByRegisteredYyyymm(month).sumOf { it.amount.toInt() }
