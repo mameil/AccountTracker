@@ -125,7 +125,7 @@
                 </button>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn">
+                    <button class="login100-form-btn" id = "doSave">
                         저장하기
                     </button>
                 </div>
@@ -160,6 +160,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.getElementById('yyyymmdd').placeholder = "yyyymmdd ex)"+getCurrentYyyymmdd();
+
+    document.addEventListener('keypress', function (e) {
+        // 엔터 키인 경우
+        if (e.key === 'Enter') {
+            // 'button1' 버튼 클릭
+            document.getElementById('doSave').click();
+        }
+    });
 
     window.onload = function () {
         $.ajax({
