@@ -54,10 +54,16 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.google.guava:guava:30.1.1-jre")
     implementation("org.springframework:spring-aop") //2.3.4 이후부터는 따로 필요 없음
     implementation ("org.springframework:spring-context:5.3.15")
+
+    //object mapper
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+
+    //guava library
+    implementation("com.google.guava:guava:30.1.1-jre")
+
+    //gson
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
 
