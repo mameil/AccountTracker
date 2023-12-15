@@ -1,7 +1,7 @@
 package com.kyu9.accountbook.common
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.kyu9.accountbook.AccountBookApplication
+//import com.kyu9.accountbook.AccountBookApplication
 import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.swagger.model.GetUserResponseDto
 import org.junit.jupiter.api.BeforeAll
@@ -21,7 +21,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import kotlin.random.Random
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = [AccountBookApplication::class])
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK
+//        , classes = [AccountBookApplication::class]
+)
 @ExtendWith(MockitoExtension::class, SpringExtension::class)
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)

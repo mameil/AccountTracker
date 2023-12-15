@@ -1,6 +1,5 @@
 package com.kyu9.accountbook.user
 
-import com.kyu9.accountbook.AccountBookApplication
 import com.kyu9.accountbook.common.TestFrame
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

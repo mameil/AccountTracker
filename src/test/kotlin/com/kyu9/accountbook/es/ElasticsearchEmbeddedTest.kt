@@ -1,6 +1,6 @@
 package com.kyu9.accountbook.es
 
-import com.kyu9.accountbook.AccountBookApplication
+//import com.kyu9.accountbook.AccountBookApplication
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.elastic.Transaction
 import com.kyu9.accountbook.elastic.TransactionRepository
@@ -17,7 +17,9 @@ import java.net.ServerSocket
 import java.net.URL
 import java.util.*
 
-@SpringBootTest(classes = [AccountBookApplication::class], properties = ["elasticsearch.url=localhost", "elasticsearch.port=9200"])
+@SpringBootTest(properties = ["elasticsearch.url=localhost", "elasticsearch.port=9200"],
+//        classes = [AccountBookApplication::class]
+        )
 class ElasticsearchEmbeddedTest {
     companion object{
         private val ELASTIC_VERSION = "6.5.4"

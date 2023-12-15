@@ -1,6 +1,6 @@
 package com.kyu9.accountbook.tag
 
-import com.kyu9.accountbook.AccountBookApplication
+//import com.kyu9.accountbook.AccountBookApplication
 import com.kyu9.accountbook.application.TagService
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
 import org.junit.Ignore
@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [AccountBookApplication::class])
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+//        , classes = [AccountBookApplication::class]
+)
 @ActiveProfiles("application.yml")
 class RealDBTest{
     @Autowired
