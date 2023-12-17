@@ -256,4 +256,19 @@ class TransactionService(
                 monthlySum = monthlyTran.toString()
         )
     }
+
+    fun getTransactionsGroupByTag(): GetListGroupTagDto? {
+        val list = transactionRepoImpl.repo.findAll()
+        val groupList = arrayListOf<GetGroupOfTagDto>()
+        list.groupBy { it.tagId }
+                .forEach{ it1 ->
+                    groupList.add(GetGroupOfTagDto(
+                        tagId = it1.key.toInt(),
+                        name = tagRepoImpl.findById(it1.key).orElseThrow(CustomError.DATA_NOT_FOUND::doThrow).name,
+                        amountSum = it1.value.sumOf { it.amount.toInt() }
+                        ))
+                }
+
+        return GetListGroupTagDto(groupList.sortedBy { it.tagId })
+    }
 }

@@ -464,7 +464,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetListTagDto'
+                $ref: '#/components/schemas/GetListGroupTagDto'
         400:
           description: "Bad Request"
           content:
@@ -705,6 +705,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GetSingleTagDto'
+
+    GetListGroupTagDto:
+      type: object
+      properties:
+          groupList:
+            type: array
+            items:
+                $ref: '#/components/schemas/GetGroupOfTagDto'
 
     LoginUserRequestDto:
       type: object
@@ -1084,6 +1092,20 @@ components:
         updated:
           type: string
           description: "updated time yyyyMMdd HH24:mm:si"
+
+    GetGroupOfTagDto:
+      type: object
+      properties:
+        tagId:
+          type: integer
+          description: "tag id"
+        name:
+          type: string
+          description: "tag name"
+        amountSum:
+          type: integer
+          description: "usage amount"
+          example: 2800
 
     GetDailySumDto:
       type: object

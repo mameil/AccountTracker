@@ -1,6 +1,7 @@
 package com.kyu9.accountbook.common
 
 import com.kyu9.accountbook.application.repository.TagRepository
+import com.kyu9.accountbook.application.repository.UsageTransactionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
@@ -15,5 +16,7 @@ class TddFrame {
     @Autowired
     lateinit var tagRepository: TagRepository
 
+    @Autowired
+    lateinit var usageTransactionRepository: UsageTransactionRepository
 
 }

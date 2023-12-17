@@ -11,7 +11,7 @@ import javax.persistence.LockModeType
 interface TagRepository: JpaRepository<Tag, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("delete from Tag t where t = ?1")
+    @Query("delete from TAG t where t = ?1")
     fun deleteWithQuery(tag: Tag)
 
 

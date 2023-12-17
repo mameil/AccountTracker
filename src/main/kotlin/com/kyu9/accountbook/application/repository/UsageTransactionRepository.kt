@@ -24,5 +24,4 @@ interface UsageTransactionRepository: JpaRepository<UsageTransaction, String> {
     fun findAllByRegisteredYYYYMMDDBetween(from: String, to: String): List<UsageTransaction>
 
     fun findFirstByOrderByRegisteredYYYYMMDDDesc(): UsageTransaction
-
 }

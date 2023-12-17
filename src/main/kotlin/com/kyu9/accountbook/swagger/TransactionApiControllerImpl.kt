@@ -38,6 +38,10 @@ class TransactionApiControllerImpl(
         return ResponseEntity.ok(transactionService.getMonthlyTransactions())
     }
 
+    override fun getTransactionsGroupByTag(): ResponseEntity<GetListGroupTagDto> {
+        return ResponseEntity.ok(transactionService.getTransactionsGroupByTag())
+    }
+
     override fun getRecentDaysTransaction(days: Int): ResponseEntity<GetDailyListTransResponseDto> {
         return ResponseEntity.ok(transactionService.getRecentDaysTransactions(days))
     }
