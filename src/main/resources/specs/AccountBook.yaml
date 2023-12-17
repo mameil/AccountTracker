@@ -430,7 +430,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDto'
 
-  /transaction/monthly:
+  /transaction/group/monthly:
     get:
       tags:
         - "Transaction"
@@ -444,6 +444,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetMonthlyTranListResponseDto'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+
+  /transaction/group/tag:
+    get:
+      tags:
+        - "Transaction"
+      summary: "get transactions group by tag"
+      description: "get transactions group by tag"
+      operationId: getTransactionsGroupByTag
+      responses:
+        200:
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetListTagDto'
         400:
           description: "Bad Request"
           content:
