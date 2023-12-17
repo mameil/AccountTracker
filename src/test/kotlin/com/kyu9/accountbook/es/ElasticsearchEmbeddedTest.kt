@@ -7,6 +7,7 @@ import com.kyu9.accountbook.elastic.TransactionRepository
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -43,6 +44,7 @@ class ElasticsearchEmbeddedTest {
     lateinit var transactionRepository: TransactionRepository
 
     @Test
+    @Disabled // embedded 미사용
     fun test(){
         embeddedElastic.start()
 
