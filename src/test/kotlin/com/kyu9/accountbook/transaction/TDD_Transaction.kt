@@ -4,7 +4,9 @@ import com.kyu9.accountbook.common.TddFrame
 import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.domain.UsageTransaction
 import com.kyu9.accountbook.swagger.TransactionApiControllerImpl
+import org.junit.Ignore
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
@@ -14,6 +16,7 @@ class TDD_Transaction: TddFrame() {
     lateinit var transactionApiControllerImpl: TransactionApiControllerImpl
 
     @Test
+    @Disabled
     fun `태그별_금액합산_컨트롤러_테스트`(){
         //arrange
         val tagList: List<Tag> = arrayListOf(

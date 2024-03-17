@@ -16,6 +16,8 @@ plugins {
     //swagger plugin
     id("org.openapi.generator") version "5.1.1"
     id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
+
+    jacoco
 }
 
 group = "com.kyu9"
@@ -23,6 +25,10 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 val queryDslVersion = "5.0.0"
+
+jacoco {
+    toolVersion = "0.8.7" // 사용하려는 Jacoco 버전
+}
 
 configurations {
     all {
@@ -279,6 +285,20 @@ tasks.withType<Jar>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
+
+tasks.test {
+    finalizedBy("jacocoTestReport") // 테스트가 완료된 후에 Jacoco 보고서를 생성합니다.
+}
+
+tasks.withType<JacocoReport>() {
+    dependsOn("test") // 테스트를 실행한 후에 보고서를 생성합니다.
+    reports {
+        xml.required.set(true)
+        csv.required.set(true)
+        html.required.set(true)
+
+    }
+}
 
 
 
