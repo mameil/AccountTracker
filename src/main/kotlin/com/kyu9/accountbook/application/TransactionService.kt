@@ -21,7 +21,6 @@ import javax.transaction.Transactional
 
 
 @Service
-@RequiredArgsConstructor
 class TransactionService(
         private val transactionRepoImpl: UsageTransactionRepoImpl,
         private val transactionElasticRepository: TransactionRepository,
@@ -258,7 +257,7 @@ class TransactionService(
     }
 
     fun getTransactionsGroupByTag(): GetListGroupTagDto? {
-        val list = transactionRepoImpl.repo.findAll()
+        val list = transactionRepoImpl.findAll()
         val groupList = arrayListOf<GetGroupOfTagDto>()
         list.groupBy { it.tagId }
                 .forEach{ it1 ->

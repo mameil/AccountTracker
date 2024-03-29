@@ -17,14 +17,30 @@ import org.springframework.stereotype.Service
 @Service
 @Log4j2
 class UsageTransactionRepoImpl(
-    @Autowired private val usageTransactionRepository: UsageTransactionRepository,
-    @Autowired private val jpaQueryFactory: JPAQueryFactory,
-    @Autowired private val esRepo: TransactionRepository
-): BaseJpaRepo<UsageTransaction, String, UsageTransactionRepository>(usageTransactionRepository){
+    private val repo: UsageTransactionRepository,
+    private val jpaQueryFactory: JPAQueryFactory,
+    private val esRepo: TransactionRepository
+){
     private val logger: org.slf4j.Logger = LoggerFactory.getLogger(this.javaClass)
 
     fun getAllEntityOrderByCreatedDesc(): List<UsageTransaction> {
         return repo.findAllByOrderByCreatedDesc()
+    }
+
+    fun findAll(): List<UsageTransaction> {
+        return repo.findAll()
+    }
+
+    fun storeEntity(t: UsageTransaction): UsageTransaction {
+        return repo.save(t)
+    }
+
+    fun removeEntityWithId(id: String) {
+        repo.deleteById(id)
+    }
+
+    fun getEntityWithId(id: String): UsageTransaction {
+        return repo.getById(id)
     }
 
     fun getAllEntityOrderByRegisteredDesc(): List<UsageTransaction> {

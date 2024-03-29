@@ -14,9 +14,8 @@ import java.math.BigDecimal
 import javax.transaction.Transactional
 
 @Service
-@RequiredArgsConstructor
 class TagApiControllerImpl(
-    private var tagService: TagService
+    private val tagService: TagService
 ): TagApiDelegate{
     override fun postTag(postSingleTagDto: PostSingleTagDto): ResponseEntity<GetSingleTagDto> {
         return ResponseEntity.ok(tagService.storeTag(postSingleTagDto))

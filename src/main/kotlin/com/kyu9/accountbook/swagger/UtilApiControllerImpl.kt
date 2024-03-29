@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UtilApiControllerImpl(
-    @Autowired val htmlGenerator: HtmlGenerator,
-        @Autowired val jsonGenerator: JsonGenerator
+    private val htmlGenerator: HtmlGenerator,
+    private val jsonGenerator: JsonGenerator
 ): UtilApiDelegate {
     override fun generateHtmlTable(generateHtmlTableRequestDto: GenerateHtmlTableRequestDto): ResponseEntity<GenerateHtmlTableResponseDto> {
         val htmlString: String =

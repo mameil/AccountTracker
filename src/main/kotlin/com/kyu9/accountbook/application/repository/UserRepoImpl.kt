@@ -11,18 +11,20 @@ import java.util.logging.Logger
 @Service
 class UserRepoImpl(
     private val userRepository: UserRepository
-): BaseJpaRepo<User, String, UserRepository>(userRepository) {
+) {
 
-    override fun getOptionalWithId(id: String): Optional<User> {
-        return super.getOptionalWithId(id)
-    }
+    fun getOptionalWithId(id: String): Optional<User> = userRepository.findById(id)
 
-    override fun storeEntity(t: User): User {
-        return super.storeEntity(t)
-    }
+    fun storeEntity(t: User): User = userRepository.save(t)
 
     fun getOptionalWithName(name: String): Optional<User> {
         return userRepository.findByName(name)
+    }
+
+    fun getEntityWithId(id: String): User = userRepository.getById(id)
+
+    fun removeEntityWithId(id: String) {
+        userRepository.deleteById(id)
     }
 
 

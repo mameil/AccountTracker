@@ -1,29 +1,18 @@
 package com.kyu9.accountbook.application
 
-import com.kyu9.accountbook.application.repository.TagRepoImpl
-import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.common.CustomError
 import com.kyu9.accountbook.common.MyTime
 import com.kyu9.accountbook.domain.Tag
 import com.kyu9.accountbook.swagger.model.GetSingleTagDto
 import com.kyu9.accountbook.swagger.model.PostSingleTagDto
-import lombok.extern.log4j.Log4j2
-import org.springframework.cache.annotation.CachePut
-import org.springframework.data.jpa.repository.Lock
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
-import javax.persistence.LockModeType
 
 @Service
-@Log4j2
 class TagService(
     private val tagRepoImpl: TagRepoImpl,
-
-    //for TEST
-    private val tagRepository: TagRepository
 ) {
     fun storeTag(dto: PostSingleTagDto): GetSingleTagDto{
 //        log.info("")
@@ -117,7 +106,7 @@ class TagService(
 
     @Transactional
     fun deleteTagQuery(tag: Tag){
-        tagRepoImpl.deleteWithEntity_query(tag)
+        tagRepoImpl.deleteEntityByQuery(tag)
     }
 
 //    @CachePut(value = ["tags"])
@@ -133,27 +122,27 @@ class TagService(
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     fun forDeadLockMinus(tagId1: Long){
-        val e1 = tagRepository.findById(tagId1).get()
+        val e1 = tagRepoImpl.getEntityWithId(tagId1)
 
         println("$e1 Before======================")
         var eName1: Int = e1.name.toInt() + 1
 
         e1.name = eName1.toString()
 
-        tagRepository.save(e1)
+        tagRepoImpl.storeEntity(e1)
         println("$e1 After======================")
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     fun forDeadLockPlus(tagId2: Long){
-        val e2 = tagRepository.findById(tagId2).get()
+        val e2 = tagRepoImpl.getEntityWithId(tagId2)
 
         println("$e2 Before======================")
         var eName2: Int = e2.name.toInt() - 1
 
         e2.name = eName2.toString()
 
-        tagRepository.save(e2)
+        tagRepoImpl.storeEntity(e2)
         println("$e2 After======================")
     }
 

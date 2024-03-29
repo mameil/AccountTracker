@@ -1,34 +1,21 @@
-package com.kyu9.accountbook.application.repository
+package com.kyu9.accountbook.application
 
+import com.kyu9.accountbook.application.repository.TagRepository
 import com.kyu9.accountbook.common.BaseJpaRepo
 import com.kyu9.accountbook.domain.Tag
-import lombok.extern.log4j.Log4j2
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
-import org.springframework.data.util.Optionals
-import org.springframework.data.util.Optionals.ifPresentOrElse
+import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
-import java.util.*
 
 
 @Service
-@Log4j2
 class TagRepoImpl(
-    @Autowired private val tagRepository: TagRepository
-): BaseJpaRepo<Tag, Long, TagRepository>(
-    tagRepository
+    private val tagRepository: TagRepository
 ) {
-    private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
-
-
     fun deleteWithEntity(tag: Tag){
         tagRepository.delete(tag)
     }
 
-    fun deleteWithEntity_query(tag: Tag){
+    fun deleteEntityByQuery(tag: Tag){
         tagRepository.deleteWithQuery(tag)
     }
 
@@ -60,18 +47,11 @@ class TagRepoImpl(
 //        )
     }
 
-//    @Cacheable(value = ["tags"])
-    override fun storeEntity(t: Tag): Tag {
-        return super.storeEntity(t)
-    }
+    fun getEntityWithId(id: Long) = tagRepository.findById(id).get()
 
-//    @CacheEvict(value = ["tags"], allEntries = true)
-    override fun removeEntityWithId(id: Long) {
-        super.removeEntityWithId(id)
-    }
+    fun getOptionalWithId(id: Long) = tagRepository.findById(id)
 
-//    @Cacheable(value = ["tags"])
-    override fun getEntityWithId(id: Long): Tag {
-        return super.getEntityWithId(id)
-    }
+    fun storeEntity(tag: Tag) = tagRepository.save(tag)
+
+    fun removeEntityWithId(id: Long) = tagRepository.deleteById(id)
 }
