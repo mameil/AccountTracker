@@ -31,7 +31,7 @@ data class UsageTransaction(
         val registeredYYYY: String,
         val registeredYYYYMM: String,
         val registeredYYYYMMDD: String,
-        val title: String,
+        var title: String,
         val content: String,
         val tagId: Long,
         @Enumerated(EnumType.STRING)

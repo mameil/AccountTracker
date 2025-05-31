@@ -50,15 +50,15 @@ server:
 logging:
   level:
     root: info
-    org.hibernate: debug
+    org.hibernate: info
     org.springframework.web: info
-    org.springframework.data.elasticsearch.client.WIRE: trace
+    org.springframework.data.elasticsearch.client.WIRE: info
     hibernate:
-      SQL: debug
+      SQL: info
       type:
         descriptor:
           sql:
-            BasicBinder: trace
+            BasicBinder: info
 
 #springdoc >> 미사용
 #springdoc:

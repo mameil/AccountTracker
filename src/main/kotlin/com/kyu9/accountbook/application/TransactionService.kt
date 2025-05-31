@@ -10,6 +10,7 @@ import com.kyu9.accountbook.elastic.Transaction
 import com.kyu9.accountbook.elastic.TransactionRepository
 import com.kyu9.accountbook.swagger.model.*
 import lombok.RequiredArgsConstructor
+import org.hibernate.annotations.common.util.impl.LoggerFactory.logger
 import org.springframework.stereotype.Service
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -26,6 +27,7 @@ class TransactionService(
         private val transactionElasticRepository: TransactionRepository,
         private val tagRepoImpl: TagRepository
 ) {
+    private val log = logger(TransactionService::class.java)
 
     fun storeFromDto(tranReqDto: PostTranRequestDto): PostTransResponseDto {
 //        val registered = if (tranReqDto.registeredAt == null) MyTime.now() else MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAt)
@@ -41,17 +43,29 @@ class TransactionService(
             registered = MyTime.toLocalDateTimeWithYyyymmdd(tranReqDto.registeredAtYyyymmdd?:MyTime.toYyyyMmDd(MyTime.now()))
         }
 
+        val t = UsageTransaction(
+            userId = tranReqDto.userId ?: "Unknown",
+            amount = tranReqDto.amount?.toLong()!!,
+            registered = registered,
+            title = tranReqDto.title!!,
+            content = tranReqDto.content!!,
+            tagId = tranReqDto.tagId?.toLong()!!,
+            moneyType = tranReqDto.moneyType.toString()
+        )
+        log.info("origin : $t")
+        val copied = t.copy()
+        log.info("copied : $copied")
+        log.info("origin == copied : ${t == copied}")
+
+        copied.title = "changed"
+log.info("origin : $t")
+        log.info("copied : $copied")
+
+
         return transactionRepoImpl.storeEntity(
-                UsageTransaction(
-                        userId = tranReqDto.userId?:"Unknown",
-                        amount = tranReqDto.amount?.toLong()!!,
-                        registered = registered,
-                        title = tranReqDto.title!!,
-                        content = tranReqDto.content!!,
-                        tagId = tranReqDto.tagId?.toLong()!!,
-                        moneyType = tranReqDto.moneyType.toString()
-                )
-        ).let {
+            t
+        )
+            .let {
             PostTransResponseDto(it.id)
         }
     }

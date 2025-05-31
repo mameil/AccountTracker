@@ -165,7 +165,7 @@ dependencies {
 
 springBoot{
     //kotlin 파일 같은 경우에는 컴파일될 때 파일명에 자동으로 뒤에 Kt가 붙음
-    mainClass.set("com.kyu9.accountbook.AccountBookApplicationKt")
+    mainClass.set("com.kyu9.accountbook.ApplicationKt")
 }
 
 buildscript {
