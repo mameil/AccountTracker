@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>CDIS Admin Inquiry Page</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <!-- <link href="https://fonts.gstatic.com" rel="preconnect"> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
+
+  <!-- Favicons -->
+<!--  <link href="assets/img/favicon.png" rel="icon">-->
+<!--  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">-->
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/css/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-12 text-center mb-3">
+          <h1 class="main-title">CDIS Admin Inquiry Page</h1>
+        </div>
+        <div class="col-12">
+          <div class="row align-items-end justify-content-center">
+            <!-- 왼쪽 여백 (25%) -->
+            <div class="col-md-3"></div>
+            
+            <!-- 중앙 컨텐츠 영역 (50%) -->
+            <div class="col-md-6">
+              <div class="row align-items-end">
+                <!-- Plain 영역 (45%) -->
+                <div class="col-md-5">
+                  <div class="form-group mb-0 text-center">
+                    <label for="inputText" class="form-label">Plain Text</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="inputText" 
+                      placeholder="암호화할 텍스트를 입력하세요..."
+                      maxlength="20"
+                    >
+                  </div>
+                </div>
+                
+                <!-- 중앙 버튼 영역 (10%) -->
+                <div class="col-md-2 text-center">
+                  <div class="form-group mb-0">
+                    <label class="form-label">convert</label>
+                    <div class="button-container">
+                      <!-- 1번 버튼: 왼쪽 → 오른쪽 -->
+                      <button type="button" class="btn btn-primary square-btn" id="btn1">
+                        &gt;
+                      </button>
+                      
+                      <!-- 2번 버튼: 지우기 -->
+                      <button type="button" class="btn btn-danger square-btn" id="btn2">
+                        ✕
+                      </button>
+                      
+                      <!-- 3번 버튼: 오른쪽 → 왼쪽 -->
+                      <button type="button" class="btn btn-primary square-btn" id="btn3">
+                        &lt;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Sealed 영역 (45%) -->
+                <div class="col-md-5">
+                  <div class="form-group mb-0 text-center">
+                    <label for="outputText" class="form-label">Sealed Text</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="outputText" 
+                      placeholder="복호화할 텍스트를 입력하세요..."
+                      maxlength="20"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 오른쪽 여백 (25%) -->
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header><!-- End Header -->
+
+  <!-- Sidebar removed -->
+
+  <main id="main" class="main">
+
+    <!-- 스크롤 테스트용 영역 -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- 왼쪽 여백 (5%) -->
+        <div class="col-md-1"></div>
+        
+        <!-- 중앙 콘텐츠 영역 (90%) -->
+        <div class="col-md-10">
+          <!-- 메인 입력 영역 -->
+          <div class="row justify-content-center mb-4">
+            <div class="col-md-6 text-center">
+              <div class="form-group">
+                <label for="mainInput" class="form-label mb-2">검색</label>
+                <input 
+                  type="text" 
+                  class="form-control main-search-input" 
+                  id="mainInput" 
+                  placeholder="검색어를 입력하세요..."
+                  style="height: 45px; font-size: 16px; border: 2px solid #007bff; border-radius: 8px;"
+                >
+              </div>
+              <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-lg" id="searchBtn" style="padding: 10px 30px; font-size: 16px;">
+                  🔍 조회
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-body">
+              
+              <!-- 암호화된 주민번호 입력 영역 -->
+              <div class="row justify-content-center mb-4">
+                <div class="col-md-8 text-center">
+                  <h6 class="mb-3" style="color: #495057; font-weight: 600;">암호화된 주민번호를 입력하세요</h6>
+                  <div class="form-group">
+                    <input 
+                      type="text" 
+                      class="form-control card-input" 
+                      id="cardInput" 
+                      placeholder="주민번호를 입력하세요..."
+                      style="max-width: 400px; margin: 0 auto; height: 45px; font-size: 16px;"
+                    >
+                  </div>
+                  <div class="mt-3">
+                    <button type="button" class="btn btn-success btn-lg" id="confirmBtn" style="padding: 10px 30px; font-size: 16px;">
+                      대상자 정보 조회하기
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 결과 표시 영역 -->
+              <div id="resultsDisplayArea" style="min-height: 200px; padding: 20px; border-radius: 8px; background-color: #f8f9fa; border: 1px solid #dee2e6;">
+                <div class="text-center text-muted">
+                  <i class="bi bi-table" style="font-size: 48px; opacity: 0.5;"></i>
+                  <p class="mt-2">조회 결과가 여기에 표시됩니다</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 오른쪽 여백 (5%) -->
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main2.js"></script>
+  
+  <!-- Custom JavaScript for CDIS Admin Inquiry Page -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputText = document.getElementById('inputText');
+      const outputText = document.getElementById('outputText');
+      const btn1 = document.getElementById('btn1');
+      const btn2 = document.getElementById('btn2');
+      const btn3 = document.getElementById('btn3');
+      
+      // 1번 버튼 클릭 이벤트 (왼쪽 → 오른쪽)
+      btn1.addEventListener('click', function() {
+        convertLeftToRight();
+      });
+      
+      // 2번 버튼 클릭 이벤트 (지우기)
+      btn2.addEventListener('click', function() {
+        clearTexts();
+      });
+      
+      // 3번 버튼 클릭 이벤트 (오른쪽 → 왼쪽)
+      btn3.addEventListener('click', function() {
+        convertRightToLeft();
+      });
+      
+      // Plain 입력칸 엔터키 이벤트
+      inputText.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          convertLeftToRight();
+        }
+      });
+      
+      // Sealed 입력칸 엔터키 이벤트
+      outputText.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          convertRightToLeft();
+        }
+      });
+      
+      // 1번 함수: 왼쪽 → 오른쪽 변환
+      function convertLeftToRight() {
+        const plainInput = inputText.value.trim();
+        if (!plainInput) {
+          alert('변환할 텍스트를 입력해주세요.');
+          return;
+        }
+        
+        // 여기에 실제 변환 로직을 구현하세요
+        // 예시: 대문자로 변환
+        const converted = plainInput.toUpperCase();
+        outputText.value = converted;
+      }
+      
+      // 3번 함수: 오른쪽 → 왼쪽 변환
+      function convertRightToLeft() {
+        const sealedInput = outputText.value.trim();
+        if (!sealedInput) {
+          alert('변환할 텍스트를 입력해주세요.');
+          return;
+        }
+        
+        // 여기에 실제 변환 로직을 구현하세요
+        // 예시: 소문자로 변환
+        const converted = sealedInput.toLowerCase();
+        inputText.value = converted;
+      }
+      
+      // 지우기 함수
+      function clearTexts() {
+        inputText.value = '';
+        outputText.value = '';
+        inputText.focus();
+      }
+      
+      // 메인 조회 기능
+      const mainInput = document.getElementById('mainInput');
+      const searchBtn = document.getElementById('searchBtn');
+      
+      // 조회 버튼 클릭 이벤트
+      searchBtn.addEventListener('click', function() {
+        performSearch();
+      });
+      
+      // 메인 입력칸 엔터키 이벤트
+      mainInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+      });
+      
+      // 조회 함수
+      function performSearch() {
+        const searchTerm = mainInput.value.trim();
+        if (!searchTerm) {
+          alert('검색어를 입력해주세요.');
+          return;
+        }
+        
+        // 여기에 실제 조회 로직을 구현하세요
+        console.log('검색어:', searchTerm);
+        alert('검색 기능이 실행되었습니다: ' + searchTerm);
+      }
+      
+      // 카드 내부 입력창 기능
+      const cardInput = document.getElementById('cardInput');
+      const confirmBtn = document.getElementById('confirmBtn');
+      
+      // 확인 버튼 클릭 이벤트
+      confirmBtn.addEventListener('click', function() {
+        processCardInput();
+      });
+      
+      // 카드 입력칸 엔터키 이벤트
+      cardInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          processCardInput();
+        }
+      });
+      
+      // 카드 입력 처리 함수
+      function processCardInput() {
+        const inputValue = cardInput.value.trim();
+        if (!inputValue) {
+          alert('주민번호를 입력해주세요.');
+          return;
+        }
+        
+        // 여기에 실제 주민번호 처리 로직을 구현하세요
+        console.log('입력된 주민번호:', inputValue);
+        
+        // 서버로 데이터 전송 예시
+        sendToServer(inputValue);
+      }
+      
+      // 서버로 데이터 전송 함수
+      function sendToServer(data) {
+        // 실제 서버 전송 로직을 여기에 구현하세요
+        // 예시: fetch API 사용
+        /*
+        fetch('/api/process-resident-number', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ residentNumber: data })
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log('서버 응답:', result);
+          displayResults(result);
+        })
+        .catch(error => {
+          console.error('오류:', error);
+          alert('처리 중 오류가 발생했습니다.');
+        });
+        */
+        
+        // 임시 테스트 데이터 (실제로는 서버 응답)
+        const testData = {
+          "객체1정보": [
+            {
+              "id": 1,
+              "name": "홍길동",
+              "age": 30,
+              "email": "hong@example.com",
+              "phone": "010-1234-5678",
+              "address": "서울시 강남구 테헤란로 123",
+              "department": "개발팀",
+              "position": "팀장",
+              "salary": 5000000,
+              "hireDate": "2020-01-15",
+              "status": "재직중"
+            },
+            {
+              "id": 2,
+              "name": "김철수",
+              "age": 25,
+              "email": "kim@example.com",
+              "phone": "010-9876-5432",
+              "address": "서울시 서초구 서초대로 456",
+              "department": "디자인팀",
+              "position": "사원",
+              "salary": 3500000,
+              "hireDate": "2021-03-20",
+              "status": "재직중"
+            }
+          ],
+          "객체2정보": [
+            {
+              "orderId": "ORD001",
+              "customerName": "박영희",
+              "productName": "노트북",
+              "quantity": 2,
+              "price": 1500000,
+              "orderDate": "2024-01-15",
+              "deliveryAddress": "부산시 해운대구 해운대로 789",
+              "paymentMethod": "신용카드",
+              "orderStatus": "배송중",
+              "estimatedDelivery": "2024-01-18",
+              "trackingNumber": "TN123456789"
+            }
+          ],
+          "객체3정보": [
+            {
+              "productId": "PROD001",
+              "productName": "스마트폰",
+              "category": "전자제품",
+              "brand": "삼성",
+              "model": "Galaxy S24",
+              "price": 1200000,
+              "stock": 50,
+              "description": "최신 스마트폰 모델",
+              "releaseDate": "2024-01-10",
+              "warranty": "2년",
+              "color": "블랙"
+            }
+          ]
+        };
+        
+        // 테스트 데이터로 결과 표시
+        displayResults(testData);
+      }
+      
+      // 결과를 표로 표시하는 함수
+      function displayResults(data) {
+        // 결과 표시 영역 가져오기
+        const resultsDisplayArea = document.getElementById('resultsDisplayArea');
+        
+        // 기존 내용 제거
+        resultsDisplayArea.innerHTML = '';
+        
+        // 결과 컨테이너 생성
+        const resultsContainer = document.createElement('div');
+        resultsContainer.id = 'resultsContainer';
+        
+        // 각 객체별로 표 생성
+        Object.keys(data).forEach((key, index) => {
+          const tableSection = createTableSection(key, data[key]);
+          resultsContainer.appendChild(tableSection);
+        });
+        
+        // 결과를 표시 영역에 추가
+        resultsDisplayArea.appendChild(resultsContainer);
+      }
+      
+      // 개별 표 섹션 생성
+      function createTableSection(title, dataList) {
+        if (!dataList || dataList.length === 0) return document.createElement('div');
+        
+        const section = document.createElement('div');
+        section.className = 'mb-4';
+        
+        // 제목
+        const titleElement = document.createElement('h6');
+        titleElement.className = 'mb-3';
+        titleElement.style.color = '#495057';
+        titleElement.style.fontWeight = '600';
+        titleElement.textContent = title;
+        section.appendChild(titleElement);
+        
+        // 스크롤 가능한 테이블 컨테이너
+        const tableContainer = document.createElement('div');
+        tableContainer.className = 'table-responsive';
+        tableContainer.style.maxHeight = '400px';
+        tableContainer.style.overflowX = 'auto';
+        tableContainer.style.overflowY = 'auto';
+        tableContainer.style.border = '1px solid #dee2e6';
+        tableContainer.style.borderRadius = '8px';
+        
+        // 테이블 생성
+        const table = document.createElement('table');
+        table.className = 'table table-striped table-bordered mb-0';
+        table.style.minWidth = '800px';
+        
+        // 테이블 헤더
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        headerRow.className = 'table-primary';
+        
+        const fields = Object.keys(dataList[0]);
+        fields.forEach(field => {
+          const th = document.createElement('th');
+          th.textContent = field;
+          th.style.whiteSpace = 'nowrap';
+          th.style.padding = '12px 8px';
+          headerRow.appendChild(th);
+        });
+        
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        
+        // 테이블 바디
+        const tbody = document.createElement('tbody');
+        dataList.forEach(item => {
+          const row = document.createElement('tr');
+          fields.forEach(field => {
+            const td = document.createElement('td');
+            td.textContent = item[field] || '';
+            td.style.padding = '8px';
+            td.style.verticalAlign = 'middle';
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+        
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
+        section.appendChild(tableContainer);
+        
+        return section;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

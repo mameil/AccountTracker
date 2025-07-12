@@ -46,6 +46,9 @@ server:
   devtools:
     restart:
       enabled: true
+    livereload:
+      enabled: true
+      port: 35729
 
 logging:
   level:

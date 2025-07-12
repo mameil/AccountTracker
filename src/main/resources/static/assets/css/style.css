@@ -41,9 +41,12 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
-  padding: 20px 30px;
+  margin-top: 200px;
+  padding: 20px 0;
   transition: all 0.3s;
+  margin-left: 0;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 @media (max-width: 1199px) {
@@ -392,15 +395,390 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+.main-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #012970;
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+/* CDIS Admin Inquiry Page Styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #012970;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #4154f1;
+  box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
+}
+
+.form-control:read-only {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.btn {
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background-color: #4154f1;
+  border-color: #4154f1;
+}
+
+.btn-primary:hover {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #545b62;
+  border-color: #4e555b;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(1, 41, 112, 0.1);
+}
+
+.card-title {
+  color: #012970;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+#copyStatus {
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
+  margin-top: 4px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.input-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 60px;
+  min-height: 120px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
-  padding-left: 20px;
+  padding: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
+}
+
+/* 헤더 내 변환 도구 스타일 */
+.header .main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #012970;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.header .form-group {
+  margin-bottom: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #012970;
+  margin-bottom: 8px;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.header .form-control {
+  height: 38px;
+  font-size: 14px;
+  border: 1px solid #dce7f1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.header .form-control:focus {
+  border-color: #4154f1;
+  box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
+}
+
+.header .form-control::placeholder {
+  text-align: center;
+  color: #6c757d;
+}
+
+.header .btn {
+  height: 38px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 auto;
+}
+
+/* 중앙 변환 영역 스타일 */
+.header .col-md-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header .col-md-2 .form-group {
+  width: 100%;
+  text-align: center;
+}
+
+.header .col-md-2 .btn {
+  width: 100%;
+  max-width: 120px;
+}
+
+.header .col-md-2 .btn-sm {
+  width: 100%;
+  max-width: 100px;
+  font-size: 12px;
+  padding: 6px 12px;
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 4px;
+}
+
+/* 정사각형 버튼 스타일 */
+.square-btn {
+  width: 33.333% !important;
+  height: 40px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  flex: 1;
+}
+
+.square-btn {
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+/* 메인 검색 입력창 스타일 */
+.main-search-input {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.main-search-input:focus {
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3) !important;
+  border-color: #0056b3 !important;
+  outline: none !important;
+}
+
+.main-search-input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 카드 내부 입력창 스타일 */
+.card-input {
+  background-color: #ffffff !important;
+  border: 2px solid #28a745 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.card-input:focus {
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3) !important;
+  border-color: #1e7e34 !important;
+  outline: none !important;
+}
+
+.card-input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 결과 테이블 스타일 */
+#resultsContainer {
+  margin-top: 20px;
+}
+
+#resultsContainer .table-responsive {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resultsContainer .table {
+  font-size: 14px;
+}
+
+#resultsContainer .table th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  text-align: center;
+}
+
+#resultsContainer .table td {
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+}
+
+#resultsContainer .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+#resultsContainer .table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.header .btn-sm {
+  height: 38px;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.header .input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.header .input-group .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.header .input-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
+
+.header .text-muted {
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .header {
+    min-height: 140px;
+    padding: 15px;
+  }
+  
+  .header .main-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .header .row > div {
+    margin-bottom: 15px;
+  }
+  
+  .header .form-control {
+    max-width: 100%;
+  }
+  
+  .header .col-md-2 .btn {
+    max-width: 100%;
+  }
 }
 
 .header .toggle-sidebar-btn {
@@ -649,7 +1027,9 @@ h6 {
 
   #main,
   #footer {
-    margin-left: 300px;
+    margin-left: 0;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
@@ -664,6 +1044,8 @@ h6 {
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .toggle-sidebar .sidebar {
